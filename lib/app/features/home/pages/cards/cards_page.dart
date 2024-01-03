@@ -15,27 +15,69 @@ class _CardPageState extends State<CardPage> {
       (index) => CardHomeModel(
           name: "Casa $index",
           urlImage:
-              "https://img.freepik.com/fotos-gratis/villa-com-piscina-de-luxo-espetacular-design-contemporaneo-arte-digital-imoveis-casa-casa-e-propriedade-ge_1258-150749.jpg?size=626&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=sph"));
+              "https://img.freepik.com/fotos-gratis/villa-com-piscina-de-luxo-espetacular-design-contemporaneo-arte-digital-imoveis-casa-casa-e-propriedade-ge_1258-150749.jpg?size=626&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=sph",
+          city: 'Aracaju - SE',
+          address: '',
+          price: ''));
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.separated(
-          itemBuilder: (context, index) {
-            final item = listCard[index];
-            return Card(
-              child: Column(children: [
-                ClipRRect(
-                  child: Image.network(item.urlImage),
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
+    return Column(
+      children: [
+        _buildSearchBar(),
+        Expanded(
+          child: ListView.separated(
+            itemBuilder: (context, index) {
+              final item = listCard[index];
+              return Card(
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      child: Image.network(item.urlImage),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                    ),
+                    Text(item.name),
+                    Text(item.city),
+                    Text(item.address),
+                    Text(item.price),
+                  ],
                 ),
-                Text(item.name),
-              ]),
-            );
-          },
-          separatorBuilder: ((context, index) => const SizedBox(
-                height: 8,
-              )),
-          itemCount: listCard.length),
+              );
+            },
+            separatorBuilder: ((context, index) => const SizedBox(
+                  height: 8,
+                )),
+            itemCount: listCard.length,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          const Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Search",
+                prefixIcon: Icon(Icons.search, color: Colors.grey),
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Ação para o botão de filtro
+            },
+            child: const Icon(Icons.filter_list_rounded,
+                color: Color.fromARGB(255, 146, 6, 118)),
+          ),
+        ],
+      ),
     );
   }
 }

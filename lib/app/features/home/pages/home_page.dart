@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   final navigationBarList = const [
     BottomNavigationBarItem(label: "Casas", icon: Icon(Icons.home)),
-    BottomNavigationBarItem(label: "Pag2", icon: Icon(Icons.add)),
+    BottomNavigationBarItem(label: "Anunciar", icon: Icon(Icons.add)),
     BottomNavigationBarItem(label: "Chat", icon: Icon(Icons.chat_sharp)),
     BottomNavigationBarItem(label: "Favoritos", icon: Icon(Icons.favorite)),
   ];
