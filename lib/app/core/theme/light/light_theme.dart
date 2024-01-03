@@ -4,12 +4,12 @@ import 'package:ache_um_lar/app/core/theme/color_extension.dart';
 
 class LightTheme {
   static final theme = ThemeData(
-      iconTheme: IconThemeData(color: Colors.black),
+      iconTheme: const IconThemeData(color: Colors.black),
       appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromARGB(0, 189, 49, 152),
           titleTextStyle: TextStyle(
               color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500)),
-      dividerColor: Color.fromRGBO(198, 87, 194, 1),
+      dividerColor: const Color.fromRGBO(198, 87, 194, 1),
       textTheme: const TextTheme(
         titleSmall: TextStyle(color: LightColors.gray),
         bodyMedium: TextStyle(color: LightColors.gray),

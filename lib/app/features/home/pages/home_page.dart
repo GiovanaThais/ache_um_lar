@@ -1,4 +1,6 @@
+import 'package:ache_um_lar/app/app_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/widgets/custom_drawer_widget.dart';
 import '../../favorites/pages/favorites_page.dart';
@@ -35,10 +37,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appController = context.read<AppController>();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Immoble"),
+          actions: [
+            ValueListenableBuilder(
+                valueListenable: appController,
+                builder: (context, state, child) {
+                  return Switch(
+                      value: state.isDarkMode,
+                      onChanged: (_) {
+                        appController.changeThemeMode();
+                      });
+                })
+          ],
         ),
         drawer: const CustomDrawerWidget(),
         body: PageView(

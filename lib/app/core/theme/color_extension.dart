@@ -31,7 +31,7 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
       focusedBadgeColor: focusedBadgeColor ?? this.focusedBadgeColor,
       unfocusedBadgeColor: unfocusedBadgeColor ?? this.unfocusedBadgeColor,
       shimmerBaseColor: shimmerBaseColor ?? this.shimmerBaseColor,
-      shimmerHighLightColor: shimmerHighLight ?? this.shimmerHighLightColor,
+      shimmerHighLightColor: shimmerHighLight ?? shimmerHighLightColor,
       drawerBackgroundColor:
           drawerBackgroundColor ?? this.drawerBackgroundColor,
     );
