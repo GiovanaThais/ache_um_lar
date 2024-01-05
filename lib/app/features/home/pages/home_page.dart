@@ -6,7 +6,7 @@ import '../../../core/widgets/custom_drawer_widget.dart';
 import '../../favorites/pages/favorites_page.dart';
 import 'cards/cards_page.dart';
 import 'chat/chat_page.dart';
-import 'page2.dart';
+import 'register/add_homes_form_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   final pagesList = <Widget>[
     const CardPage(),
-    const Page2(),
+    const AddHomesFormPage(),
     const ChatPage(),
     const FavoritesPage(),
   ];
