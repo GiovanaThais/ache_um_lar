@@ -3,6 +3,7 @@ import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/data.dart';
+import '../../components/categories.dart';
 import 'widgets/builld_search_bar_widget.dart';
 
 class CardPage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _CardPageState extends State<CardPage> {
     return Column(
       children: [
         buildSearchBar(),
+        const Categories(),
         Expanded(
           child: ListView.separated(
             itemBuilder: (context, index) {
