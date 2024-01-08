@@ -4,6 +4,7 @@
 import 'package:ache_um_lar/app/core/theme/color_extension.dart';
 import 'package:ache_um_lar/app/core/theme/light/light_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 //import '../../../features/auth/login/login_page.dart';
 
@@ -27,6 +28,8 @@ class CustomDrawerWidget extends StatelessWidget {
           height: 30,
         ),
         avatarAccountMethod(context),
+        loginMethod(),
+        const Divider(),
         registerUserMethod(),
         const Divider(),
         const SizedBox(
@@ -44,6 +47,27 @@ class CustomDrawerWidget extends StatelessWidget {
         ),
         exitMethod(context),
       ],
+    );
+  }
+
+  InkWell loginMethod() {
+    return InkWell(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        width: double.infinity,
+        child: const Row(
+          children: [
+            Icon(Icons.person),
+            SizedBox(
+              width: 5,
+            ),
+            Text("Entrar"),
+          ],
+        ),
+      ),
+      onTap: () {
+        Modular.to.pushNamed('/auth/login');
+      },
     );
   }
 
@@ -86,11 +110,7 @@ class CustomDrawerWidget extends StatelessWidget {
                       child: const Text("Não")),
                   TextButton(
                       onPressed: () {
-                        //  Navigator.pushReplacement(
-                        //     context,
-                        //    MaterialPageRoute(
-                        //        builder: (context) =>
-                        //            const LoginPage()));
+                        Modular.to.pushNamed('/auth/login');
                       },
                       child: const Text("Sim"))
                 ],
@@ -178,7 +198,7 @@ class CustomDrawerWidget extends StatelessWidget {
         width: double.infinity,
         child: const Row(
           children: [
-            Icon(Icons.person_2_rounded),
+            Icon(Icons.edit),
             SizedBox(
               width: 5,
             ),
@@ -226,8 +246,8 @@ class CustomDrawerWidget extends StatelessWidget {
               width: 60,
             ),
           ),
-          accountName: Text("User"),
-          accountEmail: Text("email@email.com")),
+          accountName: const Text("User"),
+          accountEmail: const Text("email@email.com")),
     );
   }
 }

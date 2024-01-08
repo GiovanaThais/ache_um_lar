@@ -1,19 +1,73 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/add_homes_form_controller.dart';
 import '../widgets/text_field_widget.dart';
 
-class AddHomesFormComponent extends StatelessWidget {
-  const AddHomesFormComponent({Key? key}) : super(key: key);
+class AddHomesFormComponent extends StatefulWidget {
+  const AddHomesFormComponent({
+    Key? key,
+    required this.formController,
+  }) : super(key: key);
+  final AddHomesFormController formController;
+
+  @override
+  State<AddHomesFormComponent> createState() => _AddHomesFormComponentState();
+}
+
+class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
+  String imagePath = "";
+
+  AddHomesFormController get formController => widget.formController;
 
   @override
   Widget build(BuildContext context) {
-    final formController = AddHomesFormController();
-
     return Form(
       key: GlobalKey<FormState>(),
       child: ListView(
         children: [
+          InkWell(
+            child: imagePath.isEmpty
+                ? const Icon(Icons.add_a_photo)
+                : Image.file(File(imagePath)),
+            onTap: () {
+              showModalBottomSheet(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  context: context,
+                  builder: (BuildContext bc) {
+                    return Wrap(
+                      children: [
+                        ListTile(
+                          title: Text("Camera"),
+                          leading: Icon(Icons.photo_camera),
+                          onTap: () async {
+                            final _imagePath =
+                                await formController.pickerImage("cam");
+                            setState(() {
+                              imagePath = _imagePath;
+                            });
+                          },
+                        ),
+                        ListTile(
+                          title: Text("Galeria"),
+                          leading: Icon(Icons.photo_library),
+                          onTap: () async {
+                            final _imagePath =
+                                await formController.pickerImage("gallery");
+                            setState(() {
+                              imagePath = _imagePath;
+                            });
+                          },
+                        )
+                      ],
+                    );
+                  });
+            },
+          ),
           TextFieldWidget(
             controller: formController.addressController,
             label: 'Endereço',
@@ -32,7 +86,7 @@ class AddHomesFormComponent extends StatelessWidget {
                 child: TextFieldWidget(
                   controller: formController.bedroomsController,
                   label: 'Quartos',
-                  prefixIcon: Icons.king_bed,
+                  prefixIcon: Icons.bed,
                   validator: (value) =>
                       defaultValidator(value, 'Campo Obrigatório'),
                 ),

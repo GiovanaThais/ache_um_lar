@@ -2,11 +2,11 @@ import 'package:ache_um_lar/app/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../core/widgets/custom_drawer_widget.dart';
-import '../../favorites/pages/favorites_page.dart';
-import 'cards/cards_page.dart';
-import 'chat/chat_page.dart';
-import 'register/add_homes_form_page.dart';
+import '../../../../core/widgets/custom_drawer_widget.dart';
+import '../../../favorites/pages/favorites_page.dart';
+import 'realty_page.dart';
+import '../../submodules/chat/chat_page.dart';
+import '../../submodules/register/add_homes_form_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
