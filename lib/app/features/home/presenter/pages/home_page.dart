@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/widgets/custom_drawer_widget.dart';
-import '../../../favorites/pages/favorites_page.dart';
+import '../../submodules/favorites/pages/favorites_page.dart';
 import 'realty_page.dart';
 import '../../submodules/chat/chat_page.dart';
 import '../../submodules/register/add_homes_form_page.dart';

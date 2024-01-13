@@ -30,43 +30,86 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
       child: ListView(
         children: [
           InkWell(
-            child: imagePath.isEmpty
-                ? const Icon(Icons.add_a_photo)
-                : Image.file(File(imagePath)),
+            child: Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Color.fromARGB(255, 118, 118, 118)
+                      .withOpacity(0.7), // Cor da borda com opacidade
+                  width: 1.5, // Largura da borda
+                ),
+              ),
+              child: Center(
+                child: imagePath.isEmpty
+                    ? const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.camera_alt,
+                              size: 40, color: Color.fromARGB(255, 92, 92, 92)),
+                          SizedBox(height: 8),
+                          Text(
+                            'Adicionar\nFoto',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 118, 118, 118),
+                                fontSize: 12),
+                          ),
+                        ],
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.file(
+                          File(imagePath),
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+              ),
+            ),
             onTap: () {
               showModalBottomSheet(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  context: context,
-                  builder: (BuildContext bc) {
-                    return Wrap(
-                      children: [
-                        ListTile(
-                          title: Text("Camera"),
-                          leading: Icon(Icons.photo_camera),
-                          onTap: () async {
-                            final _imagePath =
-                                await formController.pickerImage("cam");
-                            setState(() {
-                              imagePath = _imagePath;
-                            });
-                          },
-                        ),
-                        ListTile(
-                          title: Text("Galeria"),
-                          leading: Icon(Icons.photo_library),
-                          onTap: () async {
-                            final _imagePath =
-                                await formController.pickerImage("gallery");
-                            setState(() {
-                              imagePath = _imagePath;
-                            });
-                          },
-                        )
-                      ],
-                    );
-                  });
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                context: context,
+                builder: (BuildContext bc) {
+                  return Wrap(
+                    children: [
+                      ListTile(
+                        title: const Text("Câmera"),
+                        leading: const Icon(Icons.photo_camera),
+                        onTap: () async {
+                          final _imagePath =
+                              await formController.pickerImage("cam");
+                          setState(() {
+                            imagePath = _imagePath;
+                          });
+                          Navigator.pop(
+                              context); // Fechar o BottomSheet após a seleção
+                        },
+                      ),
+                      ListTile(
+                        title: const Text("Galeria"),
+                        leading: const Icon(Icons.photo_library),
+                        onTap: () async {
+                          final _imagePath =
+                              await formController.pickerImage("gallery");
+                          setState(() {
+                            imagePath = _imagePath;
+                          });
+                        },
+                      )
+                    ],
+                  );
+                },
+              );
             },
+          ),
+          const SizedBox(
+            height: 20,
           ),
           TextFieldWidget(
             controller: formController.addressController,

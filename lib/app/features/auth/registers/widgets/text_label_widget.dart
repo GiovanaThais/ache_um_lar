@@ -24,7 +24,8 @@ class TextLabel extends StatelessWidget {
         decoration: InputDecoration(
             labelText: textlabel,
             labelStyle:
-                const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            border: OutlineInputBorder()),
       ),
     );
   }

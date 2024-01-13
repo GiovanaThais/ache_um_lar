@@ -93,20 +93,23 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                     style:
                         TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
               ),
-              TextField(
-                readOnly: true,
-                controller: birthDateController,
-                onTap: () async {
-                  var date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime(2000, 1, 1),
-                      firstDate: DateTime(1900, 1, 1),
-                      lastDate: DateTime.now());
-                  if (date != null) {
-                    birthDateController.text = date.toString();
-                    birthDate = date;
-                  }
-                },
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: TextField(
+                  readOnly: true,
+                  controller: birthDateController,
+                  onTap: () async {
+                    var date = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime(2000, 1, 1),
+                        firstDate: DateTime(1900, 1, 1),
+                        lastDate: DateTime.now());
+                    if (date != null) {
+                      birthDateController.text = date.toString();
+                      birthDate = date;
+                    }
+                  },
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),

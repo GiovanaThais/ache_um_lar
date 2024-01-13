@@ -312,6 +312,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
+          border: OutlineInputBorder(),
           hintText: "Insira sua senha",
           hintStyle: TextStyle(color: theme.colorScheme.primary),
           prefixIcon: Icon(
@@ -348,7 +349,8 @@ class _LoginPageState extends State<LoginPage> {
           prefixIcon: Icon(
             Icons.person,
             color: theme.colorScheme.primary,
-          )),
+          ),
+          border: OutlineInputBorder()),
       //Expanded(flex: 4, child: Text("Informe seu email:")),
       // Expanded(flex: 4, child: Text('Email'))
       //],
