@@ -28,9 +28,9 @@ class _DetailsHousesState extends State<DetailsHouses> {
                   CustomAppBarWidget(),
                 ],
               ),
-              //CarouselImageWidget(
-              //  widget.house.moreImagesUrl,
-              // ),
+              CarouselImageWidget(
+                imagesListUrl: widget.house.moreImagesUrl ?? [],
+              ),
               HouseDetailsWidget(widget.house),
             ],
           ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart' as carousel;
 import 'package:flutter/material.dart';
 
@@ -17,30 +19,30 @@ class _CarouselImageWidgetState extends State<CarouselImageWidget> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    print("widget.imagesListUrl" + widget.imagesListUrl.toString());
     return Container(
-      height: size.height * 0.35,
-      child: Row(
+      height: size.height * 0.333,
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Container(
-              child: _buildImageCarousel(),
-            ),
+            flex: 85,
+            child: _buildImageCarousel(size),
           ),
           Expanded(
-            child: Container(
-              child: _buildIndicatorDots(),
-            ),
+            flex: 15,
+            child: _buildIndicatorDots(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildImageCarousel() {
+  Widget _buildImageCarousel(Size size) {
+    log("widget.imagesListUrl" + widget.imagesListUrl.toString());
     return carousel.CarouselSlider(
       options: carousel.CarouselOptions(
-        height: size.height * 0.35,
+        //height: size.height * 0.35,
         enableInfiniteScroll: true,
         onPageChanged: (index, reason) {
           setState(() {

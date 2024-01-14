@@ -51,11 +51,14 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                     ),
                   ],
                 ),
-                Text(
-                  '${widget.house.city} hours ago',
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    '${widget.house.city} ',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

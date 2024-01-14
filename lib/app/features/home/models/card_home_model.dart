@@ -8,13 +8,13 @@ class CardHomeModel {
   final String city;
   final String address;
   final String price;
-  late final bool? isFav;
+  final bool isFav;
   final String description;
   final int bedRooms;
   final int bathRooms;
   final int garages;
   final double sqFeet;
-  List<String>? moreImagesUrl;
+  List<String> moreImagesUrl;
 
   CardHomeModel({
     required this.name,
@@ -27,8 +27,8 @@ class CardHomeModel {
     required this.bathRooms,
     required this.garages,
     required this.sqFeet,
-    this.isFav,
-    this.moreImagesUrl,
+    this.isFav = false,
+    this.moreImagesUrl = const [],
   });
 
   CardHomeModel copyWith({
@@ -49,7 +49,7 @@ class CardHomeModel {
         urlImage: urlImage ?? this.urlImage,
         city: city ?? this.city,
         address: address ?? this.address,
-        price: price ?? this.price,
+        price: price,
         description: address ?? this.address,
         bedRooms: bedRooms ?? this.bedRooms,
         bathRooms: bathRooms ?? this.bathRooms,
@@ -67,12 +67,12 @@ class CardHomeModel {
 
   factory CardHomeModel.fromMap(Map<String, dynamic> map) {
     return CardHomeModel(
-        name: map['name'] as String,
-        urlImage: map['urlImage'] as String,
+        name: map['name'],
+        urlImage: map['urlImage'],
         city: '',
         address: '',
         price: '',
-        isFav: map['isFav'] as bool?,
+        isFav: map['isFav'],
         description: '',
         bedRooms: 0,
         bathRooms: 0,

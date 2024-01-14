@@ -1,7 +1,6 @@
 //import 'package:dart_bank/features/auth/register/register_page.dart';
 //import 'package:dart_bank/features/home/pages/setting_page.dart';
 
-import 'package:ache_um_lar/app/core/theme/color_extension.dart';
 import 'package:ache_um_lar/app/core/theme/light/light_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';

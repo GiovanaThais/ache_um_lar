@@ -16,6 +16,8 @@ class _CategoriesState extends State<Categories> {
 
   Widget _buildCategory(BuildContext context, int index) {
     Size size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return GestureDetector(
       onTap: () {
@@ -28,9 +30,7 @@ class _CategoriesState extends State<Categories> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: appPadding / 2),
           decoration: BoxDecoration(
-            color: selectedCategoryIndex == index
-                ? Colors.purple
-                : Colors.black.withOpacity(0.1),
+            color: selectedCategoryIndex == index ? colorScheme.primary : null,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Center(
@@ -39,8 +39,8 @@ class _CategoriesState extends State<Categories> {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: selectedCategoryIndex == index
-                      ? Colors.white
-                      : Colors.black12),
+                      ? colorScheme.onPrimary
+                      : null),
             ),
           ),
         ),

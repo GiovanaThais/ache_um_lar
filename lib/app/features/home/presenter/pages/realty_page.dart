@@ -2,6 +2,7 @@ import 'package:ache_um_lar/app/core/widgets/home_app_bar_widget.dart';
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:ache_um_lar/app/features/home/presenter/pages/datails_page.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../utils/data.dart';
 import '../widgets/categories_widget.dart';
@@ -22,19 +23,21 @@ class _CardPageState extends State<CardPage> {
             city: data.location,
             address: data.address,
             price: data.price,
-            isFav: data.isFavorited,
+            isFav: data.isFavorite,
             description: data.description,
             bedRooms: data.bedRooms,
             bathRooms: data.bathRooms,
             garages: data.garages,
             sqFeet: data.sqFeet,
+            moreImagesUrl: data.moreImagesUrl ?? [],
           ))
       .toList();
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    final iconSize = 20.0;
+    const iconSize = 20.0;
+    final size = MediaQuery.of(context).size;
 
     return Column(
       children: [
@@ -53,7 +56,10 @@ class _CardPageState extends State<CardPage> {
                     ),
                   );
                 },
-                child: cardHousesMethod(item, textTheme, iconSize, theme),
+                child: SizedBox(
+                    height: size.height * 0.4,
+                    // width: double.infinity,
+                    child: cardHousesMethod(item, textTheme, iconSize, theme)),
               );
             },
             separatorBuilder: ((context, index) => const SizedBox(
@@ -74,125 +80,154 @@ class _CardPageState extends State<CardPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                child: Image.network(item.urlImage),
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-              ),
-              Positioned(
-                right: appPadding / 2,
-                top: appPadding / 2,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(19)),
-                  child: IconButton(
-                    icon: item.isFav == true
-                        ? const Icon(
-                            Icons.favorite_rounded,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.favorite_border_rounded,
-                            color: Colors.black,
-                          ),
-                    onPressed: () {
-                      setState(() {
-                        item.isFav;
-                      });
-                    },
+          Expanded(
+            flex: 60,
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  child: Image.network(
+                    item.urlImage,
+                    fit: BoxFit.fitWidth,
+                    width: double.maxFinite,
                   ),
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Text(
-                item.name,
-                style: textTheme.titleMedium,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          size: iconSize,
-                        ),
-                        Text(
-                          item.city,
-                          style: textTheme.bodyLarge,
-                        ),
-                      ],
+                Positioned(
+                  right: appPadding / 2,
+                  top: appPadding / 2,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(19)),
+                    child: IconButton(
+                      icon: item.isFav == true
+                          ? const Icon(
+                              Icons.favorite_rounded,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.favorite_border_rounded,
+                              color: Colors.black,
+                            ),
+                      onPressed: () {
+                        setState(() {
+                          item.isFav;
+                        });
+                      },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.home,
-                          size: iconSize,
-                        ),
-                        Text(
-                          item.address,
-                          style: textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.attach_money,
-                      size: iconSize,
-                    ),
-                    Text(
-                      item.price,
-                      style: textTheme.headlineSmall
-                          ?.copyWith(color: theme.colorScheme.primary),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
+          Expanded(
+            flex: 40,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(Icons.bed),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 0.0, vertical: 8.0),
+                        child: Text(
+                          item.name,
+                          style: textTheme.headlineMedium,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.location_on,
+                            size: iconSize,
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            item.city,
+                            style: textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.home,
+                            size: iconSize,
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            item.address,
+                            style: textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  Text('2')
+                  Expanded(
+                    child: Column(
+                      children: [
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(Icons.bed),
+                                ),
+                                Text('2')
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(Icons.bathtub),
+                                ),
+                                Text('2')
+                              ],
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.brazilianRealSign,
+                              size: iconSize * 0.8,
+                              color: theme.colorScheme.primary,
+                            ),
+                            const SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                              item.price,
+                              style: textTheme.displaySmall?.copyWith(
+                                color: theme.colorScheme.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(Icons.bathtub),
-                  ),
-                  Text('2')
-                ],
-              )
-            ],
-          )
+            ),
+          ),
         ],
       ),
     );

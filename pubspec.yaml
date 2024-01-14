@@ -41,6 +41,7 @@ dependencies:
   brasil_fields: ^1.14.2
   flutter_carousel_widget: ^2.2.0
   carousel_slider: 4.0.0
+  font_awesome_flutter: ^10.6.0
 
 dev_dependencies:
   flutter_test:

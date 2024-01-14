@@ -65,10 +65,10 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cadastro"),
+        title: const Text("Cadastro"),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ListView(
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -137,7 +137,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 child: Center(
                   child: ElevatedButton(
                     onPressed: _onSavePressed,
-                    child: Text("Salvar"),
+                    child: const Text("Salvar"),
                   ),
                 ),
               )

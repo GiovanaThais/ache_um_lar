@@ -303,7 +303,6 @@ class _LoginPageState extends State<LoginPage> {
 
   TextField registerPasswordMethod() {
     final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
 
     return TextField(
       obscureText: isObscureText,
@@ -312,7 +311,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           hintText: "Insira sua senha",
           hintStyle: TextStyle(color: theme.colorScheme.primary),
           prefixIcon: Icon(
@@ -350,7 +349,7 @@ class _LoginPageState extends State<LoginPage> {
             Icons.person,
             color: theme.colorScheme.primary,
           ),
-          border: OutlineInputBorder()),
+          border: const OutlineInputBorder()),
       //Expanded(flex: 4, child: Text("Informe seu email:")),
       // Expanded(flex: 4, child: Text('Email'))
       //],
