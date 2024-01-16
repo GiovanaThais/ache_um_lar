@@ -8,6 +8,7 @@ class BottomButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: appPadding),
@@ -18,11 +19,11 @@ class BottomButtons extends StatelessWidget {
             width: size.width * 0.4,
             height: 60,
             decoration: BoxDecoration(
-                color: Colors.purple,
+                color: theme.colorScheme.primary,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.purple.withOpacity(0.6),
+                      color: theme.colorScheme.primary.withOpacity(0.6),
                       offset: Offset(0, 10),
                       blurRadius: 10)
                 ]),
@@ -48,11 +49,11 @@ class BottomButtons extends StatelessWidget {
             width: size.width * 0.4,
             height: 60,
             decoration: BoxDecoration(
-                color: Colors.purple,
+                color: theme.colorScheme.primary,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.purple.withOpacity(0.6),
+                      color: theme.colorScheme.primary.withOpacity(0.6),
                       offset: Offset(0, 10),
                       blurRadius: 10)
                 ]),

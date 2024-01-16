@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../controllers/add_homes_form_controller.dart';
+import '../widgets/check_more_info_widget.dart';
 import '../widgets/text_field_widget.dart';
 
 class AddHomesFormComponent extends StatefulWidget {
@@ -22,6 +23,30 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
   String imagePath = "";
 
   AddHomesFormController get formController => widget.formController;
+
+  List<String> imovelDetails = [
+    'Área de serviço',
+    'Armários no quarto',
+    'Armários na cozinha',
+    'Mobiliado',
+    'Ar condicionado',
+    'Churrasqueira',
+    'Varanda',
+    'Academia',
+    'Piscina',
+    'Quarto de serviço',
+  ];
+
+  List<String> condominiumDetails = [
+    'Condomínio fechado',
+    'Elevador',
+    'Segurança 24h',
+    'Portaria',
+    'Permitido animais',
+    'Academia (cond.)',
+    'Piscina (cond.)',
+    'Salão de festas',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +148,18 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
           ),
           const SizedBox(height: 20),
+          TextFieldWidget(
+            controller: formController.condominiumTaxController,
+            label: 'Taxa de condomínio: (R\$)',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(height: 20),
+          TextFieldWidget(
+            controller: formController.iptuController,
+            label: 'IPTU (R\$)',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
@@ -153,6 +190,20 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             maxLines: 3,
             keyboardType: TextInputType.multiline,
             validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: CheckMoreInfoWidget(
+              title: 'Detalhes do imóvel',
+              detailsList: _AddHomesFormComponentState().imovelDetails,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: CheckMoreInfoWidget(
+              title: 'Detalhes do condomínio',
+              detailsList: _AddHomesFormComponentState().condominiumDetails,
+            ),
           ),
           const SizedBox(height: 20),
           Center(

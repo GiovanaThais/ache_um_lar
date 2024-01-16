@@ -28,6 +28,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
             bathRooms: data.bathRooms,
             garages: data.garages,
             sqFeet: data.sqFeet,
+            iptu: data.iptu,
+            condominiumTax: data.condominiumTax,
             moreImagesUrl: data.moreImagesUrl ?? [],
           ))
       .where((element) => element.isFav)

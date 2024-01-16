@@ -2,6 +2,7 @@ import 'package:ache_um_lar/app/features/home/submodules/register/register_modul
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'widgets/check_more_info_widget.dart';
 import 'components/add_homes_form_components.dart';
 
 class AddHomesFormPage extends StatelessWidget {
@@ -15,8 +16,16 @@ class AddHomesFormPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: AddHomesFormComponent(
-          formController: context.read(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 5),
+            Expanded(
+              child: AddHomesFormComponent(
+                formController: context.read(),
+              ),
+            ),
+          ],
         ),
       ),
     );

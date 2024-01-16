@@ -49,6 +49,22 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
+                    Text(
+                      'IPTU: \$${widget.house.iptu} reais',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black.withOpacity(0.4),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      'Condomínio: \$${widget.house.condominiumTax} reais',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black.withOpacity(0.4),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
                 Expanded(
@@ -144,7 +160,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                           height: 10,
                         ),
                         const Text(
-                          'Bedrooms',
+                          'Quartos',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -181,7 +197,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                           height: 10,
                         ),
                         const Text(
-                          'Bathrooms',
+                          'Banheiros',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -218,7 +234,44 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                           height: 10,
                         ),
                         const Text(
-                          'Garages',
+                          'Garagem',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: appPadding,
+                    bottom: appPadding,
+                  ),
+                  child: Container(
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.black.withOpacity(0.4),
+                        )),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.house.bedRooms.toString(),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Bedrooms',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -244,7 +297,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                 height: 1.5,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

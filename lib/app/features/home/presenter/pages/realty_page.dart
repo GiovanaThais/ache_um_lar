@@ -29,6 +29,8 @@ class _CardPageState extends State<CardPage> {
             bathRooms: data.bathRooms,
             garages: data.garages,
             sqFeet: data.sqFeet,
+            iptu: data.iptu,
+            condominiumTax: data.condominiumTax,
             moreImagesUrl: data.moreImagesUrl ?? [],
           ))
       .toList();

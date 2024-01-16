@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 class AddHomesFormController {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
+  final TextEditingController iptuController = TextEditingController();
+  final TextEditingController condominiumTaxController =
+      TextEditingController();
   final TextEditingController bedroomsController = TextEditingController();
   final TextEditingController bathroomsController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();

@@ -15,6 +15,8 @@ class CardHomeModel {
   final int garages;
   final double sqFeet;
   List<String> moreImagesUrl;
+  final double iptu;
+  final double condominiumTax;
 
   CardHomeModel({
     required this.name,
@@ -29,6 +31,8 @@ class CardHomeModel {
     required this.sqFeet,
     this.isFav = false,
     this.moreImagesUrl = const [],
+    required this.iptu,
+    required this.condominiumTax,
   });
 
   CardHomeModel copyWith({
@@ -43,6 +47,8 @@ class CardHomeModel {
     double? sqFeet,
     Bool? isFav,
     List<String>? moreImagesUrl,
+    double? iptu,
+    double? condominiumTax,
   }) {
     return CardHomeModel(
         name: name ?? this.name,
@@ -55,6 +61,8 @@ class CardHomeModel {
         bathRooms: bathRooms ?? this.bathRooms,
         garages: garages ?? this.garages,
         sqFeet: sqFeet ?? this.sqFeet,
+        iptu: iptu ?? this.iptu,
+        condominiumTax: condominiumTax ?? this.condominiumTax,
         moreImagesUrl: moreImagesUrl ?? this.moreImagesUrl);
   }
 
@@ -78,6 +86,8 @@ class CardHomeModel {
         bathRooms: 0,
         garages: 0,
         sqFeet: 0,
+        iptu: 0,
+        condominiumTax: 0,
         moreImagesUrl: map['moreImagesUrl']);
   }
 

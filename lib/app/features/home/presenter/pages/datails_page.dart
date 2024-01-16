@@ -1,5 +1,6 @@
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:ache_um_lar/app/features/home/submodules/details/widgets/bottom_buttons.dart';
+import 'package:ache_um_lar/app/features/home/submodules/register/widgets/check_more_info_widget.dart';
 import 'package:ache_um_lar/app/features/home/submodules/details/widgets/custom_bar_widgtes.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,7 @@ class _DetailsHousesState extends State<DetailsHouses> {
                 imagesListUrl: widget.house.moreImagesUrl ?? [],
               ),
               HouseDetailsWidget(widget.house),
+              //const CheckMoreInfoWidget(),
             ],
           ),
           const BottomButtons(),

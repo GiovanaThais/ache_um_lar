@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'custom_drawer_widget.dart';
-
 class MyHomePageWidget extends StatefulWidget {
   const MyHomePageWidget({super.key, required this.title});
 
