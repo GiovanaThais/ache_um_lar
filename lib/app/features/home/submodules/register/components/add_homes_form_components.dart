@@ -47,7 +47,6 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
     'Piscina (cond.)',
     'Salão de festas',
   ];
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -195,14 +194,14 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
           Expanded(
             child: CheckMoreInfoWidget(
               title: 'Detalhes do imóvel',
-              detailsList: _AddHomesFormComponentState().imovelDetails,
+              detailsList: imovelDetails,
             ),
           ),
           const SizedBox(width: 16),
           Expanded(
             child: CheckMoreInfoWidget(
               title: 'Detalhes do condomínio',
-              detailsList: _AddHomesFormComponentState().condominiumDetails,
+              detailsList: condominiumDetails,
             ),
           ),
           const SizedBox(height: 20),

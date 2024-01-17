@@ -457,7 +457,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 0.01 * size.height,
                 ),
-                const Text("Seja bem-vindo a Immoble!",
+                const Text("Seja bem-vindo a MyImmoble!",
                     //"APP_SUB_TITLE".tr(),
                     style: TextStyle(
                         fontSize: 20,

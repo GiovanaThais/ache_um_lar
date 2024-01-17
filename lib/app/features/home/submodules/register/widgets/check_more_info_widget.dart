@@ -18,7 +18,7 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoWidget> {
   bool isChecked = false;
 
   // Listas de opções específicas para imóvel e condomínio
-  static List<String> imovelDetails = [
+  List<String> imovelDetails = [
     'Área de serviço',
     'Armários no quarto',
     'Armários na cozinha',
@@ -31,7 +31,7 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoWidget> {
     'Quarto de serviço',
   ];
 
-  static List<String> condominiumDetails = [
+  List<String> condominiumDetails = [
     'Condomínio fechado',
     'Elevador',
     'Segurança 24h',
@@ -42,20 +42,36 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoWidget> {
     'Salão de festas',
   ];
 
+  late List<bool> checkedList;
+
+  @override
+  void initState() {
+    super.initState();
+    checkedList = List.filled(widget.detailsList.length, false);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Checkbox(
-          value: isChecked,
-          onChanged: (value) {
-            setState(() {
-              isChecked = value ?? false;
-            });
-          },
-        ),
-        const SizedBox(width: 8),
         Text(widget.title),
+        for (int i = 0; i < widget.detailsList.length; i++)
+          Row(
+            children: [
+              Checkbox(
+                value: checkedList[i],
+                onChanged: (value) {
+                  setState(() {
+                    checkedList[i] = value ?? false;
+                  });
+
+                  // Notify parent about the changes
+                },
+              ),
+              SizedBox(width: 8),
+              Text(widget.detailsList[i]),
+            ],
+          ),
       ],
     );
   }

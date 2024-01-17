@@ -14,7 +14,7 @@ class AppWidget extends StatelessWidget {
         builder: (context, state, child) {
           return MaterialApp.router(
             routerConfig: Modular.routerConfig,
-            title: 'Immoble',
+            title: 'MyImmoble',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 useMaterial3: true,

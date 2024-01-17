@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Immoble"),
+          title: const Text("MyImmoble"),
           actions: [
             ValueListenableBuilder(
                 valueListenable: appController,

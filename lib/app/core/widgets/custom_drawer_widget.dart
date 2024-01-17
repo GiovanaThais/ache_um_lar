@@ -94,7 +94,7 @@ class CustomDrawerWidget extends StatelessWidget {
                 elevation: 8,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
-                title: const Text("Immoble"),
+                title: const Text("MyImmoble"),
                 content: const Wrap(
                   children: [
                     Text("Voce sairá do aplicativo!"),
