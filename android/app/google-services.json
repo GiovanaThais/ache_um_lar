@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "341023915082",
+    "project_id": "my-immoble-app",
+    "storage_bucket": "my-immoble-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341023915082:android:2b567be8c3848da2c33ab3",
+        "android_client_info": {
+          "package_name": "com.example.ache_um_lar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpKuPHfMfbk5UV6YCfr6Q6wUFRioz7xh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

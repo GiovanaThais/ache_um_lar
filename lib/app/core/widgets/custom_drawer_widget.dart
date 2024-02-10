@@ -2,8 +2,11 @@
 //import 'package:dart_bank/features/home/pages/setting_page.dart';
 
 import 'package:ache_um_lar/app/core/theme/light/light_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../features/auth/service/auth_service_firebase.dart';
 
 //import '../../../features/auth/login/login_page.dart';
 
@@ -109,6 +112,7 @@ class CustomDrawerWidget extends StatelessWidget {
                       child: const Text("Não")),
                   TextButton(
                       onPressed: () {
+                        AuthServiceFirebase().logOut();
                         Modular.to.pushNamed('/auth/login');
                       },
                       child: const Text("Sim"))
@@ -206,11 +210,7 @@ class CustomDrawerWidget extends StatelessWidget {
         ),
       ),
       onTap: () {
-        //Navigator.pop(context);
-        //Navigator.push(
-        //  context,
-        //  MaterialPageRoute(builder: (context) => const RegisterPage()),
-        // );
+        Modular.to.pushNamed('/auth/registerUser');
       },
     );
   }
