@@ -1,3 +1,5 @@
+import 'package:ache_um_lar/app/core/components/snackbar_componets.dart';
+import 'package:ache_um_lar/app/features/auth/service/auth_service_firebase.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +25,8 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   var emailController = TextEditingController(text: "");
   var passwordController = TextEditingController(text: "");
 
+  AuthServiceFirebase _authService = AuthServiceFirebase();
+
   DateTime? birthDate;
   var types = [];
   var typeSelected = "";
@@ -38,6 +42,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   final String PASSWORD_REGISTRATER_DATA_KEY = "PASSWORD_REGISTRATER_DATA_KEY";
 
   bool safing = false;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -77,6 +82,16 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 child: TextLabel(
                   controller: nameController,
                   textlabel: "Nome Completo",
+                  validator: (String? value) {
+                    if (value == null) {
+                      return "O nome deve ser preenchido";
+                    }
+                    if (value!.length < 2) {
+                      return "O nome está muito curto!";
+                    }
+
+                    return null;
+                  },
                 ),
               ),
               Padding(
@@ -85,6 +100,16 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                   controller: cellController,
                   textlabelFormatter: "Telefone",
                   formatter: TelefoneInputFormatter(),
+                  validator: (String? value) {
+                    if (value == null) {
+                      return "O telefone deve ser preenchido";
+                    }
+                    if (value!.length < 5) {
+                      return "O telefone está muito curto!";
+                    }
+
+                    return null;
+                  },
                 ),
               ),
               const Padding(
@@ -113,9 +138,24 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
-                child: TextLabel(
-                  controller: emailController,
-                  textlabel: "Email",
+                child: Form(
+                  key: _formKey,
+                  child: TextLabel(
+                    controller: emailController,
+                    textlabel: "Email",
+                    validator: (String? value) {
+                      if (value == null) {
+                        return "O e-mail deve ser preenchido";
+                      }
+                      if (value!.length < 5) {
+                        return "O e-mail está muito curto!";
+                      }
+                      if (!value.contains("@")) {
+                        return "O e-mail não é válido";
+                      }
+                      return null;
+                    },
+                  ),
                 ),
               ),
               Padding(
@@ -123,6 +163,16 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 child: TextLabel(
                   controller: passwordController,
                   textlabel: "Senha",
+                  validator: (String? value) {
+                    if (value == null) {
+                      return "A senha deve ser preenchida";
+                    }
+                    if (value!.length < 8) {
+                      return "O senha deve conter no mínimo 8 caracteres!";
+                    }
+
+                    return null;
+                  },
                 ),
               ),
               Padding(
@@ -130,6 +180,16 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 child: TextLabel(
                   controller: passwordController,
                   textlabel: "Confirmar Senha",
+                  validator: (String? value) {
+                    if (value == null) {
+                      return "O e-mail deve ser preenchido";
+                    }
+                    if (value!.length < 8) {
+                      return "O senha deve conter no mínimo 8 caracteres!";
+                    }
+
+                    return null;
+                  },
                 ),
               ),
               Padding(
@@ -147,6 +207,10 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   }
 
   void _onSavePressed() async {
+    String names = nameController.text;
+    String emails = emailController.text;
+    String passwords = passwordController.text;
+
     if (nameController.text.trim().length < 3) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Nome deve ser preenchido")));
@@ -170,6 +234,25 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
     await storage.setRegisterEmail(emailController.text);
     await storage.setRegisterPassword(passwordController.text);
 
+    print(
+        "${emailController.text},${passwordController.text}, ${nameController.text}");
+    _authService
+        .registerUser(
+      name: names,
+      password: passwords,
+      email: emails,
+    )
+        .then((String? erro) {
+      if (erro != null) {
+        showSnacksBar(context: context, message: erro);
+      } else {
+        showSnacksBar(
+          context: context,
+          message: "Cadastro efetuado com sucesso",
+          isError: false,
+        );
+      }
+    });
     setState(() {
       safing = true;
     });
