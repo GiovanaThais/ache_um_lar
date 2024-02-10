@@ -15,67 +15,90 @@ class BottomButtons extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Container(
-            width: size.width * 0.4,
-            height: 60,
-            decoration: BoxDecoration(
-                color: theme.colorScheme.primary,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                      color: theme.colorScheme.primary.withOpacity(0.6),
-                      offset: Offset(0, 10),
-                      blurRadius: 10)
-                ]),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  (Icons.mail_rounded),
-                  color: Colors.white,
-                ),
-                Text(
-                  ' Message',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              ],
-            ),
+          _buildPopupButton(
+            context,
+            Icons.mail_rounded,
+            'Email',
+            theme.colorScheme.primary, // ou outra cor de sua escolha
+            'example@email.com',
           ),
-          Container(
-            width: size.width * 0.4,
-            height: 60,
-            decoration: BoxDecoration(
-                color: theme.colorScheme.primary,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                      color: theme.colorScheme.primary.withOpacity(0.6),
-                      offset: Offset(0, 10),
-                      blurRadius: 10)
-                ]),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  (Icons.call_rounded),
-                  color: Colors.white,
-                ),
-                Text(
-                  ' Call',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              ],
-            ),
+          _buildPopupButton(
+            context,
+            Icons.call_rounded,
+            'Telefone',
+            theme.colorScheme.primary, // ou outra cor de sua escolha
+            '+55 123 456 789',
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPopupButton(
+    BuildContext context,
+    IconData icon,
+    String text,
+    Color color,
+    String content,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(text),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+              content: Text(content),
+            );
+          },
+        );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.4,
+        height: 60,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.6),
+              offset: const Offset(0, 10),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              text,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

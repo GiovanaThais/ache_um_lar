@@ -8,6 +8,7 @@ class CustomAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -30,9 +31,9 @@ class CustomAppBarWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.white.withOpacity(0.4)),
                     borderRadius: BorderRadius.circular(15)),
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back_rounded,
-                  color: Colors.purple,
+                  color: theme.colorScheme.primary, //mudar para cor primaria
                 ),
               ),
             ),
@@ -42,9 +43,9 @@ class CustomAppBarWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white.withOpacity(0.4)),
                   borderRadius: BorderRadius.circular(15)),
-              child: const Icon(
+              child: Icon(
                 Icons.favorite_border_rounded,
-                color: Colors.purple,
+                color: theme.colorScheme.primary, //mudar para cor primaria
               ),
             ),
           ],
