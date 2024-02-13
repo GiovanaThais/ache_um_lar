@@ -83,7 +83,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
           const Padding(
             padding: EdgeInsets.only(left: appPadding, bottom: appPadding),
             child: Text(
-              'House information',
+              'Mais informações',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -112,19 +112,17 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.house.sqFeet.toString(),
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const Icon(
+                          Icons.square_foot,
+                          size: 24,
+                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          'Metros',
-                          style: TextStyle(
+                        Text(
+                          '${widget.house.sqFeet} Metros',
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                           ),
@@ -149,19 +147,17 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.house.bedRooms.toString(),
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const Icon(
+                          Icons.king_bed,
+                          size: 24,
+                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          'Quartos',
-                          style: TextStyle(
+                        Text(
+                          '${widget.house.bedRooms} Quartos',
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                           ),
@@ -186,19 +182,17 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.house.bathRooms.toString(),
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const Icon(
+                          Icons.bathtub,
+                          size: 24,
+                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          'Banheiros',
-                          style: TextStyle(
+                        Text(
+                          '${widget.house.bathRooms} Banheiros',
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                           ),
@@ -223,19 +217,17 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.house.garages.toString(),
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const Icon(
+                          Icons.garage,
+                          size: 24,
+                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          'Garagem',
-                          style: TextStyle(
+                        Text(
+                          '${widget.house.garages} Garagem',
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                           ),
@@ -260,19 +252,17 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.house.bedRooms.toString(),
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        const Icon(
+                          Icons.pool,
+                          size: 24,
+                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text(
-                          'Lazer',
-                          style: TextStyle(
+                        Text(
+                          '${widget.house.garages} Lazer',
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                           ),

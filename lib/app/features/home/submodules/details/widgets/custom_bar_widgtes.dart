@@ -33,7 +33,7 @@ class CustomAppBarWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15)),
                 child: Icon(
                   Icons.arrow_back_rounded,
-                  color: theme.colorScheme.primary, //mudar para cor primaria
+                  color: theme.colorScheme.primary,
                 ),
               ),
             ),
@@ -45,7 +45,7 @@ class CustomAppBarWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)),
               child: Icon(
                 Icons.favorite_border_rounded,
-                color: theme.colorScheme.primary, //mudar para cor primaria
+                color: theme.colorScheme.primary,
               ),
             ),
           ],

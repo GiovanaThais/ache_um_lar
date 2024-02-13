@@ -2,7 +2,15 @@ import 'package:ache_um_lar/app/core/services/image_picker_service.dart';
 import 'package:flutter/material.dart';
 
 class AddHomesFormController {
-  final TextEditingController addressController = TextEditingController();
+  final TextEditingController addressController =
+      TextEditingController(); //logradouro
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController stateController =
+      TextEditingController(); //Estado
+  final TextEditingController numberAddressController = TextEditingController();
+  final TextEditingController neighborhoodController = TextEditingController();
+  final TextEditingController cepController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController iptuController = TextEditingController();
   final TextEditingController condominiumTaxController =

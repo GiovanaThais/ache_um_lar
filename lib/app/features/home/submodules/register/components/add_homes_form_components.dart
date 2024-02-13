@@ -136,8 +136,56 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             height: 20,
           ),
           TextFieldWidget(
+            controller: formController.cityController,
+            label: 'Cidade',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFieldWidget(
+            controller: formController.stateController,
+            label: 'Estado',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFieldWidget(
+            controller: formController.countryController,
+            label: 'País',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFieldWidget(
             controller: formController.addressController,
-            label: 'Endereço',
+            label: 'Logradouro',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFieldWidget(
+            controller: formController.cepController,
+            label: 'CEP',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFieldWidget(
+            controller: formController.neighborhoodController,
+            label: 'Bairro',
+            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextFieldWidget(
+            controller: formController.numberAddressController,
+            label: 'Número',
             validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
           ),
           const SizedBox(height: 20),
@@ -161,23 +209,27 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
           const SizedBox(height: 20),
           Row(
             children: [
-              Expanded(
-                child: TextFieldWidget(
-                  controller: formController.bedroomsController,
-                  label: 'Quartos',
-                  prefixIcon: Icons.bed,
-                  validator: (value) =>
-                      defaultValidator(value, 'Campo Obrigatório'),
+              Container(
+                child: Expanded(
+                  child: TextFieldWidget(
+                    controller: formController.bedroomsController,
+                    label: 'Quartos',
+                    prefixIcon: Icons.bed,
+                    validator: (value) =>
+                        defaultValidator(value, 'Campo Obrigatório'),
+                  ),
                 ),
               ),
               const SizedBox(width: 20),
-              Expanded(
-                child: TextFieldWidget(
-                  controller: formController.bathroomsController,
-                  label: 'Banheiros',
-                  prefixIcon: Icons.bathtub,
-                  validator: (value) =>
-                      defaultValidator(value, 'Campo Obrigatório'),
+              Container(
+                child: Expanded(
+                  child: TextFieldWidget(
+                    controller: formController.bathroomsController,
+                    label: 'Banheiros',
+                    prefixIcon: Icons.bathtub,
+                    validator: (value) =>
+                        defaultValidator(value, 'Campo Obrigatório'),
+                  ),
                 ),
               ),
             ],
@@ -191,17 +243,21 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
           ),
           const SizedBox(width: 20),
-          Expanded(
-            child: CheckMoreInfoWidget(
-              title: 'Detalhes do imóvel',
-              detailsList: imovelDetails,
+          Center(
+            child: Expanded(
+              child: CheckMoreInfoWidget(
+                title: 'Detalhes do imóvel',
+                detailsList: imovelDetails,
+              ),
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
-            child: CheckMoreInfoWidget(
-              title: 'Detalhes do condomínio',
-              detailsList: condominiumDetails,
+          Center(
+            child: Expanded(
+              child: CheckMoreInfoWidget(
+                title: 'Detalhes do condomínio',
+                detailsList: condominiumDetails,
+              ),
             ),
           ),
           const SizedBox(height: 20),
