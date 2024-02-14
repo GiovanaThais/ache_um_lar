@@ -121,7 +121,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                           height: 10,
                         ),
                         Text(
-                          '${widget.house.sqFeet} Metros',
+                          '${widget.house.sqFeet} Metros²',
                           style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
