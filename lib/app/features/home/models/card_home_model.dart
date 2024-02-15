@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
+//import 'dart:ffi';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class CardHomeModel {
@@ -45,7 +45,7 @@ class CardHomeModel {
     int? bathRooms,
     int? garages,
     double? sqFeet,
-    Bool? isFav,
+    bool? isFav,
     List<String>? moreImagesUrl,
     double? iptu,
     double? condominiumTax,
@@ -75,6 +75,7 @@ class CardHomeModel {
 
   factory CardHomeModel.fromMap(Map<String, dynamic> map) {
     return CardHomeModel(
+        // add novas
         name: map['name'],
         urlImage: map['urlImage'],
         city: '',

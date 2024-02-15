@@ -43,7 +43,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
     return Column(
       children: [
-        buildSearchBar(),
+        buildSearchBar(context),
         Expanded(
           child: ListView.separated(
             itemBuilder: (context, index) {

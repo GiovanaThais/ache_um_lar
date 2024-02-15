@@ -43,7 +43,7 @@ class _CardPageState extends State<CardPage> {
 
     return Column(
       children: [
-        buildSearchBar(),
+        buildSearchBar(context),
         const Categories(),
         Expanded(
           child: ListView.separated(
