@@ -1,3 +1,4 @@
+import 'package:ache_um_lar/app/features/home/presenter/widgets/filters_search_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/search_page.dart';
@@ -42,7 +43,11 @@ Widget buildSearchBar(BuildContext context) {
         ),
         ElevatedButton(
           onPressed: () {
-            // Ação para o botão de filtro
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const FilterSearchBarWidget()),
+            );
           },
           child: const Icon(Icons.filter_list_rounded,
               color: Color.fromARGB(255, 146, 6, 118)),

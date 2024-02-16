@@ -113,7 +113,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(
-                          Icons.square_foot,
+                          Icons.zoom_out_map,
                           size: 24,
                           color: Colors.black,
                         ),
