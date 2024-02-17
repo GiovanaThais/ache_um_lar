@@ -14,15 +14,16 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+      padding: const EdgeInsets.only(right: 24, left: 24, top: 32, bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
             children: [
               Text(
-                "Filtros",
+                "Filtre",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -38,37 +39,39 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
             ],
           ),
           const SizedBox(
-            height: 12,
+            height: 32,
           ),
           const Row(
             children: [
               Text(
                 "Preço",
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(
-                width: 2,
+                width: 8,
               ),
               Text(
-                "média",
-                style: TextStyle(fontSize: 14),
+                "médio",
+                style: TextStyle(fontSize: 24),
               )
             ],
           ),
-          RangeSlider(
-            values: selectedRange,
-            onChanged: (RangeValues newRange) {
-              setState(() {
-                selectedRange = newRange;
-              });
-            },
-            min: 100,
-            max: 1000,
-            activeColor: Colors.blue[900],
-            inactiveColor: Colors.grey[300],
+          Material(
+            child: RangeSlider(
+              values: selectedRange,
+              onChanged: (RangeValues newRange) {
+                setState(() {
+                  selectedRange = newRange;
+                });
+              },
+              min: 100,
+              max: 1000,
+              activeColor: theme.colorScheme.primary,
+              inactiveColor: Colors.grey[300],
+            ),
           ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,25 +79,26 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
               Text(
                 r"$70k",
                 style: TextStyle(
-                  fontSize: 4,
+                  fontSize: 14,
                 ),
               ),
               Text(
                 r"$1000k",
                 style: TextStyle(
-                  fontSize: 4,
+                  fontSize: 14,
                 ),
               ),
             ],
           ),
           const SizedBox(
-            height: 6,
+            height: 16,
           ),
           const Text(
-            "Rooms",
+            "Quartos",
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
+              //color: theme.colorScheme.primary,
             ),
           ),
           const SizedBox(
@@ -103,20 +107,21 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildOption("Any", false),
-              buildOption("1", false),
-              buildOption("2", true),
-              buildOption("3+", false),
+              buildOption("Qualquer", false, context),
+              buildOption("1", false, context),
+              buildOption("2", true, context),
+              buildOption("3+", false, context),
             ],
           ),
           const SizedBox(
-            height: 6,
+            height: 16,
           ),
           const Text(
-            "Bathrooms",
+            "Banheiros",
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 24,
               fontWeight: FontWeight.bold,
+              //color: theme.colorScheme.primary,
             ),
           ),
           const SizedBox(
@@ -125,10 +130,10 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildOption("Any", true),
-              buildOption("1", false),
-              buildOption("2", false),
-              buildOption("3+", false),
+              buildOption("Qualquer", true, context),
+              buildOption("1", false, context),
+              buildOption("2", false, context),
+              buildOption("3+", false, context),
             ],
           ),
         ],

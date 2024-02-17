@@ -43,11 +43,7 @@ Widget buildSearchBar(BuildContext context) {
         ),
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const FilterSearchBarWidget()),
-            );
+            _showBottomSheet(context);
           },
           child: const Icon(Icons.filter_list_rounded,
               color: Color.fromARGB(255, 146, 6, 118)),
@@ -55,4 +51,23 @@ Widget buildSearchBar(BuildContext context) {
       ],
     ),
   );
+}
+
+void _showBottomSheet(context) {
+  showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return const Wrap(
+          children: [
+            FilterSearchBarWidget(),
+          ],
+        );
+      });
 }
