@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/widgets/constants_widget.dart';
 
 class CustomAppBarWidget extends StatelessWidget {
-  const CustomAppBarWidget({super.key});
+  const CustomAppBarWidget({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,9 @@ class CustomAppBarWidget extends StatelessWidget {
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white.withOpacity(0.4)),
-                    borderRadius: BorderRadius.circular(15)),
+                  border: Border.all(color: Colors.white.withOpacity(0.4)),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Icon(
                   Icons.arrow_back_rounded,
                   color: theme.colorScheme.primary,
@@ -41,11 +42,34 @@ class CustomAppBarWidget extends StatelessWidget {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white.withOpacity(0.4)),
-                  borderRadius: BorderRadius.circular(15)),
+                border: Border.all(color: Colors.white.withOpacity(0.4)),
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Icon(
                 Icons.favorite_border_rounded,
                 color: theme.colorScheme.primary,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                // Lógica para a ação de compartilhar
+                // Substitua este comentário com a lógica de compartilhamento desejada
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                      content: Text("Botão de Compartilhar Pressionado")),
+                );
+              },
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white.withOpacity(0.4)),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Icon(
+                  Icons.share_rounded,
+                  color: theme.colorScheme.primary,
+                ),
               ),
             ),
           ],
