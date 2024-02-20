@@ -2,6 +2,8 @@ import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/constants_widget.dart';
+import '../../../presenter/pages/check_more_info_details_widget.dart';
+import 'bottom_buttons_chat.dart';
 
 class HouseDetailsWidget extends StatefulWidget {
   final CardHomeModel house;
@@ -274,6 +276,11 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
               ],
             ),
           ),
+          const CheckMoreInfoDetailsWidget(
+            imovelDetails: [],
+            condominiumDetails: [],
+          ),
+          BottomButtonsChat(),
           Padding(
             padding: const EdgeInsets.only(
               left: appPadding,

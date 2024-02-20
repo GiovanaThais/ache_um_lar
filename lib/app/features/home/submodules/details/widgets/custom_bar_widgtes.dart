@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/constants_widget.dart';
 
+import 'package:share_plus/share_plus.dart';
+
 class CustomAppBarWidget extends StatelessWidget {
   const CustomAppBarWidget({Key? key});
 
@@ -52,11 +54,8 @@ class CustomAppBarWidget extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                // Lógica para a ação de compartilhar
-                // Substitua este comentário com a lógica de compartilhamento desejada
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                      content: Text("Botão de Compartilhar Pressionado")),
+                Share.share(
+                  'Olhem esse imóvel, que legal! https://imoblist.com.br/',
                 );
               },
               child: Container(

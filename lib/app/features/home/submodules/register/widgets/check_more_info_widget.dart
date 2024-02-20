@@ -36,6 +36,7 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoWidget> {
     'Elevador',
     'Segurança 24h',
     'Portaria',
+    'Quadra',
     'Permitido animais',
     'Academia (cond.)',
     'Piscina (cond.)',
@@ -68,7 +69,7 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoWidget> {
                   // Notify parent about the changes
                 },
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(widget.detailsList[i]),
             ],
           ),
