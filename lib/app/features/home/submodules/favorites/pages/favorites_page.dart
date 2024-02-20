@@ -1,6 +1,6 @@
 import 'package:ache_um_lar/app/core/widgets/home_app_bar_widget.dart';
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
-import 'package:ache_um_lar/app/features/home/presenter/pages/datails_page.dart';
+import 'package:ache_um_lar/app/features/home/presenter/widgets/datails_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

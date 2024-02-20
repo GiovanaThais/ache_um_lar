@@ -2,6 +2,7 @@
 //import 'package:dart_bank/features/home/pages/setting_page.dart';
 
 import 'package:ache_um_lar/app/core/theme/light/light_colors.dart';
+import 'package:ache_um_lar/app/features/home/presenter/pages/settings_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -44,6 +45,11 @@ class CustomDrawerWidget extends StatelessWidget {
           height: 10,
         ),
         settingsMethod(context),
+        const Divider(),
+        const SizedBox(
+          height: 10,
+        ),
+        helpMethod(context),
         const Divider(),
         const SizedBox(
           height: 10,
@@ -140,134 +146,36 @@ class CustomDrawerWidget extends StatelessWidget {
         ),
       ),
       onTap: () {
-        bool isBrazilSelected = false;
-        bool isMexicoSelected = false;
-        showModalBottomSheet(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          context: context,
-          builder: (BuildContext bc) {
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          // Handle accessibility button tap
-                        },
-                        icon: const Icon(Icons.accessibility_new_rounded),
-                        label: const Text("Acessibilidade"),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          // Handle "Sobre nós" button tap
-                        },
-                        icon: const Icon(Icons.info),
-                        label: const Text("Sobre nós"),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HelpPage()),
-                          );
-                        },
-                        icon: const Icon(Icons.help),
-                        label: const Text("Ajuda"),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          alterCountryMethod(
-                              context, isBrazilSelected, isMexicoSelected);
-                        },
-                        icon: const Icon(Icons.language),
-                        label: const Text("Alterar País"),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsPage()),
         );
       },
     );
   }
 
-  Future<dynamic> alterCountryMethod(
-      BuildContext context, bool isBrazilSelected, bool isMexicoSelected) {
-    return showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+  InkWell helpMethod(BuildContext context) {
+    return InkWell(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        width: double.infinity,
+        child: const Row(
+          children: [
+            Icon(Icons.help),
+            SizedBox(
+              width: 5,
+            ),
+            Text("Ajuda"),
+          ],
         ),
-        context: context,
-        builder: (BuildContext bc) {
-          return Container(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-              child: Column(
-                children: [
-                  const Text(
-                    "Alterar o país",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Divider(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    " Onde você deseja buscar um imovél?",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: isBrazilSelected,
-                        onChanged: (bool? value) {
-                          // Handle Brazil checkbox change
-                          isBrazilSelected = value ?? false;
-                        },
-                      ),
-                      const Text("Brasil"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: isMexicoSelected,
-                        onChanged: (bool? value) {
-                          // Handle Mexico checkbox change
-                          isMexicoSelected = value ?? false;
-                        },
-                      ),
-                      const Text("México"),
-                    ],
-                  ),
-                ],
-              ));
-        });
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HelpPage()),
+        );
+      },
+    );
   }
 
   InkWell useTermsMethod(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Como podemos ajudar?"),
@@ -20,33 +21,73 @@ class HelpPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            ListTile(
-              leading: const Icon(Icons.description),
-              title: const Text("Documentos e Avaliação de Crédito"),
-              onTap: () {
-                // Handle the tap on this item
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: ListTile(
+                  leading: const Icon(Icons.description, color: Colors.purple),
+                  title: const Text("Documentos e Avaliação de Crédito"),
+                  hoverColor: theme.colorScheme.primary,
+                  splashColor: theme.colorScheme.primary,
+                  selectedColor: theme.colorScheme.primary,
+                  focusColor: theme.colorScheme.primary,
+                  textColor: theme.colorScheme.primary,
+                  onTap: () {
+                    // Handle the tap on this item
+                  },
+                ),
+              ),
             ),
-            ListTile(
-              leading: const Icon(Icons.key),
-              title: const Text("Entrada no imovel"),
-              onTap: () {
-                // Handle the tap on this item
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: ListTile(
+                  leading: const Icon(Icons.key, color: Colors.purple),
+                  title: const Text("Entrada no imovel"),
+                  hoverColor: theme.colorScheme.primary,
+                  splashColor: theme.colorScheme.primary,
+                  selectedColor: theme.colorScheme.primary,
+                  focusColor: theme.colorScheme.primary,
+                  textColor: theme.colorScheme.primary,
+                  onTap: () {
+                    // Handle the tap on this item
+                  },
+                ),
+              ),
             ),
-            ListTile(
-              leading: const Icon(Icons.payment),
-              title: const Text("Pagamentos"),
-              onTap: () {
-                // Handle the tap on this item
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: ListTile(
+                  leading: const Icon(Icons.payment, color: Colors.purple),
+                  hoverColor: theme.colorScheme.primary,
+                  splashColor: theme.colorScheme.primary,
+                  selectedColor: theme.colorScheme.primary,
+                  focusColor: theme.colorScheme.primary,
+                  textColor: theme.colorScheme.primary,
+                  title: const Text("Pagamentos"),
+                  onTap: () {
+                    // Handle the tap on this item
+                  },
+                ),
+              ),
             ),
-            ListTile(
-              leading: const Icon(Icons.location_on),
-              title: const Text("Visitas"),
-              onTap: () {
-                // Handle the tap on this item
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: ListTile(
+                  leading: const Icon(Icons.location_on, color: Colors.purple),
+                  hoverColor: theme.colorScheme.primary,
+                  splashColor: theme.colorScheme.primary,
+                  selectedColor: theme.colorScheme.primary,
+                  focusColor: theme.colorScheme.primary,
+                  textColor: theme.colorScheme.primary,
+                  title: const Text("Visitas"),
+                  onTap: () {
+                    // Handle the tap on this item
+                  },
+                ),
+              ),
             ),
           ],
         ),

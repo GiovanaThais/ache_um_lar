@@ -1,5 +1,6 @@
 import 'package:ache_um_lar/app/features/auth/login/login_page.dart';
 import 'package:ache_um_lar/app/features/auth/registers/register_user_page.dart';
+import 'package:ache_um_lar/app/features/home/submodules/chat/chat_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthModule extends Module {
@@ -7,5 +8,6 @@ class AuthModule extends Module {
   void routes(r) {
     r.child('/login', child: (context) => LoginPage());
     r.child('/registerUser', child: (context) => RegisterUserPage());
+    // r.child('/chat', child: (context) => ChatPage());
   }
 }

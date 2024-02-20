@@ -2,6 +2,7 @@ import 'package:ache_um_lar/app/app_controller.dart';
 import 'package:ache_um_lar/app/core/services/image_picker_service.dart';
 import 'package:ache_um_lar/app/features/auth/auth_module.dart';
 import 'package:ache_um_lar/app/features/home/presenter/pages/home_page.dart';
+import 'package:ache_um_lar/app/features/home/submodules/chat/chat_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,5 +24,6 @@ class AppModule extends Module {
         child: (context) => const HomePage(
               title: "",
             ));
+    r.child('/chat', child: (context) => const ChatPage());
   }
 }
