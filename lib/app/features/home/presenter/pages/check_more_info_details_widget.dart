@@ -33,6 +33,15 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoDetailsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Padding(
+          padding: EdgeInsets.all(18.0),
+          child: Row(
+            children: [
+              Icon(Icons.home),
+              Text("Imovel"),
+            ],
+          ),
+        ),
         GestureDetector(
           onTap: () {
             setState(() {
@@ -43,15 +52,15 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoDetailsWidget> {
             });
           },
           child: Container(
-            color: Colors.grey[200],
-            padding: EdgeInsets.all(12),
-            child: Row(
-              children: [
-                Icon(Icons.home), // Adicionei o ícone aqui
-                SizedBox(width: 8),
-                Text("Detalhes do Imóvel"),
-              ],
-            ),
+            color: Colors.white10,
+            padding: EdgeInsets.all(10),
+            child: Row(children: [
+              Icon(showImovelDetails
+                  ? Icons.arrow_drop_up
+                  : Icons.arrow_drop_down),
+              SizedBox(width: 8),
+              Text("Detalhes do Imóvel"),
+            ]),
           ),
         ),
         if (showImovelDetails)
@@ -66,10 +75,23 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoDetailsWidget> {
                     });
                   },
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 25),
                 Text(widget.imovelDetails[i]),
               ],
             ),
+        const Padding(
+          padding: EdgeInsets.all(18.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(Icons.apartment),
+              SizedBox(
+                height: 5,
+              ),
+              Text("Condomínio"),
+            ],
+          ),
+        ),
         GestureDetector(
           onTap: () {
             setState(() {
@@ -80,13 +102,17 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoDetailsWidget> {
             });
           },
           child: Container(
-            color: Colors.grey[200],
+            color: Colors.white10,
             padding: EdgeInsets.all(12),
             child: Row(
               children: [
-                Icon(Icons.apartment), // Adicionei o ícone aqui
+                Icon(
+                  showCondominiumDetails
+                      ? Icons.arrow_drop_up
+                      : Icons.arrow_drop_down,
+                ),
                 SizedBox(width: 8),
-                Text("Detalhes do Condomínio"),
+                Text("Instalações do Condomínio"),
               ],
             ),
           ),
@@ -103,7 +129,7 @@ class _CheckMoreInfoWidgetState extends State<CheckMoreInfoDetailsWidget> {
                     });
                   },
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(widget.condominiumDetails[i]),
               ],
             ),
