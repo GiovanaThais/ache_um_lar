@@ -4,12 +4,18 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../submodules/details/widgets/bottom_buttons.dart';
 
-class VisitHomePage extends StatelessWidget {
+class VisitHomePage extends StatefulWidget {
+  @override
+  State<VisitHomePage> createState() => _VisitHomePageState();
+}
+
+class _VisitHomePageState extends State<VisitHomePage> {
   DateTime today = DateTime.now();
+
   void _onDaySelected(DateTime day, DateTime focusedDay) {
-    setState() {
+    setState(() {
       today = day;
-    }
+    });
   }
 
   @override
@@ -41,7 +47,7 @@ class VisitHomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Text("Dia da visita: " + today.toString().split("")[0]),
+                      Text("Dia da visita: " + today.toString()),
                       TableCalendar(
                         locale: "en_US",
                         rowHeight: 43,
@@ -76,7 +82,7 @@ class VisitHomePage extends StatelessWidget {
                       focusColor: theme.colorScheme.primary,
                       textColor: theme.colorScheme.primary,
                       onTap: () {
-                        alterCountryMethod(
+                        alterHourMethod(
                           context,
                         );
                       },
@@ -96,7 +102,7 @@ class VisitHomePage extends StatelessWidget {
                       focusColor: theme.colorScheme.primary,
                       textColor: theme.colorScheme.primary,
                       onTap: () {
-                        alterCountryMethod(
+                        alterHourMethodOption(
                           context,
                         );
                       },
@@ -127,11 +133,14 @@ class VisitHomePage extends StatelessWidget {
   }
 }
 
-Future<dynamic> alterCountryMethod(
+alterHourMethod(
   BuildContext context,
 ) {
-  bool isBrazilSelected = false;
-  bool isMexicoSelected = false;
+  bool is8Selected = false;
+  bool is9Selected = false;
+  bool is10Selected = false;
+  bool is11Selected = false;
+
   return showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -148,7 +157,7 @@ Future<dynamic> alterCountryMethod(
                 ),
                 const Divider(),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 const Text(
                   " Qual horário você deseja visitar o imovél?",
@@ -158,10 +167,10 @@ Future<dynamic> alterCountryMethod(
                 Row(
                   children: [
                     Checkbox(
-                      value: isBrazilSelected,
+                      value: is8Selected,
                       onChanged: (bool? value) {
                         // Handle Brazil checkbox change
-                        isBrazilSelected = value ?? false;
+                        is8Selected = value ?? false;
                       },
                     ),
                     const Text("08:00hrs - 09:00hrs"),
@@ -170,10 +179,10 @@ Future<dynamic> alterCountryMethod(
                 Row(
                   children: [
                     Checkbox(
-                      value: isMexicoSelected,
+                      value: is9Selected,
                       onChanged: (bool? value) {
                         // Handle Mexico checkbox change
-                        isMexicoSelected = value ?? false;
+                        is9Selected = value ?? false;
                       },
                     ),
                     const Text("09:00hrs - 10:00hrs"),
@@ -182,22 +191,72 @@ Future<dynamic> alterCountryMethod(
                 Row(
                   children: [
                     Checkbox(
-                      value: isBrazilSelected,
+                      value: is10Selected,
                       onChanged: (bool? value) {
                         // Handle Brazil checkbox change
-                        isBrazilSelected = value ?? false;
+                        is10Selected = value ?? false;
                       },
                     ),
                     const Text("10:00hrs - 11:00hrs"),
                   ],
                 ),
+              ],
+            ));
+      });
+}
+
+alterHourMethodOption(
+  BuildContext context,
+) {
+  bool is13Selected = false;
+  bool is14Selected = false;
+  bool is15Selected = false;
+  bool is16Selected = false;
+  bool is17Selected = false;
+  bool is18Selected = false;
+
+  return showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+            child: Column(
+              children: [
+                const Text(
+                  "Escolher um horário",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const Divider(),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  " Qual horário você deseja visitar o imovél?",
+                  style: TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Checkbox(
-                      value: isBrazilSelected,
+                      value: is13Selected,
                       onChanged: (bool? value) {
                         // Handle Brazil checkbox change
-                        isBrazilSelected = value ?? false;
+                        is13Selected = value ?? false;
+                      },
+                    ),
+                    const Text("13:00hrs - 14:00hrs"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: is14Selected,
+                      onChanged: (bool? value) {
+                        // Handle Brazil checkbox change
+                        is14Selected = value ?? false;
                       },
                     ),
                     const Text("14:00hrs - 15:00hrs"),
@@ -206,10 +265,22 @@ Future<dynamic> alterCountryMethod(
                 Row(
                   children: [
                     Checkbox(
-                      value: isBrazilSelected,
+                      value: is15Selected,
                       onChanged: (bool? value) {
                         // Handle Brazil checkbox change
-                        isBrazilSelected = value ?? false;
+                        is15Selected = value ?? false;
+                      },
+                    ),
+                    const Text("15:00hrs - 16:00hrs"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: is16Selected,
+                      onChanged: (bool? value) {
+                        // Handle Brazil checkbox change
+                        is16Selected = value ?? false;
                       },
                     ),
                     const Text("16:00hrs - 17:00hrs"),
@@ -218,13 +289,25 @@ Future<dynamic> alterCountryMethod(
                 Row(
                   children: [
                     Checkbox(
-                      value: isBrazilSelected,
+                      value: is17Selected,
                       onChanged: (bool? value) {
                         // Handle Brazil checkbox change
-                        isBrazilSelected = value ?? false;
+                        is17Selected = value ?? false;
                       },
                     ),
                     const Text("17:00hrs - 18:00hrs"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: is18Selected,
+                      onChanged: (bool? value) {
+                        // Handle Brazil checkbox change
+                        is18Selected = value ?? false;
+                      },
+                    ),
+                    const Text("18:00hrs - 19:00hrs"),
                   ],
                 ),
               ],
