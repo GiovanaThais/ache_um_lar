@@ -146,10 +146,11 @@ class CustomDrawerWidget extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SettingsPage()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => SettingsPage()),
+        // );
+        Modular.to.pushNamed('/settings');
       },
     );
   }
@@ -170,10 +171,11 @@ class CustomDrawerWidget extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HelpPage()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => HelpPage()),
+        // );
+        Modular.to.pushNamed('/help');
       },
     );
   }

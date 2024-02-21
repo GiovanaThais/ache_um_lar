@@ -1,7 +1,10 @@
 import 'package:ache_um_lar/app/app_controller.dart';
 import 'package:ache_um_lar/app/core/services/image_picker_service.dart';
 import 'package:ache_um_lar/app/features/auth/auth_module.dart';
+import 'package:ache_um_lar/app/features/home/presenter/pages/help_page.dart';
 import 'package:ache_um_lar/app/features/home/presenter/pages/home_page.dart';
+import 'package:ache_um_lar/app/features/home/presenter/pages/settings_page.dart';
+import 'package:ache_um_lar/app/features/home/presenter/pages/visit_home_page.dart';
 import 'package:ache_um_lar/app/features/home/submodules/chat/chat_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,5 +28,8 @@ class AppModule extends Module {
               title: "",
             ));
     r.child('/chat', child: (context) => const ChatPage());
+    r.child('/visit', child: (context) => VisitHomePage());
+    r.child('/help', child: (context) => HelpPage());
+    r.child('/settings', child: (context) => SettingsPage());
   }
 }

@@ -4,6 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../presenter/pages/visit_home_page.dart';
+
 class BottomButtonsChat extends StatelessWidget {
   const BottomButtonsChat({super.key});
 
@@ -75,6 +77,11 @@ class BottomButtonsChat extends StatelessWidget {
       onPressed: () {
         // lógica para agendar a visita
         print('Agendar Visita clicado');
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => VisitHomePage()),
+        // );
+        Modular.to.pushNamed('/visit');
       },
       icon: Icon(Icons.calendar_today),
       label: Text('Agendar Visita'),
@@ -113,15 +120,11 @@ class BottomButtonsChat extends StatelessWidget {
     final theme = Theme.of(context);
     return ElevatedButton.icon(
       onPressed: () {
-        Material(
-          child: InkWell(onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ChatPage()),
-            );
-          }),
-        );
-        //Modular.to.pushNamed('/chat/');
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => ChatPage()),
+        // );
+        Modular.to.pushNamed('/chat');
       },
       icon: const Icon(Icons.chat),
       label: const Text('Chat'),
