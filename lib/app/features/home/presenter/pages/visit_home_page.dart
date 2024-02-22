@@ -166,38 +166,50 @@ alterHourMethod(
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is8Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is8Selected = value ?? false;
                       },
+                      groupValue: is8Selected,
                     ),
                     const Text("08:00hrs - 09:00hrs"),
                   ],
                 ),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is9Selected,
                       onChanged: (bool? value) {
-                        // Handle Mexico checkbox change
                         is9Selected = value ?? false;
                       },
+                      groupValue: is9Selected,
                     ),
                     const Text("09:00hrs - 10:00hrs"),
                   ],
                 ),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is10Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is10Selected = value ?? false;
                       },
+                      groupValue: is10Selected,
                     ),
                     const Text("10:00hrs - 11:00hrs"),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Radio(
+                      value: is11Selected,
+                      onChanged: (bool? value) {
+                        is11Selected = value ?? false;
+                      },
+                      groupValue: is11Selected,
+                    ),
+                    const Text("11:00hrs - 12:00hrs"),
                   ],
                 ),
               ],
@@ -240,72 +252,72 @@ alterHourMethodOption(
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is13Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is13Selected = value ?? false;
                       },
+                      groupValue: is13Selected,
                     ),
                     const Text("13:00hrs - 14:00hrs"),
                   ],
                 ),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is14Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is14Selected = value ?? false;
                       },
+                      groupValue: is14Selected,
                     ),
                     const Text("14:00hrs - 15:00hrs"),
                   ],
                 ),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is15Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is15Selected = value ?? false;
                       },
+                      groupValue: is15Selected,
                     ),
                     const Text("15:00hrs - 16:00hrs"),
                   ],
                 ),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is16Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is16Selected = value ?? false;
                       },
+                      groupValue: is16Selected,
                     ),
                     const Text("16:00hrs - 17:00hrs"),
                   ],
                 ),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is17Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is17Selected = value ?? false;
                       },
+                      groupValue: is17Selected,
                     ),
                     const Text("17:00hrs - 18:00hrs"),
                   ],
                 ),
                 Row(
                   children: [
-                    Checkbox(
+                    Radio(
                       value: is18Selected,
                       onChanged: (bool? value) {
-                        // Handle Brazil checkbox change
                         is18Selected = value ?? false;
                       },
+                      groupValue: is18Selected,
                     ),
                     const Text("18:00hrs - 19:00hrs"),
                   ],
