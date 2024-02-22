@@ -11,6 +11,7 @@ class VisitHomePage extends StatefulWidget {
 
 class _VisitHomePageState extends State<VisitHomePage> {
   DateTime today = DateTime.now();
+  String groupValue = "08:00";
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
@@ -82,9 +83,7 @@ class _VisitHomePageState extends State<VisitHomePage> {
                       focusColor: theme.colorScheme.primary,
                       textColor: theme.colorScheme.primary,
                       onTap: () {
-                        alterHourMethod(
-                          context,
-                        );
+                        alterHourMethod(context);
                       },
                     ),
                   ),
@@ -102,9 +101,113 @@ class _VisitHomePageState extends State<VisitHomePage> {
                       focusColor: theme.colorScheme.primary,
                       textColor: theme.colorScheme.primary,
                       onTap: () {
-                        alterHourMethodOption(
-                          context,
-                        );
+                        showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            context: context,
+                            builder: (BuildContext bc) {
+                              return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 16, horizontal: 12),
+                                  child: Column(
+                                    children: [
+                                      const Text(
+                                        "Escolher um horário - Tarde",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const Divider(),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const Text(
+                                        " Qual horário você deseja visitar o imovél?",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                              value: "13:00",
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          const Text("13:00hrs - 14:00hrs"),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                              value: "14:00",
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          const Text("14:00hrs - 15:00hrs"),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                              value: "15:00",
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          const Text("15:00hrs - 16:00hrs"),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                              value: "16:00",
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          const Text("16:00hrs - 17:00hrs"),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                              value: "17:00",
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          const Text("17:00hrs - 18:00hrs"),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Radio(
+                                              value: "18:00",
+                                              groupValue: groupValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  groupValue = value!;
+                                                });
+                                              }),
+                                          const Text("18:00hrs - 19:00hrs"),
+                                        ],
+                                      ),
+                                    ],
+                                  ));
+                            });
                       },
                     ),
                   ),
@@ -131,198 +234,286 @@ class _VisitHomePageState extends State<VisitHomePage> {
       ),
     );
   }
-}
 
-alterHourMethod(
-  BuildContext context,
-) {
-  bool is8Selected = false;
-  bool is9Selected = false;
-  bool is10Selected = false;
-  bool is11Selected = false;
-
-  return showModalBottomSheet(
+  Future<dynamic> alterHourMethod(BuildContext context) {
+    return showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       context: context,
       builder: (BuildContext bc) {
         return Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-            child: Column(
-              children: [
-                const Text(
-                  "Escolher um horário",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const Divider(),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  " Qual horário você deseja visitar o imovél?",
-                  style: TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Radio(
-                      value: is8Selected,
-                      onChanged: (bool? value) {
-                        is8Selected = value ?? false;
-                      },
-                      groupValue: is8Selected,
-                    ),
-                    const Text("08:00hrs - 09:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is9Selected,
-                      onChanged: (bool? value) {
-                        is9Selected = value ?? false;
-                      },
-                      groupValue: is9Selected,
-                    ),
-                    const Text("09:00hrs - 10:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is10Selected,
-                      onChanged: (bool? value) {
-                        is10Selected = value ?? false;
-                      },
-                      groupValue: is10Selected,
-                    ),
-                    const Text("10:00hrs - 11:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is11Selected,
-                      onChanged: (bool? value) {
-                        is11Selected = value ?? false;
-                      },
-                      groupValue: is11Selected,
-                    ),
-                    const Text("11:00hrs - 12:00hrs"),
-                  ],
-                ),
-              ],
-            ));
-      });
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+          child: Column(
+            children: [
+              const Text(
+                "Escolher um horário",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const Divider(),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                " Qual horário você deseja visitar o imovél?",
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Radio(
+                    value: "08:00",
+                    groupValue: groupValue,
+                    onChanged: (value) {
+                      setState(() {
+                        groupValue = value!;
+                      });
+                    },
+                  ),
+                  const Text("08:00hrs - 09:00hrs"),
+                ],
+              ),
+              Row(
+                children: [
+                  Radio(
+                      value: "09:00",
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                      }),
+                  const Text("09:00hrs - 10:00hrs"),
+                ],
+              ),
+              Row(
+                children: [
+                  Radio(
+                      value: "10:00",
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                      }),
+                  const Text("10:00hrs - 11:00hrs"),
+                ],
+              ),
+              Row(
+                children: [
+                  Radio(
+                      value: "11:00",
+                      groupValue: groupValue,
+                      onChanged: (value) {
+                        setState(() {
+                          groupValue = value!;
+                        });
+                      }),
+                  const Text("11:00hrs - 12:00hrs"),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
-alterHourMethodOption(
-  BuildContext context,
-) {
-  bool is13Selected = false;
-  bool is14Selected = false;
-  bool is15Selected = false;
-  bool is16Selected = false;
-  bool is17Selected = false;
-  bool is18Selected = false;
+// alterHourMethod(
+//   BuildContext context,
+// ) {
+//   // bool is8Selected = false;
+//   // bool is9Selected = false;
+//   // bool is10Selected = false;
+//   // bool is11Selected = false;
+//   String groupValue = "08:00";
 
-  return showModalBottomSheet(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      context: context,
-      builder: (BuildContext bc) {
-        return Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-            child: Column(
-              children: [
-                const Text(
-                  "Escolher um horário",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const Divider(),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  " Qual horário você deseja visitar o imovél?",
-                  style: TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Radio(
-                      value: is13Selected,
-                      onChanged: (bool? value) {
-                        is13Selected = value ?? false;
-                      },
-                      groupValue: is13Selected,
-                    ),
-                    const Text("13:00hrs - 14:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is14Selected,
-                      onChanged: (bool? value) {
-                        is14Selected = value ?? false;
-                      },
-                      groupValue: is14Selected,
-                    ),
-                    const Text("14:00hrs - 15:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is15Selected,
-                      onChanged: (bool? value) {
-                        is15Selected = value ?? false;
-                      },
-                      groupValue: is15Selected,
-                    ),
-                    const Text("15:00hrs - 16:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is16Selected,
-                      onChanged: (bool? value) {
-                        is16Selected = value ?? false;
-                      },
-                      groupValue: is16Selected,
-                    ),
-                    const Text("16:00hrs - 17:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is17Selected,
-                      onChanged: (bool? value) {
-                        is17Selected = value ?? false;
-                      },
-                      groupValue: is17Selected,
-                    ),
-                    const Text("17:00hrs - 18:00hrs"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                      value: is18Selected,
-                      onChanged: (bool? value) {
-                        is18Selected = value ?? false;
-                      },
-                      groupValue: is18Selected,
-                    ),
-                    const Text("18:00hrs - 19:00hrs"),
-                  ],
-                ),
-              ],
-            ));
-      });
-}
+//   return showModalBottomSheet(
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(10),
+//       ),
+//       context: context,
+//       builder: (BuildContext bc) {
+//         return Container(
+//             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+//             child: Column(
+//               children: [
+//                 const Text(
+//                   "Escolher um horário",
+//                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//                 ),
+//                 const Divider(),
+//                 const SizedBox(
+//                   height: 10,
+//                 ),
+//                 const Text(
+//                   " Qual horário você deseja visitar o imovél?",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 const SizedBox(height: 10),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: "08:00",
+//                       groupValue: groupValue,
+//                       onChanged: (value) {
+//                         setState(() {
+//                           groupValue = value!;
+//                         });
+//                       },
+//                     ),
+//                     const Text("08:00hrs - 09:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is9Selected,
+//                       onChanged: (bool? value) {
+//                         is9Selected = value ?? false;
+//                       },
+//                       groupValue: is9Selected,
+//                     ),
+//                     const Text("09:00hrs - 10:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is10Selected,
+//                       onChanged: (bool? value) {
+//                         is10Selected = value ?? false;
+//                       },
+//                       groupValue: is10Selected,
+//                     ),
+//                     const Text("10:00hrs - 11:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is11Selected,
+//                       onChanged: (bool? value) {
+//                         is11Selected = value ?? false;
+//                       },
+//                       groupValue: is11Selected,
+//                     ),
+//                     const Text("11:00hrs - 12:00hrs"),
+//                   ],
+//                 ),
+//               ],
+//             ));
+//       });
+// }
+
+// alterHourMethodOption(
+//   BuildContext context,
+// ) {
+//   // bool is13Selected = false;
+//   // bool is14Selected = false;
+//   // bool is15Selected = false;
+//   // bool is16Selected = false;
+//   // bool is17Selected = false;
+//   // bool is18Selected = false;
+
+//   return showModalBottomSheet(
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(10),
+//       ),
+//       context: context,
+//       builder: (BuildContext bc) {
+//         return Container(
+//             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+//             child: Column(
+//               children: [
+//                 const Text(
+//                   "Escolher um horário",
+//                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//                 ),
+//                 const Divider(),
+//                 const SizedBox(
+//                   height: 10,
+//                 ),
+//                 const Text(
+//                   " Qual horário você deseja visitar o imovél?",
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 const SizedBox(height: 10),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: "10:00",
+//                       groupValue: groupValue,
+//                       onChanged: (value) {
+//                         setState(() {
+//                           groupValue = value!;
+//                         });
+//                       }),
+//                     const Text("13:00hrs - 14:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is14Selected,
+//                       onChanged: (bool? value) {
+//                         is14Selected = value ?? false;
+//                       },
+//                       groupValue: is14Selected,
+//                     ),
+//                     const Text("14:00hrs - 15:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is15Selected,
+//                       onChanged: (bool? value) {
+//                         is15Selected = value ?? false;
+//                       },
+//                       groupValue: is15Selected,
+//                     ),
+//                     const Text("15:00hrs - 16:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is16Selected,
+//                       onChanged: (bool? value) {
+//                         is16Selected = value ?? false;
+//                       },
+//                       groupValue: is16Selected,
+//                     ),
+//                     const Text("16:00hrs - 17:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is17Selected,
+//                       onChanged: (bool? value) {
+//                         is17Selected = value ?? false;
+//                       },
+//                       groupValue: is17Selected,
+//                     ),
+//                     const Text("17:00hrs - 18:00hrs"),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: [
+//                     Radio(
+//                       value: is18Selected,
+//                       onChanged: (bool? value) {
+//                         is18Selected = value ?? false;
+//                       },
+//                       groupValue: is18Selected,
+//                     ),
+//                     const Text("18:00hrs - 19:00hrs"),
+//                   ],
+//                 ),
+//               ],
+//             ));
+//       });
+// }
