@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                   flex: 55,
                   child: Container(
                     padding: const EdgeInsets.all(8),
-                    color: Colors.white,
+                    color: theme.colorScheme.background,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
       onChanged: (value) {
         password = value;
       },
-      style: const TextStyle(color: Colors.black),
+      //style: const TextStyle(color: theme.colorScheme.background),
       decoration: InputDecoration(
           border: const OutlineInputBorder(),
           hintText: "Insira sua senha",
@@ -122,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
       onChanged: (value) {
         email = value;
       },
-      style: const TextStyle(color: Colors.black),
+      //style: const TextStyle(color: Colors.black),
       //children: [
       decoration: InputDecoration(
           hintText: "Insira seu email",

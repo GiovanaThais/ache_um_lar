@@ -248,6 +248,7 @@ class CustomDrawerWidget extends StatelessWidget {
   }
 
   InkWell avatarAccountMethod(BuildContext context) {
+    final theme = Theme.of(context);
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -271,14 +272,20 @@ class CustomDrawerWidget extends StatelessWidget {
       },
       child: UserAccountsDrawerHeader(
           currentAccountPicture: CircleAvatar(
-            backgroundColor: LightColors.lightPurple,
+            backgroundColor: theme.colorScheme.background,
             child: Image.asset(
               'assets/icons/avatar.png',
               width: 60,
             ),
           ),
-          accountName: const Text("User"),
-          accountEmail: const Text("email@email.com")),
+          accountName: Text(
+            "User",
+            style: TextStyle(color: theme.colorScheme.background),
+          ),
+          accountEmail: Text(
+            "email@email.com",
+            style: TextStyle(color: theme.colorScheme.background),
+          )),
     );
   }
 }

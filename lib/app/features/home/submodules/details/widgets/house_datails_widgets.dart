@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/constants_widget.dart';
 import '../../../presenter/pages/check_more_info_details_widget.dart';
-import 'bottom_buttons_chat.dart';
+import 'bottom_buttons_more_itens.dart';
 
 class HouseDetailsWidget extends StatefulWidget {
   final CardHomeModel house;
@@ -16,6 +16,7 @@ class HouseDetailsWidget extends StatefulWidget {
 class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Expanded(
       child: ListView(
         physics: const BouncingScrollPhysics(),
@@ -47,7 +48,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                       widget.house.address,
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.black.withOpacity(0.4),
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -55,7 +56,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                       'IPTU: \$${widget.house.iptu} reais',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.black.withOpacity(0.4),
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -63,7 +64,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                       'Condomínio: \$${widget.house.condominiumTax} reais',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.black.withOpacity(0.4),
+                        color: theme.colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -106,10 +107,10 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: theme.colorScheme.onSecondary,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: Colors.black.withOpacity(0.4),
+                          color: theme.colorScheme.secondary,
                         )),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -117,16 +118,17 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                         const Icon(
                           Icons.zoom_out_map,
                           size: 24,
-                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          '${widget.house.sqFeet} Metros²',
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
+                        Center(
+                          child: Text(
+                            '${widget.house.sqFeet} Metros²',
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ],
@@ -141,10 +143,10 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: theme.colorScheme.onSecondary,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: Colors.black.withOpacity(0.4),
+                          color: theme.colorScheme.secondary,
                         )),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -152,7 +154,6 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                         const Icon(
                           Icons.king_bed,
                           size: 24,
-                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
@@ -176,10 +177,10 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: theme.colorScheme.onSecondary,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: Colors.black.withOpacity(0.4),
+                          color: theme.colorScheme.secondary,
                         )),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -187,7 +188,6 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                         const Icon(
                           Icons.bathtub,
                           size: 24,
-                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
@@ -211,10 +211,10 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: theme.colorScheme.onSecondary,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: Colors.black.withOpacity(0.4),
+                          color: theme.colorScheme.secondary,
                         )),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -222,7 +222,6 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                         const Icon(
                           Icons.garage,
                           size: 24,
-                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
@@ -246,18 +245,17 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: theme.colorScheme.onSecondary,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: Colors.black.withOpacity(0.4),
+                          color: theme.colorScheme.secondary,
                         )),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(
-                          Icons.pool,
+                          Icons.pool_rounded,
                           size: 24,
-                          color: Colors.black,
                         ),
                         const SizedBox(
                           height: 10,
@@ -280,7 +278,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
             imovelDetails: [],
             condominiumDetails: [],
           ),
-          BottomButtonsChat(),
+          const BottomButtonsChat(),
           Padding(
             padding: const EdgeInsets.only(
               left: appPadding,

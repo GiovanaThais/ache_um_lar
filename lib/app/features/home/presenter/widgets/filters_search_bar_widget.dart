@@ -11,6 +11,17 @@ class FilterSearchBarWidget extends StatefulWidget {
 
 class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
   var selectedRange = const RangeValues(400, 1000);
+  bool anyBedroomsSelected = false;
+  bool oneBedroomSelected = false;
+  bool twoBedroomsSelected =
+      true; // Definindo 2 quartos como selecionado inicialmente
+  bool threePlusBedroomsSelected = false;
+
+  bool anyBathroomsSelected =
+      true; // Definindo "Qualquer" banheiro como selecionado inicialmente
+  bool oneBathroomSelected = false;
+  bool twoBathroomsSelected = false;
+  bool threePlusBathroomsSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +88,13 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                r"$70k",
+                r"R$70k",
                 style: TextStyle(
                   fontSize: 14,
                 ),
               ),
               Text(
-                r"$1000k",
+                r"R$1000k",
                 style: TextStyle(
                   fontSize: 14,
                 ),
@@ -107,10 +118,26 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildOption("Qualquer", false, context),
-              buildOption("1", false, context),
-              buildOption("2", true, context),
-              buildOption("3+", false, context),
+              buildOption("Qualquer", anyBedroomsSelected, () {
+                setState(() {
+                  anyBedroomsSelected = !anyBedroomsSelected;
+                });
+              }, context),
+              buildOption("1", oneBedroomSelected, () {
+                setState(() {
+                  oneBedroomSelected = !oneBedroomSelected;
+                });
+              }, context),
+              buildOption("2", twoBedroomsSelected, () {
+                setState(() {
+                  twoBedroomsSelected = !twoBedroomsSelected;
+                });
+              }, context),
+              buildOption("3+", threePlusBedroomsSelected, () {
+                setState(() {
+                  threePlusBedroomsSelected = !threePlusBedroomsSelected;
+                });
+              }, context),
             ],
           ),
           const SizedBox(
@@ -130,10 +157,26 @@ class _FilterSearchBarWidgetState extends State<FilterSearchBarWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildOption("Qualquer", true, context),
-              buildOption("1", false, context),
-              buildOption("2", false, context),
-              buildOption("3+", false, context),
+              buildOption("Qualquer", anyBathroomsSelected, () {
+                setState(() {
+                  anyBathroomsSelected = !anyBathroomsSelected;
+                });
+              }, context),
+              buildOption("1", oneBathroomSelected, () {
+                setState(() {
+                  oneBathroomSelected = !oneBathroomSelected;
+                });
+              }, context),
+              buildOption("2", twoBathroomsSelected, () {
+                setState(() {
+                  twoBathroomsSelected = !twoBathroomsSelected;
+                });
+              }, context),
+              buildOption("3+", threePlusBathroomsSelected, () {
+                setState(() {
+                  threePlusBathroomsSelected = !threePlusBathroomsSelected;
+                });
+              }, context),
             ],
           ),
         ],

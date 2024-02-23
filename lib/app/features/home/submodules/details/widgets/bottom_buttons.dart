@@ -19,14 +19,14 @@ class BottomButtons extends StatelessWidget {
             context,
             Icons.mail_rounded,
             'Email',
-            theme.colorScheme.primary, // ou outra cor de sua escolha
+            theme.colorScheme.primary,
             'example@email.com',
           ),
           _buildPopupButton(
             context,
             Icons.call_rounded,
             'Telefone',
-            theme.colorScheme.primary, // ou outra cor de sua escolha
+            theme.colorScheme.primary,
             '+55 123 456 789',
           ),
         ],
@@ -75,9 +75,9 @@ class BottomButtons extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.6),
-              offset: const Offset(0, 10),
-              blurRadius: 10,
+              color: color.withOpacity(0.4),
+              offset: const Offset(0, 4),
+              blurRadius: 1,
             ),
           ],
         ),

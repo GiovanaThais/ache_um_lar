@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../submodules/details/widgets/bottom_buttons.dart';
+import '../widgets/alter_hour_visit_afternoon_widget.dart';
 import '../widgets/alter_hour_visit_bottom_sheet_widget.dart';
 
 class VisitHomePage extends StatefulWidget {
@@ -102,7 +103,7 @@ class _VisitHomePageState extends State<VisitHomePage> {
                       focusColor: theme.colorScheme.primary,
                       textColor: theme.colorScheme.primary,
                       onTap: () {
-                        showAlterHourBottomSheet(context);
+                        showAlterHourBottomSheetAfternoon(context);
                       },
                     ),
                   ),
@@ -139,6 +140,18 @@ void showAlterHourBottomSheet(BuildContext context) {
     context: context,
     builder: (BuildContext bc) {
       return AlterHourVisitBottomSheetWidget();
+    },
+  );
+}
+
+void showAlterHourBottomSheetAfternoon(BuildContext context) {
+  showModalBottomSheet(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+    context: context,
+    builder: (BuildContext bc) {
+      return AlterHourVisitAfternoonBottomSheetWidget();
     },
   );
 }

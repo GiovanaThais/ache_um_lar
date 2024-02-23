@@ -143,18 +143,32 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
           const SizedBox(
             height: 20,
           ),
-          TextFieldWidget(
-            controller: formController.stateController,
-            label: 'Estado',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFieldWidget(
-            controller: formController.countryController,
-            label: 'País',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          Row(
+            children: [
+              Container(
+                child: Expanded(
+                  child: TextFieldWidget(
+                    controller: formController.stateController,
+                    label: 'Estado',
+                    validator: (value) =>
+                        defaultValidator(value, 'Campo Obrigatório'),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: Expanded(
+                  child: TextFieldWidget(
+                    controller: formController.countryController,
+                    label: 'País',
+                    validator: (value) =>
+                        defaultValidator(value, 'Campo Obrigatório'),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 20,
@@ -175,18 +189,32 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
           const SizedBox(
             height: 20,
           ),
-          TextFieldWidget(
-            controller: formController.neighborhoodController,
-            label: 'Bairro',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFieldWidget(
-            controller: formController.numberAddressController,
-            label: 'Número',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          Row(
+            children: [
+              Container(
+                child: Expanded(
+                  child: TextFieldWidget(
+                    controller: formController.neighborhoodController,
+                    label: 'Bairro',
+                    validator: (value) =>
+                        defaultValidator(value, 'Campo Obrigatório'),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: Expanded(
+                  child: TextFieldWidget(
+                    controller: formController.numberAddressController,
+                    label: 'Número',
+                    validator: (value) =>
+                        defaultValidator(value, 'Campo Obrigatório'),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 20),
           TextFieldWidget(

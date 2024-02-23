@@ -11,8 +11,9 @@ class BottomButtonsChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
-      color: Colors.white,
+      color: theme.colorScheme.onSecondary,
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
@@ -34,13 +35,9 @@ class BottomButtonsChat extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          _buildBigButton(
-            Icons.videocam,
-            'Tour Digital',
-            () {
-              // lógica para o tour digital
-            },
-          ),
+          _buildBigButton(Icons.videocam, 'Tour Digital', () {
+            // lógica para o tour digital
+          }, context),
           const SizedBox(
             height: 20,
           ),
@@ -129,8 +126,6 @@ class BottomButtonsChat extends StatelessWidget {
       icon: const Icon(Icons.chat),
       label: const Text('Chat'),
       style: ElevatedButton.styleFrom(
-        //primary: theme.colorScheme.primary,
-        // onPrimary: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -157,7 +152,9 @@ class BottomButtonsChat extends StatelessWidget {
     );
   }
 
-  Widget _buildBigButton(IconData icon, String label, VoidCallback onPressed) {
+  Widget _buildBigButton(
+      IconData icon, String label, VoidCallback onPressed, context) {
+    final theme = Theme.of(context);
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
@@ -165,9 +162,9 @@ class BottomButtonsChat extends StatelessWidget {
         icon: Icon(icon),
         label: Text(label),
         style: ElevatedButton.styleFrom(
-          shadowColor: Colors.deepPurple,
-          primary: Color.fromARGB(255, 134, 0, 158),
-          onPrimary: Colors.white,
+          shadowColor: theme.colorScheme.secondary,
+          primary: theme.colorScheme.primary,
+          onPrimary: theme.colorScheme.onSecondary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

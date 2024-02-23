@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class AlterHourVisitBottomSheetWidget extends StatefulWidget {
-  const AlterHourVisitBottomSheetWidget({Key? key}) : super(key: key);
+class AlterHourVisitAfternoonBottomSheetWidget extends StatefulWidget {
+  const AlterHourVisitAfternoonBottomSheetWidget({Key? key}) : super(key: key);
 
   @override
-  _AlterHourVisitBottomSheetWidgetState createState() =>
-      _AlterHourVisitBottomSheetWidgetState();
+  _AlterHourVisitAfternoonBottomSheetWidgetState createState() =>
+      _AlterHourVisitAfternoonBottomSheetWidgetState();
 
   void showAlterHourBottomSheet(BuildContext context) {}
 }
 
-class _AlterHourVisitBottomSheetWidgetState
-    extends State<AlterHourVisitBottomSheetWidget> {
+class _AlterHourVisitAfternoonBottomSheetWidgetState
+    extends State<AlterHourVisitAfternoonBottomSheetWidget> {
   String groupValue = "08:00";
 
   @override
@@ -21,7 +21,7 @@ class _AlterHourVisitBottomSheetWidgetState
       child: Column(
         children: [
           const Text(
-            "Escolher um horário",
+            "Escolher um horário - Tarde",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const Divider(),
@@ -44,7 +44,7 @@ class _AlterHourVisitBottomSheetWidgetState
                   });
                 },
               ),
-              const Text("08:00hrs - 09:00hrs"),
+              const Text("13:00hrs - 14:00hrs"),
             ],
           ),
           Row(
@@ -58,7 +58,7 @@ class _AlterHourVisitBottomSheetWidgetState
                   });
                 },
               ),
-              const Text("09:00hrs - 10:00hrs"),
+              const Text("14:00hrs - 15:00hrs"),
             ],
           ),
           Row(
@@ -72,7 +72,7 @@ class _AlterHourVisitBottomSheetWidgetState
                   });
                 },
               ),
-              const Text("10:00hrs - 11:00hrs"),
+              const Text("16:00hrs - 17:00hrs"),
             ],
           ),
           Row(
@@ -86,23 +86,11 @@ class _AlterHourVisitBottomSheetWidgetState
                   });
                 },
               ),
-              const Text("11:00hrs - 12:00hrs"),
+              const Text("17:00hrs - 18:00hrs"),
             ],
           ),
         ],
       ),
     );
   }
-
-  // void showAlterHourBottomSheet(BuildContext context) {
-  //   showModalBottomSheet(
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.circular(10),
-  //     ),
-  //     context: context,
-  //     builder: (BuildContext bc) {
-  //       return AlterHourVisitBottomSheetWidget();
-  //     },
-  //   );
-  // }
 }
