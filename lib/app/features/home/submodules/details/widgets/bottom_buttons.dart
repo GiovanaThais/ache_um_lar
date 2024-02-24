@@ -41,6 +41,7 @@ class BottomButtons extends StatelessWidget {
     Color color,
     String content,
   ) {
+    final theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -86,7 +87,7 @@ class BottomButtons extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: Colors.white,
+              color: theme.colorScheme.background,
             ),
             const SizedBox(width: 8),
             Text(

@@ -52,6 +52,17 @@ class _VisitHomePageState extends State<VisitHomePage> {
                     children: [
                       Text("Dia da visita: " + today.toString()),
                       TableCalendar(
+                        calendarStyle: CalendarStyle(
+                            markerDecoration:
+                                BoxDecoration(color: theme.colorScheme.primary),
+                            rangeHighlightColor: theme.colorScheme.primary,
+                            todayDecoration: BoxDecoration(
+                              color: theme.colorScheme.tertiary,
+                              shape: BoxShape.circle,
+                            ),
+                            selectedDecoration: BoxDecoration(
+                                color: theme.colorScheme.primary,
+                                shape: BoxShape.circle)),
                         locale: "en_US",
                         rowHeight: 43,
                         headerStyle: const HeaderStyle(
@@ -139,7 +150,7 @@ void showAlterHourBottomSheet(BuildContext context) {
     ),
     context: context,
     builder: (BuildContext bc) {
-      return AlterHourVisitBottomSheetWidget();
+      return const AlterHourVisitBottomSheetWidget();
     },
   );
 }

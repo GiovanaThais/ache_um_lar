@@ -21,6 +21,7 @@ class AppWidget extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(
                   seedColor: const Color(0xffffccff),
                   tertiary: const Color(0xffac99bf),
+                  //shadow: Color.fromARGB(255, 207, 83, 174),
                   brightness: Brightness.light,
                 )),
             themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
@@ -29,6 +30,7 @@ class AppWidget extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(
                   seedColor: const Color(0xffffccff),
                   tertiary: const Color(0xffac99bf),
+                  //shadow: Color.fromARGB(255, 152, 29, 119),
                   brightness: Brightness.dark,
                 )),
           );

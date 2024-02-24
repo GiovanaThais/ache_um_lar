@@ -13,7 +13,7 @@ class BottomButtonsChat extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      color: theme.colorScheme.onSecondary,
+      color: theme.colorScheme.surface,
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
@@ -30,11 +30,11 @@ class BottomButtonsChat extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildChatButton(context),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
               _buildSimulationButton(context),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 36),
           _buildBigButton(Icons.videocam, 'Tour Digital', () {
             // lógica para o tour digital
           }, context),
@@ -72,12 +72,6 @@ class BottomButtonsChat extends StatelessWidget {
     final theme = Theme.of(context);
     return ElevatedButton.icon(
       onPressed: () {
-        // lógica para agendar a visita
-        print('Agendar Visita clicado');
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => VisitHomePage()),
-        // );
         Modular.to.pushNamed('/visit');
       },
       icon: Icon(Icons.calendar_today),
@@ -162,7 +156,7 @@ class BottomButtonsChat extends StatelessWidget {
         icon: Icon(icon),
         label: Text(label),
         style: ElevatedButton.styleFrom(
-          shadowColor: theme.colorScheme.secondary,
+          shadowColor: theme.colorScheme.tertiary,
           primary: theme.colorScheme.primary,
           onPrimary: theme.colorScheme.onSecondary,
           shape: RoundedRectangleBorder(
