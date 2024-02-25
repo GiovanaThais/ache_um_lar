@@ -18,10 +18,11 @@ class _CarouselImageWidgetState extends State<CarouselImageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     Size size = MediaQuery.of(context).size;
     print("widget.imagesListUrl" + widget.imagesListUrl.toString());
     return Container(
-      height: size.height * 0.333,
+      height: size.height * 0.35,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -42,7 +43,7 @@ class _CarouselImageWidgetState extends State<CarouselImageWidget> {
     log("widget.imagesListUrl" + widget.imagesListUrl.toString());
     return carousel.CarouselSlider(
       options: carousel.CarouselOptions(
-        //height: size.height * 0.35,
+        height: size.height * 0.35,
         enableInfiniteScroll: true,
         onPageChanged: (index, reason) {
           setState(() {

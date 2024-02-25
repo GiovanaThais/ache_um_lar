@@ -1,7 +1,6 @@
 import 'dart:convert';
-//import 'dart:ffi';
+import 'dart:ffi';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class CardHomeModel {
   final String name;
   final String urlImage;
@@ -10,8 +9,8 @@ class CardHomeModel {
   final String price;
   final bool isFav;
   final String description;
-  final int bedRooms;
-  final int bathRooms;
+  final String bedRooms;
+  final String bathRooms;
   final int garages;
   final double sqFeet;
   List<String> moreImagesUrl;
@@ -41,8 +40,8 @@ class CardHomeModel {
     String? city,
     String? address,
     String? description,
-    int? bedRooms,
-    int? bathRooms,
+    String? bedRooms,
+    String? bathRooms,
     int? garages,
     double? sqFeet,
     bool? isFav,
@@ -83,8 +82,8 @@ class CardHomeModel {
         price: '',
         isFav: map['isFav'],
         description: '',
-        bedRooms: 0,
-        bathRooms: 0,
+        bedRooms: '',
+        bathRooms: '',
         garages: 0,
         sqFeet: 0,
         iptu: 0,

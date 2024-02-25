@@ -7,8 +7,8 @@ class HouseData {
   final String location;
   final String address;
   final String description;
-  final int bedRooms;
-  final int bathRooms;
+  final String bedRooms;
+  final String bathRooms;
   final int garages;
   final double sqFeet;
   final bool isFavorite;
@@ -42,8 +42,8 @@ List<HouseData> popular = [
     price: "580k",
     location: "Aracaju, Sergipe",
     description: '',
-    bedRooms: 4,
-    bathRooms: 3,
+    bedRooms: "4",
+    bathRooms: "3",
     garages: 2,
     sqFeet: 416,
     isFavorite: true,
@@ -64,8 +64,8 @@ List<HouseData> popular = [
     price: "550k",
     location: "Aracaju, Sergipe",
     description: '',
-    bedRooms: 4,
-    bathRooms: 2,
+    bedRooms: "4",
+    bathRooms: "2",
     garages: 2,
     sqFeet: 416,
     isFavorite: false,
@@ -84,8 +84,8 @@ List<HouseData> popular = [
     price: "475k",
     location: "Aracaju, Sergipe",
     description: '',
-    bedRooms: 4,
-    bathRooms: 2,
+    bedRooms: "4",
+    bathRooms: "2",
     garages: 2,
     sqFeet: 216,
     isFavorite: false,
@@ -105,8 +105,8 @@ List<HouseData> popular = [
     price: "620k",
     location: "Aracaju, Sergipe",
     description: 'Lorem Ipsum is simply dummy text of the printing ',
-    bedRooms: 5,
-    bathRooms: 2,
+    bedRooms: "5",
+    bathRooms: "2",
     garages: 2,
     sqFeet: 416,
     isFavorite: false,
@@ -125,8 +125,8 @@ List<HouseData> popular = [
     price: "390k",
     location: "Aracaju, Sergipe",
     description: '',
-    bedRooms: 4,
-    bathRooms: 3,
+    bedRooms: "4",
+    bathRooms: "3",
     garages: 2,
     sqFeet: 216,
     isFavorite: true,
@@ -146,8 +146,8 @@ List<HouseData> popular = [
     price: "320k",
     location: "Aracaju, Sergipe",
     description: '',
-    bedRooms: 4,
-    bathRooms: 2,
+    bedRooms: "4",
+    bathRooms: "4",
     garages: 2,
     sqFeet: 216,
     isFavorite: false,

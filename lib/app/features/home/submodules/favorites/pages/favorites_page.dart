@@ -138,7 +138,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             horizontal: 0.0, vertical: 8.0),
                         child: Text(
                           item.name,
-                          style: textTheme.headlineMedium,
+                          style: textTheme.headlineSmall,
                         ),
                       ),
                       Row(
@@ -178,27 +178,27 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   Expanded(
                     child: Column(
                       children: [
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
+                            const Row(
                               children: [
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Icon(Icons.bed),
                                 ),
-                                Text('2')
                               ],
                             ),
-                            Row(
+                            Text(item.bedRooms),
+                            const Row(
                               children: [
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Icon(Icons.bathtub),
                                 ),
-                                Text('2')
                               ],
-                            )
+                            ),
+                            Text(item.bathRooms),
                           ],
                         ),
                         Row(

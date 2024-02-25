@@ -19,6 +19,7 @@ class DetailsHouses extends StatefulWidget {
 class _DetailsHousesState extends State<DetailsHouses> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,
@@ -34,6 +35,27 @@ class _DetailsHousesState extends State<DetailsHouses> {
                 imagesListUrl: widget.house.moreImagesUrl ?? [],
               ),
               HouseDetailsWidget(widget.house),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     InkWell(
+              //       onTap: () {},
+              //       child: Container(
+              //         height: 50,
+              //         width: 50,
+              //         decoration: BoxDecoration(
+              //           border:
+              //               Border.all(color: Colors.white.withOpacity(0.4)),
+              //           borderRadius: BorderRadius.circular(15),
+              //         ),
+              //         child: Icon(
+              //           Icons.favorite_border_rounded,
+              //           color: theme.colorScheme.primary,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
           const BottomButtons(),

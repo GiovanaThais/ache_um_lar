@@ -1,6 +1,43 @@
-# ache_um_lar
+# Desenvolvimento de Aplicativo Imobiliario: MyImmoble ,Ache um lar
 
-A new Flutter project.
+## 📄 Descrição:
+- O projeto se trata da implementação de um aplicativo para 
+
+## 💻 Funcionalidades:
+- Cadastrar imobiliarias
+- Anunciar imoveis
+- Cadastrar usuarios
+- Exibição de Imoveis a venda
+- Navegação de Interface
+
+## 📋 Pré-requisitos
+
+Você vai precisar ter o [Dart SDK](https://dart.dev/get-dart) também o [flutter](https://flutter.dev/?gclid=CjwKCAiAsIGrBhAAEiwAEzMlC9BTfOO2CFWsMG1vF5f3CIssnHNStUnCqISb719GDptVhKbm2a2tzBoChw0QAvD_BwE&gclsrc=aw.ds) e 
+o [Git](https://git-scm.com/) instalados no seu computador.
+
+## 👷 Instruções:
+- Clone o repositório com o seguinte comando no seu terminal .
+
+```git clone ```
+- Em seguida entre nas pastas
+
+```cd ache_um_lar```
+
+- Instale as dependências:
+
+```flutter pub get```
+
+- Execute o projeto
+
+```flutter run```
+
+## 🚀 Tecnologias e ferramentas
+
+Este projeto foi desenvolvido com as seguintes tecnologias:
+
+- [Dart](https://dart.dev/)
+- [Flutter](https://docs.flutter.dev/)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
 ## Getting Started
 

@@ -1,3 +1,5 @@
+//import 'dart:ffi';
+
 import 'package:ache_um_lar/app/core/widgets/home_app_bar_widget.dart';
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:ache_um_lar/app/features/home/presenter/widgets/datails_page.dart';
@@ -139,7 +141,7 @@ class _CardPageState extends State<CardPage> {
                             horizontal: 0.0, vertical: 8.0),
                         child: Text(
                           item.name,
-                          style: textTheme.headlineMedium,
+                          style: textTheme.headlineSmall,
                         ),
                       ),
                       Row(
@@ -179,27 +181,27 @@ class _CardPageState extends State<CardPage> {
                   Expanded(
                     child: Column(
                       children: [
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
+                            const Row(
                               children: [
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Icon(Icons.bed),
                                 ),
-                                Text('2')
                               ],
                             ),
-                            Row(
+                            Text(item.bedRooms),
+                            const Row(
                               children: [
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Icon(Icons.bathtub),
                                 ),
-                                Text('2')
                               ],
-                            )
+                            ),
+                            Text(item.bathRooms),
                           ],
                         ),
                         Row(

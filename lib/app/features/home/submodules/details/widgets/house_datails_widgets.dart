@@ -70,6 +70,27 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                     ),
                   ],
                 ),
+                // Column(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: [
+                //     InkWell(
+                //       onTap: () {},
+                //       child: Container(
+                //         height: 50,
+                //         width: 50,
+                //         decoration: BoxDecoration(
+                //           border:
+                //               Border.all(color: Colors.white.withOpacity(0.4)),
+                //           borderRadius: BorderRadius.circular(15),
+                //         ),
+                //         child: Icon(
+                //           Icons.favorite_border_rounded,
+                //           color: theme.colorScheme.primary,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 Expanded(
                   child: Text(
                     '${widget.house.city} ',

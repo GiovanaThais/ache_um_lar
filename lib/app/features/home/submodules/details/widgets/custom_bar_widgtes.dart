@@ -19,7 +19,7 @@ class CustomAppBarWidget extends StatelessWidget {
         top: appPadding,
       ),
       child: SizedBox(
-        height: size.height * 0.1,
+        height: size.height * 0.10,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -36,21 +36,6 @@ class CustomAppBarWidget extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.arrow_back_rounded,
-                  color: theme.colorScheme.primary,
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white.withOpacity(0.4)),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Icon(
-                  Icons.favorite_border_rounded,
                   color: theme.colorScheme.primary,
                 ),
               ),

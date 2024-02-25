@@ -86,7 +86,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                     if (value == null) {
                       return "O nome deve ser preenchido";
                     }
-                    if (value!.length < 2) {
+                    if (value.length < 2) {
                       return "O nome está muito curto!";
                     }
 
