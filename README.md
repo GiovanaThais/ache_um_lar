@@ -1,11 +1,13 @@
 # Desenvolvimento de Aplicativo Imobiliario: MyImmoble ,Ache um lar
 
 ## 📄 Descrição:
-- O projeto se trata da implementação de um aplicativo para 
+- O projeto se trata da implementação de um aplicativo inovador projetado para simplificar e aprimorar a experiência de compra e venda de imóveis. Com um design acessível e funcionalidades abrangentes, o aplicativo visa atender tanto a imobiliárias quanto a usuários individuais, proporcionando uma plataforma eficiente e intuitiva.
 
 ## 💻 Funcionalidades:
 - Cadastrar imobiliarias
 - Anunciar imoveis
+- Agendar visita ao imovel
+- Chat entre usuario e vendedor
 - Cadastrar usuarios
 - Exibição de Imoveis a venda
 - Navegação de Interface
