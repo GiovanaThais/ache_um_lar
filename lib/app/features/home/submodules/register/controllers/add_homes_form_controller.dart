@@ -1,5 +1,6 @@
 import 'package:ache_um_lar/app/core/services/image_picker_service.dart';
 import 'package:flutter/material.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 
 class AddHomesFormController {
   final TextEditingController addressController =
@@ -18,6 +19,10 @@ class AddHomesFormController {
   final TextEditingController bedroomsController = TextEditingController();
   final TextEditingController bathroomsController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final RealInputFormatter priceFormatter = RealInputFormatter(moeda: true);
+  final RealInputFormatter condominiumTaxFormatter =
+      RealInputFormatter(moeda: true);
+  final RealInputFormatter iptuFormatter = RealInputFormatter(moeda: true);
 
   final ImagePickerService imagePickerService;
   Future<String> pickerImage(String source) async {

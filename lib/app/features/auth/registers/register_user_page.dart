@@ -22,6 +22,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   var birthDateController = TextEditingController(text: "");
 
   var cellController = TextEditingController(text: "");
+  var creciController = TextEditingController(text: "");
   var emailController = TextEditingController(text: "");
   var passwordController = TextEditingController(text: "");
 
@@ -38,6 +39,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
       "CELLPHONE_REGISTRATER_DATA_KEY";
   final String BIRTHDATE_REGISTRATER_DATA_KEY =
       "BIRTHDATE_REGISTRATER_DATA_KEY";
+  final String CRECI_REGISTRATER_DATA_KEY = "CRECI_REGISTRATER_DATA_KEY";
   final String EMAIL_REGISTRATER_DATA_KEY = "EMAIL_REGISTRATER_DATA_KEY";
   final String PASSWORD_REGISTRATER_DATA_KEY = "PASSWORD_REGISTRATER_DATA_KEY";
 
@@ -55,6 +57,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
     nameController.text = await storage.getRegisterDataName();
     emailController.text = await storage.getRegisterEmail();
     passwordController.text = await storage.getRegisterPassword();
+    creciController.text = await storage.getRegisterCreci();
 
     birthDateController.text = await storage.getRegisterBirthday();
     if (birthDateController.text.isNotEmpty) {
@@ -136,6 +139,17 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                   },
                 ),
               ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 12.0),
+              //   child: Form(
+              //     //key: _formKey,
+              //     child: TextLabel(
+              //       controller: creciController,
+              //       textlabel: "Creci",
+              //       validator: null,
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
                 child: Form(

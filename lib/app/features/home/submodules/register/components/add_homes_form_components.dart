@@ -1,11 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 import '../controllers/add_homes_form_controller.dart';
 import '../widgets/check_more_info_widget.dart';
+import '../widgets/row_formatters_widget.dart';
 import '../widgets/text_field_widget.dart';
 
 class AddHomesFormComponent extends StatefulWidget {
@@ -217,22 +219,19 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             ],
           ),
           const SizedBox(height: 20),
-          TextFieldWidget(
-            controller: formController.priceController,
+          RowFormatters(
             label: 'Preço (R\$)',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+            formatter: formController.priceFormatter,
           ),
           const SizedBox(height: 20),
-          TextFieldWidget(
-            controller: formController.condominiumTaxController,
-            label: 'Taxa de condomínio: (R\$)',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+          RowFormatters(
+            label: 'Taxa de condomínio (R\$)',
+            formatter: formController.condominiumTaxFormatter,
           ),
           const SizedBox(height: 20),
-          TextFieldWidget(
-            controller: formController.iptuController,
+          RowFormatters(
             label: 'IPTU (R\$)',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+            formatter: formController.iptuFormatter,
           ),
           const SizedBox(height: 20),
           Row(
@@ -292,7 +291,7 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
           Center(
             child: ElevatedButton(
               onPressed: () => formController.addProperties(),
-              child: const Text('Adicionar'),
+              child: const Text('Cadastrar'),
             ),
           ),
         ],

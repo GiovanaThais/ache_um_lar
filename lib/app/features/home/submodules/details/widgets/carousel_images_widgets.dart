@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart' as carousel;
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
+
+import 'package:photo_view/photo_view_gallery.dart';
 
 class CarouselImageWidget extends StatefulWidget {
   final List<String> imagesListUrl;
@@ -20,58 +23,47 @@ class _CarouselImageWidgetState extends State<CarouselImageWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     Size size = MediaQuery.of(context).size;
-    print("widget.imagesListUrl" + widget.imagesListUrl.toString());
-    return Container(
-      height: size.height * 0.35,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 85,
-            child: _buildImageCarousel(size),
-          ),
-          Expanded(
-            flex: 15,
-            child: _buildIndicatorDots(),
-          ),
-        ],
+
+    return GestureDetector(
+      onTap: () {
+        _openImageGallery(context);
+      },
+      child: Container(
+        height: size.height * 0.35,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 85,
+              child: _buildImageCarousel(size),
+            ),
+            Expanded(
+              flex: 15,
+              child: _buildIndicatorDots(),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildImageCarousel(Size size) {
-    log("widget.imagesListUrl" + widget.imagesListUrl.toString());
-    return carousel.CarouselSlider(
-      options: carousel.CarouselOptions(
-        height: size.height * 0.35,
-        enableInfiniteScroll: true,
-        onPageChanged: (index, reason) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
-      items: widget.imagesListUrl.map((imageUrl) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            );
-          },
+    return PhotoViewGallery.builder(
+      scrollPhysics: const BouncingScrollPhysics(),
+      builder: (BuildContext context, int index) {
+        return PhotoViewGalleryPageOptions(
+          imageProvider: NetworkImage(widget.imagesListUrl[index]),
+          minScale: PhotoViewComputedScale.contained * 0.8,
+          maxScale: PhotoViewComputedScale.covered * 2,
         );
-      }).toList(),
+      },
+      itemCount: widget.imagesListUrl.length,
+      pageController: PageController(),
+      onPageChanged: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
     );
   }
 
@@ -95,6 +87,64 @@ class _CarouselImageWidgetState extends State<CarouselImageWidget> {
           ),
         );
       }).toList(),
+    );
+  }
+
+  void _openImageGallery(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          body: Stack(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  color: Colors.black,
+                  child: PhotoViewGallery.builder(
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    builder: (BuildContext context, int index) {
+                      return PhotoViewGalleryPageOptions(
+                        imageProvider:
+                            NetworkImage(widget.imagesListUrl[index]),
+                        minScale: PhotoViewComputedScale.contained * 0.8,
+                        maxScale: PhotoViewComputedScale.covered * 2,
+                      );
+                    },
+                    itemCount: widget.imagesListUrl.length,
+                    backgroundDecoration: const BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    pageController: PageController(initialPage: _currentIndex),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 40,
+                right: 16,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: const Icon(
+                      Icons.close,
+                      color: Color.fromARGB(255, 161, 0, 189),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

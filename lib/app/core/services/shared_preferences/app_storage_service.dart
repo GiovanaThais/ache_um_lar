@@ -5,6 +5,7 @@ enum STORAGE_KEYS {
   BIRTHDATE_REGISTRATER_DATA_KEY,
   CELLPHONE_REGISTRATER_DATA_KEY,
   NUMBERID_REGISTRATER_DATA_KEY,
+  CRECI_REGISTRATER_DATA_KEY,
   EMAIL_REGISTRATER_DATA_KEY,
   PASSWORD_REGISTRATER_DATA_KEY,
   PUSH_NOTIFICATION_KEY,
@@ -69,6 +70,16 @@ class AppStorageService {
 
   Future<String> getRegisterNumberId() async {
     return _getString(STORAGE_KEYS.NUMBERID_REGISTRATER_DATA_KEY.toString());
+  }
+
+  //CRECI
+  Future<void> setRegisterCreci(String number) async {
+    await _setString(
+        STORAGE_KEYS.CRECI_REGISTRATER_DATA_KEY.toString(), number.toString());
+  }
+
+  Future<String> getRegisterCreci() async {
+    return _getString(STORAGE_KEYS.CRECI_REGISTRATER_DATA_KEY.toString());
   }
 
   //email
