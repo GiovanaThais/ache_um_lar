@@ -43,14 +43,29 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: const Text("MyImmoble"),
           actions: [
+            //const Center(child: Text("Dark Mode")),
             ValueListenableBuilder(
                 valueListenable: appController,
                 builder: (context, state, child) {
-                  return Switch(
-                      value: state.isDarkMode,
-                      onChanged: (_) {
-                        appController.changeThemeMode();
-                      });
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.wb_sunny_outlined,
+                        size: 16,
+                      ),
+                      Switch(
+                          value: state.isDarkMode,
+                          onChanged: (_) {
+                            appController.changeThemeMode();
+                          }),
+                      Transform.rotate(
+                        angle: 3.0, // Ângulo de rotação
+                        child: const Icon(Icons.brightness_3_outlined,
+                            size: 16), // Ícone para modo escuro
+                      ),
+                    ],
+                  );
                 })
           ],
         ),
