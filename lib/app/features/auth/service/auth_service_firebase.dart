@@ -20,7 +20,10 @@ class AuthServiceFirebase {
       if (e.code == "email-already-in-use") {
         return ("O usuário já está cadastrado!");
       }
-      return "Erro desconhecido";
+      // if (e.code == "email-already-in-use") {
+      //   return ("O usuário já está cadastrado!");
+      // }
+      return "Erro ao cadastrar usuario";
     }
   }
 

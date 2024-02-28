@@ -36,6 +36,10 @@ class _LoginPageState extends State<LoginPage> {
     Modular.to.pushNamed('/auth/registerUser');
   }
 
+  void navigateToRestPasswordPage() {
+    Modular.to.pushNamed('/auth/resetPassword');
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -179,7 +183,9 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(color: theme.colorScheme.primary),
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              navigateToRestPasswordPage();
+            },
           ),
           const SizedBox(
             height: 10,
