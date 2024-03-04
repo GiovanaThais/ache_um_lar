@@ -6,6 +6,9 @@ class CardHomeModel {
   final String urlImage;
   final String city;
   final String address;
+  final String? numberAddress;
+  final String? neighborhood;
+  final String? cep;
   final String price;
   final bool isFav;
   final String description;
@@ -28,6 +31,9 @@ class CardHomeModel {
     required this.bathRooms,
     required this.garages,
     required this.sqFeet,
+    this.cep,
+    this.neighborhood,
+    this.numberAddress,
     this.isFav = false,
     this.moreImagesUrl = const [],
     required this.iptu,
@@ -39,6 +45,9 @@ class CardHomeModel {
     String? urlImage,
     String? city,
     String? address,
+    String? cep,
+    String? numberAddress,
+    String? neighborhood,
     String? description,
     String? bedRooms,
     String? bathRooms,
@@ -62,6 +71,9 @@ class CardHomeModel {
         sqFeet: sqFeet ?? this.sqFeet,
         iptu: iptu ?? this.iptu,
         condominiumTax: condominiumTax ?? this.condominiumTax,
+        cep: cep ?? this.cep,
+        numberAddress: numberAddress ?? this.numberAddress,
+        neighborhood: neighborhood ?? this.neighborhood,
         moreImagesUrl: moreImagesUrl ?? this.moreImagesUrl);
   }
 
@@ -84,6 +96,9 @@ class CardHomeModel {
         description: '',
         bedRooms: '',
         bathRooms: '',
+        cep: '',
+        numberAddress: '',
+        neighborhood: '',
         garages: 0,
         sqFeet: 0,
         iptu: 0,

@@ -4,7 +4,7 @@ import '../../../../utils/data.dart';
 
 class SearchPage extends SearchDelegate<String> {
   @override
-  String get searchFieldLabel => 'ex: nome,valor ou cidade';
+  String get searchFieldLabel => 'ex: nome,valor ou cidade ou rua';
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -55,7 +55,11 @@ class SearchPage extends SearchDelegate<String> {
                         ],
                       ),
                       Text(snapshot.data!.location),
-                      Text(snapshot.data!.address),
+                      Text(snapshot.data!.address +
+                          ' ' +
+                          (snapshot.data!.numberAddress ?? '') +
+                          ' ' +
+                          (snapshot.data!.neighborhood ?? '')),
                     ],
                   ),
                 )
@@ -113,7 +117,9 @@ class SearchPage extends SearchDelegate<String> {
     var filteredHouses = popular.where((house) {
       return house.name.toLowerCase().contains(query.toLowerCase()) ||
           house.price.toLowerCase().contains(query.toLowerCase()) ||
-          house.location.toLowerCase().contains(query.toLowerCase());
+          house.location.toLowerCase().contains(query.toLowerCase()) ||
+          house.address.toLowerCase().contains(query.toLowerCase()) ||
+          house.neighborhood!.toLowerCase().contains(query.toLowerCase());
     }).toList();
     return filteredHouses;
   }

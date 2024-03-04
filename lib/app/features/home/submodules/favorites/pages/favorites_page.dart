@@ -21,6 +21,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
             urlImage: data.image,
             city: data.location,
             address: data.address,
+            numberAddress: data.numberAddress,
+            neighborhood: data.neighborhood,
             price: data.price,
             isFav: data.isFavorite,
             description: data.description,
@@ -168,7 +170,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             width: 2,
                           ),
                           Text(
-                            item.address,
+                            '${item.address} ${item.numberAddress} ${item.neighborhood}',
                             style: textTheme.titleMedium,
                           ),
                         ],

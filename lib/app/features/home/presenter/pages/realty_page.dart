@@ -24,6 +24,8 @@ class _CardPageState extends State<CardPage> {
             urlImage: data.image,
             city: data.location,
             address: data.address,
+            numberAddress: data.numberAddress,
+            neighborhood: data.neighborhood,
             price: data.price,
             isFav: data.isFavorite,
             description: data.description,
@@ -171,7 +173,7 @@ class _CardPageState extends State<CardPage> {
                             width: 2,
                           ),
                           Text(
-                            item.address,
+                            '${item.address} ${item.numberAddress} ${item.neighborhood}',
                             style: textTheme.titleMedium,
                           ),
                         ],

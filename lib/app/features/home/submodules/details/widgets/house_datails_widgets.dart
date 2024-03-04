@@ -45,7 +45,11 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                       height: 5,
                     ),
                     Text(
-                      widget.house.address,
+                      widget.house.address +
+                          '' +
+                          (widget.house.numberAddress ?? '') +
+                          ' ' +
+                          (widget.house.neighborhood ?? ''),
                       style: TextStyle(
                         fontSize: 15,
                         color: theme.colorScheme.secondary,
