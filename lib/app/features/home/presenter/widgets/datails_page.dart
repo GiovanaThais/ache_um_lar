@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../submodules/details/widgets/carousel_images_widgets.dart';
 import '../../submodules/details/widgets/house_datails_widgets.dart';
-import '../pages/check_more_info_details_widget.dart';
+import 'check_more_info_details_widget.dart';
 
 class DetailsHouses extends StatefulWidget {
   final CardHomeModel house;

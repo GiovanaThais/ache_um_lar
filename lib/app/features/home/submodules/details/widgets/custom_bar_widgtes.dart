@@ -42,6 +42,23 @@ class CustomAppBarWidget extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                //  lógica favoritar
+              },
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white.withOpacity(0.4)),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Icon(
+                  Icons.favorite_rounded,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
                 Share.share(
                   'Olhem esse imóvel, que legal! https://imoblist.com.br/',
                 );

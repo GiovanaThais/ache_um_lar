@@ -2,7 +2,7 @@ import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/constants_widget.dart';
-import '../../../presenter/pages/check_more_info_details_widget.dart';
+import '../../../presenter/widgets/check_more_info_details_widget.dart';
 import 'bottom_buttons_more_itens.dart';
 
 class HouseDetailsWidget extends StatefulWidget {
@@ -14,6 +14,30 @@ class HouseDetailsWidget extends StatefulWidget {
 }
 
 class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
+  final List<String> moreImovelDetails = [
+    'Área de serviço',
+    'Armários no quarto',
+    'Armários na cozinha',
+    'Mobiliado',
+    'Ar condicionado',
+    'Churrasqueira',
+    'Varanda',
+    'Academia',
+    'Piscina',
+    'Quarto de serviço',
+  ];
+
+  final List<String> moreCondominiumDetails = [
+    'Condomínio fechado',
+    'Elevador',
+    'Segurança 24h',
+    'Portaria',
+    'Quadra',
+    'Permitido animais',
+    'Academia (cond.)',
+    'Piscina (cond.)',
+    'Salão de festas',
+  ];
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -299,9 +323,9 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
               ],
             ),
           ),
-          const CheckMoreInfoDetailsWidget(
-            imovelDetails: [],
-            condominiumDetails: [],
+          CheckMoreInfoDetailsWidget(
+            imovelDetails: moreImovelDetails,
+            condominiumDetails: moreCondominiumDetails,
           ),
           const BottomButtonsChat(),
           Padding(
