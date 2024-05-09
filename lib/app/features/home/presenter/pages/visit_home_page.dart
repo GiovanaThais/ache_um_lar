@@ -50,7 +50,11 @@ class _VisitHomePageState extends State<VisitHomePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Text("Dia da visita: " + today.toString()),
+                      Text("Dia da visita: " +
+                          '' +
+                          today.day.toString() +
+                          '/' +
+                          today.month.toString()),
                       TableCalendar(
                         calendarStyle: CalendarStyle(
                             markerDecoration:

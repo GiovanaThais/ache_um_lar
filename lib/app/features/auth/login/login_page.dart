@@ -36,6 +36,10 @@ class _LoginPageState extends State<LoginPage> {
     Modular.to.pushNamed('/auth/registerUser');
   }
 
+  void navigateToRegisterCompanyPage() {
+    Modular.to.pushNamed('/auth/registerCompany');
+  }
+
   void navigateToRestPasswordPage() {
     Modular.to.pushNamed('/auth/resetPassword');
   }
@@ -205,6 +209,23 @@ class _LoginPageState extends State<LoginPage> {
             ),
             onTap: () {
               navigateToRegisterPage();
+            },
+          ),
+          InkWell(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              height: 30,
+              alignment: Alignment.center,
+              color: Colors.transparent,
+              child: Text(
+                "Cadastre-se como imobiliaria ou corretor",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.primary),
+              ),
+            ),
+            onTap: () {
+              navigateToRegisterCompanyPage();
             },
           ),
         ],

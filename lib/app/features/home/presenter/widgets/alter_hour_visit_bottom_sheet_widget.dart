@@ -89,6 +89,17 @@ class _AlterHourVisitBottomSheetWidgetState
               const Text("11:00hrs - 12:00hrs"),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Coloque aqui o código para lidar com a ação do botão OK
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
         ],
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:ache_um_lar/app/core/components/snackbar_componets.dart';
 import 'package:ache_um_lar/app/features/auth/service/auth_service_firebase.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../core/services/shared_preferences/app_storage_service.dart';
 import 'widgets/formatters_widget.dart';
@@ -27,6 +29,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   var passwordController = TextEditingController(text: "");
 
   AuthServiceFirebase _authService = AuthServiceFirebase();
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   DateTime? birthDate;
   var types = [];
@@ -242,6 +245,14 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
       return;
     }
 
+    String id = const Uuid().v1();
+
+    db.collection("users").doc(id).set({
+      'name': nameController.text,
+      'birthDate': birthDate,
+      'cellphone': cellController.text,
+      'email': emailController.text,
+    });
     await storage.setRegisterDataName(nameController.text);
     await storage.setRegisterCellphone(cellController.text);
     await storage.setRegisterBirthday(birthDateController.text);

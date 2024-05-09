@@ -36,7 +36,7 @@ class _AlterHourVisitAfternoonBottomSheetWidgetState
           Row(
             children: [
               Radio(
-                value: "08:00",
+                value: "13:00",
                 groupValue: groupValue,
                 onChanged: (value) {
                   setState(() {
@@ -50,7 +50,7 @@ class _AlterHourVisitAfternoonBottomSheetWidgetState
           Row(
             children: [
               Radio(
-                value: "09:00",
+                value: "14:00",
                 groupValue: groupValue,
                 onChanged: (value) {
                   setState(() {
@@ -64,7 +64,7 @@ class _AlterHourVisitAfternoonBottomSheetWidgetState
           Row(
             children: [
               Radio(
-                value: "10:00",
+                value: "16:00",
                 groupValue: groupValue,
                 onChanged: (value) {
                   setState(() {
@@ -78,7 +78,7 @@ class _AlterHourVisitAfternoonBottomSheetWidgetState
           Row(
             children: [
               Radio(
-                value: "11:00",
+                value: "17:00",
                 groupValue: groupValue,
                 onChanged: (value) {
                   setState(() {
@@ -87,6 +87,17 @@ class _AlterHourVisitAfternoonBottomSheetWidgetState
                 },
               ),
               const Text("17:00hrs - 18:00hrs"),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Coloque aqui o código para lidar com a ação do botão OK
+                },
+                child: const Text('OK'),
+              ),
             ],
           ),
         ],

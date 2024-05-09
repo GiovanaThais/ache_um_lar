@@ -157,8 +157,8 @@ class BottomButtonsChat extends StatelessWidget {
         label: Text(label),
         style: ElevatedButton.styleFrom(
           shadowColor: theme.colorScheme.tertiary,
-          primary: theme.colorScheme.primary,
-          onPrimary: theme.colorScheme.onSecondary,
+          // primary: theme.colorScheme.primary,
+          // onPrimary:theme.colorScheme.onSecondary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
