@@ -1,4 +1,5 @@
 import 'package:ache_um_lar/app/features/home/submodules/chat/chat_page.dart';
+import 'package:ache_um_lar/app/features/home/submodules/details/page/advertisement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -62,6 +63,17 @@ class BottomButtonsChat extends StatelessWidget {
                 ],
               ),
             ],
+          ),
+          const SizedBox(height: 36),
+          _buildBigButton(Icons.star_border, 'Destacar Anuncio', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AdvertisementPage()),
+            );
+          }, context),
+          const SizedBox(
+            height: 20,
           ),
         ],
       ),

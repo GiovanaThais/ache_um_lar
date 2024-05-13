@@ -262,6 +262,11 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             ],
           ),
           const SizedBox(height: 20),
+          RowFormatters(
+            label: 'Código do Imóvel(Opcional)',
+            formatter: formController.condominiumTaxFormatter,
+          ),
+          const SizedBox(height: 20),
           TextFieldWidget(
             controller: formController.descriptionController,
             label: 'Descrição',
@@ -269,7 +274,7 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             keyboardType: TextInputType.multiline,
             validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 30),
           Center(
             child: Expanded(
               child: CheckMoreInfoWidget(
