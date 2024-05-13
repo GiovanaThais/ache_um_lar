@@ -213,7 +213,7 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
                       if (value == null) {
                         return "O e-mail deve ser preenchido";
                       }
-                      if (value!.length < 5) {
+                      if (value.length < 5) {
                         return "O e-mail está muito curto!";
                       }
                       if (!value.contains("@")) {
@@ -293,37 +293,6 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
           const SnackBar(content: Text("Telefone deve ser adicionado!")));
       return;
     }
-
-    // String id = const Uuid().v1();
-
-    // company.collection("companies").doc(id).set({
-    //   'name': nameCompanyController.text,
-    //   'cnpj': cnpjController,
-    //   'cellphone': cellCompanyController.text,
-    //   'email': emailCompanyController.text,
-    // });
-    try {
-      await company.collection("companies").add({
-        'name': nameCompanyController.text,
-        'cnpj': cnpjController,
-        'cellphone': cellCompanyController.text,
-        'email': emailCompanyController.text,
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Usuário cadastrado com sucesso")),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Erro ao cadastrar usuário: $e")),
-      );
-    }
-    // await storage.setRegisterCompanyDataName(nameController.text);
-    // await storage.setRegisterCompanyCellphone(cellController.text);
-    // await storage.setRegisterCnpj(cnpjController.text);
-    // await storage.setRegisterCompanyEmail(emailController.text);
-    // await storage.setRegisterCompanyPassword(passwordController.text);
-
     // print(
     //     "${emailController.text},${passwordController.text}, ${nameController.text}");
     // _authService
@@ -346,6 +315,30 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
     // setState(() {
     //   safing = true;
     // });
+
+    String id = const Uuid().v1();
+    try {
+      await company
+          .collection("companies")
+          .doc(id)
+          .set({
+            'name': nameCompanyController.text,
+            'cnpj': cnpjController,
+            'cellphone': cellCompanyController.text,
+            'email': emailCompanyController.text,
+          })
+          .then((value) => print('cadastrado'))
+          .catchError((erro) => print('deu erro $erro'));
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Usuário cadastrado com sucesso")),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro ao cadastrar usuário: $e")),
+      );
+    }
+
     // Future.delayed(const Duration(seconds: 3), () {
     //   ScaffoldMessenger.of(context).showSnackBar(
     //     const SnackBar(

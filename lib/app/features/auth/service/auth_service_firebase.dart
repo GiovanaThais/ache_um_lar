@@ -15,7 +15,7 @@ class AuthServiceFirebase {
 
       await userCredential.user!.updateDisplayName(name);
 
-      return null;
+      return userCredential.user?.uid;
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
         return ("O usuário já está cadastrado!");

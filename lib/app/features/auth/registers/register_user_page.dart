@@ -2,6 +2,7 @@ import 'package:ache_um_lar/app/core/components/snackbar_componets.dart';
 import 'package:ache_um_lar/app/features/auth/service/auth_service_firebase.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -244,57 +245,38 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
           const SnackBar(content: Text("Telefone deve ser adicionado!")));
       return;
     }
+    try {
+      // Registrar no Firebase Authentication
+      final userId = await _authService.registerUser(
+        name: nameController.text,
+        password: passwordController.text,
+        email: emailController.text,
+      );
 
-    String id = const Uuid().v1();
+      await db
+          .collection('users')
+          .doc(userId)
+          .set({
+            'name': nameController.text,
+            'birthDate': birthDate,
+            'cellphone': cellController.text,
+            'email': emailController.text,
+          })
+          .then((value) => print('cadastrado'))
+          .catchError((erro) => print('deu erro $erro'));
 
-    db.collection("users").doc(id).set({
-      'name': nameController.text,
-      'birthDate': birthDate,
-      'cellphone': cellController.text,
-      'email': emailController.text,
-    });
-    await storage.setRegisterDataName(nameController.text);
-    await storage.setRegisterCellphone(cellController.text);
-    await storage.setRegisterBirthday(birthDateController.text);
-    await storage.setRegisterEmail(emailController.text);
-    await storage.setRegisterPassword(passwordController.text);
-
-    print(
-        "${emailController.text},${passwordController.text}, ${nameController.text}");
-    _authService
-        .registerUser(
-      name: names,
-      password: passwords,
-      email: emails,
-    )
-        .then((String? erro) {
-      if (erro != null) {
-        showSnacksBar(context: context, message: erro);
-      } else {
-        showSnacksBar(
-          context: context,
-          message: "Cadastro efetuado com sucesso",
-          isError: false,
-        );
-      }
-    });
-    setState(() {
-      safing = true;
-    });
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(
-    //       content: Text("Dados salvo com sucesso")));
-    //         setState(() {
-    //             safing = false;
-    //               });
-    //               Navigator.pop(context);
-    //               });
-    //             },
-    //             child: Text("Salvar"),
-    //     ),
-    //     ],
-    //     ),
-    //   }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text(
+          "Usuário cadastrado com sucesso",
+        )),
+      );
+      //}
+    } catch (e) {
+      // Exibir mensagem de erro em caso de falha
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Erro ao cadastrar usuário: $e")),
+      );
+    }
   }
 }
