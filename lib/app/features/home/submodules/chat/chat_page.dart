@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  const ChatPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,35 +9,99 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Chat"),
       ),
-      body: Material(
-        child: ListView(
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          _buildMessageCard(
+            'User 1',
+            'Olá\nTudo bem?',
+            Icons.more_vert,
+            context,
+            'assets/icons/avatar.png',
+          ),
+          const SizedBox(height: 16.0),
+          _buildMessageCard(
+            'User 2',
+            'Olá',
+            Icons.more_vert, // Add menu icon for this message
+            context,
+            'assets/icons/avatar.png',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMessageCard(
+    String username,
+    String message,
+    IconData? menuIcon,
+    BuildContext context,
+    String avatarImagePath,
+  ) {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Material(
-              child: ListTile(
-                leading: Image.asset('assets/icons/avatar.png'),
-                title: const Text("User 1"),
-                subtitle: const Text("Olá \n Tudo bem?"),
-                trailing: PopupMenuButton<String>(
-                    onSelected: (menu) {},
-                    itemBuilder: (BuildContext bc) {
-                      return <PopupMenuEntry<String>>[
-                        const PopupMenuItem(
-                          value: "opção 1",
-                          child: Text("Option 1"),
-                        )
-                      ];
-                    }),
-                isThreeLine: true,
+            CircleAvatar(
+              backgroundImage: AssetImage(avatarImagePath),
+            ),
+            const SizedBox(width: 16.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    username,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    message,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                  ),
+                  // Positioned(
+                  //   bottom: 8,
+                  //   right: 8,
+                  //   child: GestureDetector(
+                  //     onTap: () {
+                  //       // Handle delete icon click
+                  //     },
+                  //     child: Icon(
+                  //       Icons.delete,
+                  //       color: Colors.red,
+                  //     ),
+                  //   ),
+                  // ),
+                ],
               ),
             ),
-            Material(
-              child: ListTile(
-                leading: Image.asset('assets/icons/avatar.png'),
-                title: const Text("User 2"),
-                subtitle: const Text("Olá"),
-                trailing: const Icon(Icons.access_time),
+            if (menuIcon != null)
+              PopupMenuButton<String>(
+                icon: Icon(menuIcon),
+                onSelected: (menu) {
+                  // Handle menu selection
+                },
+                itemBuilder: (BuildContext bc) {
+                  return <PopupMenuEntry<String>>[
+                    const PopupMenuItem(
+                      value: "opção 1",
+                      child: Text("Option 1"),
+                    ),
+                  ];
+                },
               ),
-            ),
           ],
         ),
       ),
