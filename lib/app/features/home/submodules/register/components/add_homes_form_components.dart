@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_cropper/image_cropper.dart';
 
@@ -22,7 +21,6 @@ class AddHomesFormComponent extends StatefulWidget {
 }
 
 class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
-  String imagePath = "";
   List<String> imagePaths = [];
 
   AddHomesFormController get formController => widget.formController;
@@ -50,6 +48,7 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
     'Piscina (cond.)',
     'Salão de festas',
   ];
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -57,84 +56,112 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
       key: GlobalKey<FormState>(),
       child: ListView(
         children: [
-          InkWell(
-            child: Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: Color.fromARGB(255, 118, 118, 118)
-                      .withOpacity(0.7), // Cor da borda com opacidade
-                  width: 1.5, // Largura da borda
-                ),
-              ),
-              child: Center(
-                child: imagePath.isEmpty
-                    ? const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.camera_alt,
-                              size: 40, color: Color.fromARGB(255, 92, 92, 92)),
-                          SizedBox(height: 8),
-                          Text(
-                            'Adicionar\nFoto',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 118, 118, 118),
-                                fontSize: 12),
-                          ),
-                        ],
-                      )
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.file(
-                          File(imagePath),
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
+          SizedBox(
+            height: 200,
+            child: PageView.builder(
+              controller: PageController(viewportFraction: 0.8),
+              itemCount: imagePaths.length + 1,
+              itemBuilder: (context, index) {
+                if (index == imagePaths.length) {
+                  return GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        context: context,
+                        builder: (BuildContext bc) {
+                          return Wrap(
+                            children: [
+                              ListTile(
+                                title: const Text("Câmera"),
+                                leading: const Icon(Icons.photo_camera),
+                                onTap: () async {
+                                  final _imagePath =
+                                      await formController.pickerImage("cam");
+                                  setState(() {
+                                    imagePaths.add(_imagePath);
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              ListTile(
+                                title: const Text("Galeria"),
+                                leading: const Icon(Icons.photo_library),
+                                onTap: () async {
+                                  final _imagePath = await formController
+                                      .pickerImage("gallery");
+                                  setState(() {
+                                    imagePaths.add(_imagePath);
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color:
+                            Color.fromARGB(255, 226, 226, 226).withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Color.fromARGB(255, 226, 226, 226)
+                              .withOpacity(0.7),
+                          width: 1.5,
                         ),
                       ),
-              ),
-            ),
-            onTap: () {
-              showModalBottomSheet(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                context: context,
-                builder: (BuildContext bc) {
-                  return Wrap(
-                    children: [
-                      ListTile(
-                        title: const Text("Câmera"),
-                        leading: const Icon(Icons.photo_camera),
-                        onTap: () async {
-                          final _imagePath =
-                              await formController.pickerImage("cam");
-                          setState(() {
-                            imagePath = _imagePath;
-                          });
-                          Navigator.pop(
-                              context); // Fechar o BottomSheet após a seleção
-                        },
+                      child: const Center(
+                        child: Icon(
+                          Icons.add_a_photo,
+                          size: 40,
+                          color: Color.fromARGB(255, 86, 86, 86),
+                        ),
                       ),
-                      ListTile(
-                        title: const Text("Galeria"),
-                        leading: const Icon(Icons.photo_library),
-                        onTap: () async {
-                          final _imagePath =
-                              await formController.pickerImage("gallery");
-                          setState(() {
-                            imagePath = _imagePath;
-                          });
-                        },
-                      )
+                    ),
+                  );
+                } else {
+                  return Stack(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(8),
+                        width: 250,
+                        height: 250,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: FileImage(File(imagePaths[index])),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              imagePaths.removeAt(index);
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                            child: const Icon(Icons.close),
+                          ),
+                        ),
+                      ),
                     ],
                   );
-                },
-              );
-            },
+                }
+              },
+            ),
           ),
           const SizedBox(
             height: 10,
