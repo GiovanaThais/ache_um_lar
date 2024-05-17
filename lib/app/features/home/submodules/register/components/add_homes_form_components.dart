@@ -23,6 +23,7 @@ class AddHomesFormComponent extends StatefulWidget {
 
 class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
   String imagePath = "";
+  List<String> imagePaths = [];
 
   AddHomesFormController get formController => widget.formController;
 
@@ -51,6 +52,7 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
   ];
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Form(
       key: GlobalKey<FormState>(),
       child: ListView(
@@ -135,144 +137,223 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             },
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
-          TextFieldWidget(
-            controller: formController.cityController,
-            label: 'Cidade',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Container(
-                child: Expanded(
-                  child: TextFieldWidget(
-                    controller: formController.stateController,
-                    label: 'Estado',
-                    validator: (value) =>
-                        defaultValidator(value, 'Campo Obrigatório'),
+          Card(
+            margin: EdgeInsets.symmetric(vertical: 9, horizontal: 2),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            color: theme.colorScheme.secondaryContainer,
+            child: ExpansionTile(
+              title: const Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'Endereço',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 143, 143, 143),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                child: Expanded(
-                  child: TextFieldWidget(
-                    controller: formController.countryController,
-                    label: 'País',
-                    validator: (value) =>
-                        defaultValidator(value, 'Campo Obrigatório'),
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextFieldWidget(
+                        controller: formController.cityController,
+                        label: 'Cidade',
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFieldWidget(
+                              controller: formController.stateController,
+                              label: 'Estado',
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                          Expanded(
+                            child: TextFieldWidget(
+                              controller: formController.countryController,
+                              label: 'País',
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      TextFieldWidget(
+                        controller: formController.addressController,
+                        label: 'Logradouro',
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                      SizedBox(height: 20),
+                      TextFieldWidget(
+                        controller: formController.cepController,
+                        label: 'CEP',
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFieldWidget(
+                              controller: formController.neighborhoodController,
+                              label: 'Bairro',
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                          Expanded(
+                            child: TextFieldWidget(
+                              controller:
+                                  formController.numberAddressController,
+                              label: 'Número',
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          Card(
+            margin: const EdgeInsets.symmetric(vertical: 9, horizontal: 2),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            color: theme.colorScheme.secondaryContainer,
+            child: ExpansionTile(
+              title: const Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'Informações Financeiras',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 143, 143, 143),
                   ),
                 ),
               ),
-            ],
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      RowFormatters(
+                        label: 'Preço (R\$)',
+                        formatter: formController.priceFormatter,
+                      ),
+                      SizedBox(height: 20),
+                      RowFormatters(
+                        label: 'Taxa de condomínio (R\$)',
+                        formatter: formController.condominiumTaxFormatter,
+                      ),
+                      SizedBox(height: 20),
+                      RowFormatters(
+                        label: 'IPTU (R\$)',
+                        formatter: formController.iptuFormatter,
+                      ),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFieldWidget(
-            controller: formController.addressController,
-            label: 'Logradouro',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextFieldWidget(
-            controller: formController.cepController,
-            label: 'CEP',
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Container(
-                child: Expanded(
-                  child: TextFieldWidget(
-                    controller: formController.neighborhoodController,
-                    label: 'Bairro',
-                    validator: (value) =>
-                        defaultValidator(value, 'Campo Obrigatório'),
+          const SizedBox(height: 10),
+          Card(
+            margin: EdgeInsets.symmetric(vertical: 9, horizontal: 2),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            color: theme.colorScheme.secondaryContainer,
+            child: ExpansionTile(
+              title: const Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  'Características do Imóvel',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 143, 143, 143),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                child: Expanded(
-                  child: TextFieldWidget(
-                    controller: formController.numberAddressController,
-                    label: 'Número',
-                    validator: (value) =>
-                        defaultValidator(value, 'Campo Obrigatório'),
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            child: Expanded(
+                              child: TextFieldWidget(
+                                controller: formController.bedroomsController,
+                                label: 'Quartos',
+                                prefixIcon: Icons.bed,
+                                validator: (value) => defaultValidator(
+                                    value, 'Campo Obrigatório'),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                          Container(
+                            child: Expanded(
+                              child: TextFieldWidget(
+                                controller: formController.bathroomsController,
+                                label: 'Banheiros',
+                                prefixIcon: Icons.bathtub,
+                                validator: (value) => defaultValidator(
+                                    value, 'Campo Obrigatório'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      RowFormatters(
+                        label: 'Código do Imóvel(Opcional)',
+                        formatter: formController.condominiumTaxFormatter,
+                      ),
+                      SizedBox(height: 20),
+                      TextFieldWidget(
+                        controller: formController.descriptionController,
+                        label: 'Descrição',
+                        maxLines: 3,
+                        keyboardType: TextInputType.multiline,
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          RowFormatters(
-            label: 'Preço (R\$)',
-            formatter: formController.priceFormatter,
-          ),
-          const SizedBox(height: 20),
-          RowFormatters(
-            label: 'Taxa de condomínio (R\$)',
-            formatter: formController.condominiumTaxFormatter,
-          ),
-          const SizedBox(height: 20),
-          RowFormatters(
-            label: 'IPTU (R\$)',
-            formatter: formController.iptuFormatter,
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              Container(
-                child: Expanded(
-                  child: TextFieldWidget(
-                    controller: formController.bedroomsController,
-                    label: 'Quartos',
-                    prefixIcon: Icons.bed,
-                    validator: (value) =>
-                        defaultValidator(value, 'Campo Obrigatório'),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 20),
-              Container(
-                child: Expanded(
-                  child: TextFieldWidget(
-                    controller: formController.bathroomsController,
-                    label: 'Banheiros',
-                    prefixIcon: Icons.bathtub,
-                    validator: (value) =>
-                        defaultValidator(value, 'Campo Obrigatório'),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          RowFormatters(
-            label: 'Código do Imóvel(Opcional)',
-            formatter: formController.condominiumTaxFormatter,
-          ),
-          const SizedBox(height: 20),
-          TextFieldWidget(
-            controller: formController.descriptionController,
-            label: 'Descrição',
-            maxLines: 3,
-            keyboardType: TextInputType.multiline,
-            validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+              ],
+            ),
           ),
           const SizedBox(width: 30),
           Center(

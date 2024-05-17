@@ -216,7 +216,7 @@ class CustomDrawerWidget extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        " Podemos já vislumbrar o modo pelo qual a mobilidade dos capitais internacionais ainda não demonstrou convincentemente que vai participar na mudança das regras de conduta normativas. A certificação de metodologias que nos auxiliam a lidar com o novo modelo estrutural aqui  proposições. atuação assume importantes posições no estabelecimento das direções preferenciais no sentido do progresso.",
+                        " O usuário de serviços públicos deve utilizar adequadamente os serviços, procedendo com urbanidade e boa-fé; prestar as informações pertinentes ao serviço utilizado quando solicitadas; colaborar para a adequada prestação do serviço; e preservar as condições dos bens públicos por meio dos quais lhe são prestados os serviços.Ao acessar o aplicativo, os usuários declaram que irão respeitar todos os direitos de propriedade intelectual.O prestador do serviço também delimita as situações em que será responsabilizado e em quais situações não poderá ser responsabilizado.",
                         style: TextStyle(fontSize: 16),
                       ),
                     ],

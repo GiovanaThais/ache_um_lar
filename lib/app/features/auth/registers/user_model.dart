@@ -3,7 +3,7 @@ class UserModel {
   final DateTime birthDate;
   final String cellPhone;
   final String email;
-  late final String userType;
+  late String userType;
   final String uid;
   final String? cnpj;
   final String? creci;

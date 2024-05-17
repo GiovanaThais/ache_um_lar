@@ -74,7 +74,14 @@ class RegisterUserController {
         password: passwordController.text,
         email: emailController.text,
       );
-
+      final String userType = userDataNotifier.value.userType;
+      if (userType == "Empresa") {
+        userDataNotifier.value.userType = "empresa";
+      } else if (userType == "Corretor") {
+        userDataNotifier.value.userType = "corretor";
+      } else {
+        userDataNotifier.value.userType = "cliente";
+      }
       await _db
           .collection('users')
           .doc(userId)
