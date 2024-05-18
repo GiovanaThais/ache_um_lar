@@ -172,8 +172,11 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            color: theme.colorScheme.secondaryContainer,
+            color: theme.colorScheme.onPrimary,
             child: ExpansionTile(
+              iconColor: Color.fromARGB(255, 220, 167,
+                  255), // Cor da setinha quando o ExpansionTile está expandido
+              collapsedIconColor: Color.fromARGB(255, 238, 161, 248),
               title: const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
@@ -269,8 +272,11 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            color: theme.colorScheme.secondaryContainer,
+            color: theme.colorScheme.onPrimary,
             child: ExpansionTile(
+              iconColor: Color.fromARGB(255, 220, 167,
+                  255), // Cor da setinha quando o ExpansionTile está expandido
+              collapsedIconColor: Color.fromARGB(255, 238, 161, 248),
               title: const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
@@ -316,8 +322,12 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            color: theme.colorScheme.secondaryContainer,
+            color: theme.colorScheme.onPrimary,
             child: ExpansionTile(
+              iconColor: Color.fromARGB(255, 220, 167,
+                  255), // Cor da setinha quando o ExpansionTile está expandido
+              collapsedIconColor: Color.fromARGB(255, 238, 161,
+                  248), // Cor da setinha quando o ExpansionTile está colapsado
               title: const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(

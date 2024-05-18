@@ -18,6 +18,8 @@ class CardPage extends StatefulWidget {
 class _CardPageState extends State<CardPage> {
   late List<CardHomeModel> listCard = [];
   late SharedPreferences prefs;
+  String selectedCategory =
+      'All'; // Adicione um estado para armazenar a categoria selecionada
 
   @override
   void initState() {
@@ -49,7 +51,69 @@ class _CardPageState extends State<CardPage> {
               moreImagesUrl: data.moreImagesUrl ?? [],
             ))
         .toList();
-    setState(() {});
+    _filterList();
+  }
+
+  void _filterList() {
+    setState(() {
+      if (selectedCategory == 'All') {
+        listCard = popular
+            .map((data) => CardHomeModel(
+                  id: data.id,
+                  name: data.name,
+                  urlImage: data.image,
+                  city: data.location,
+                  address: data.address,
+                  numberAddress: data.numberAddress,
+                  neighborhood: data.neighborhood,
+                  price: data.price,
+                  isFav:
+                      prefs.getStringList('favoriteIds')?.contains(data.id) ??
+                          false,
+                  description: data.description,
+                  bedRooms: data.bedRooms,
+                  bathRooms: data.bathRooms,
+                  garages: data.garages,
+                  sqFeet: data.sqFeet,
+                  iptu: data.iptu,
+                  condominiumTax: data.condominiumTax,
+                  moreImagesUrl: data.moreImagesUrl ?? [],
+                ))
+            .toList();
+      } else {
+        listCard = popular
+            .where((data) => data.category == selectedCategory)
+            .map((data) => CardHomeModel(
+                  id: data.id,
+                  name: data.name,
+                  urlImage: data.image,
+                  city: data.location,
+                  address: data.address,
+                  numberAddress: data.numberAddress,
+                  neighborhood: data.neighborhood,
+                  price: data.price,
+                  isFav:
+                      prefs.getStringList('favoriteIds')?.contains(data.id) ??
+                          false,
+                  description: data.description,
+                  bedRooms: data.bedRooms,
+                  bathRooms: data.bathRooms,
+                  garages: data.garages,
+                  sqFeet: data.sqFeet,
+                  iptu: data.iptu,
+                  condominiumTax: data.condominiumTax,
+                  moreImagesUrl: data.moreImagesUrl ?? [],
+                ))
+            .toList();
+      }
+    });
+  }
+
+  void _onCategorySelected(String category) {
+    setState(() {
+      selectedCategory = category;
+    });
+    _filterList();
   }
 
   Future<void> _toggleFavorite(CardHomeModel item) async {
@@ -71,7 +135,9 @@ class _CardPageState extends State<CardPage> {
     return Column(
       children: [
         buildSearchBar(context),
-        const Categories(),
+        Categories(
+            onCategorySelected:
+                _onCategorySelected), // Passe a função de retorno de chamada
         Expanded(
           child: ListView.separated(
             itemBuilder: (context, index) {

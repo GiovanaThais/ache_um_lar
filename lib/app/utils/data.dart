@@ -19,6 +19,7 @@ class HouseData {
   List<String>? moreImagesUrl;
   final double iptu;
   final double condominiumTax;
+  final String category;
 
   HouseData({
     required this.id,
@@ -39,6 +40,7 @@ class HouseData {
     this.numberAddress,
     required this.iptu,
     required this.condominiumTax,
+    required this.category,
   });
 }
 
@@ -67,6 +69,7 @@ List<HouseData> popular = [
       "https://img.freepik.com/fotos-gratis/desenho-interior-de-cozinha-bonito_23-2150976557.jpg?w=996&t=st=1705258979~exp=1705259579~hmac=dcf0faf00f2e12606770111e7618d4a176a07c17513d4980ce30f9185d16bf63"
     ],
     condominiumTax: 500,
+    category: 'Casas',
   ),
   HouseData(
     id: '2',
@@ -90,6 +93,7 @@ List<HouseData> popular = [
       'https://i.pinimg.com/564x/05/3b/d0/053bd0e10819c0d8f2605f579dbda9fc.jpg'
     ],
     condominiumTax: 500,
+    category: 'Casas',
   ),
   HouseData(
     id: '3',
@@ -114,6 +118,7 @@ List<HouseData> popular = [
       "https://revistamatrimoni.com.br/wp-content/uploads/2024/01/733e09ab-eb62-4866-8782-23af16fd21cb.jpg"
     ],
     condominiumTax: 500,
+    category: 'Casas',
   ),
   HouseData(
     id: '4',
@@ -137,6 +142,7 @@ List<HouseData> popular = [
       "https://img.freepik.com/fotos-gratis/renderizacao-3d-moderna-sala-de-jantar-e-sala-de-estar-com-decoracao-de-luxo-e-sofa-verde_105762-2140.jpg?w=1380&t=st=1705258817~exp=1705259417~hmac=79044c4537f9181ccf5251b7eae3a53be6fa8ab09f642e1a8875582eb546660e"
     ],
     condominiumTax: 500,
+    category: 'Casas',
   ),
   HouseData(
     id: '5',
@@ -161,6 +167,7 @@ List<HouseData> popular = [
       'https://www.estilofontana.com.br/blog/wp-content/uploads/2021/02/Cozinha-Americana.jpg'
     ],
     condominiumTax: 500,
+    category: 'Apartamentos',
   ),
   HouseData(
     id: '6',
@@ -185,6 +192,7 @@ List<HouseData> popular = [
       "https://img.freepik.com/fotos-gratis/quarto-vazio-moderno-com-mobilia_23-2149178335.jpg?w=1380&t=st=1705258925~exp=1705259525~hmac=70689709189512df145d0bea790371a2fd06216f36aa8f52b3bd040ccae4d2ba"
     ],
     condominiumTax: 500,
+    category: 'Apartamentos',
   ),
 ];
 

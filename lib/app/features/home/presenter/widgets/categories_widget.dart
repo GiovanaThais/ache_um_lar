@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../../utils/data.dart';
 
 class Categories extends StatefulWidget {
-  const Categories({super.key});
+  final Function(String) onCategorySelected; // Adicione esta linha
+
+  const Categories(
+      {super.key, required this.onCategorySelected}); // Modifique o construtor
 
   @override
   State<Categories> createState() => _CategoriesState();
@@ -24,6 +27,8 @@ class _CategoriesState extends State<Categories> {
         setState(() {
           selectedCategoryIndex = index;
         });
+        widget
+            .onCategorySelected(categoryList[index]); // Chame a função callback
       },
       child: Padding(
         padding: EdgeInsets.only(right: appPadding / 3),
