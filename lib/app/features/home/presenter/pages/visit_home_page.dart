@@ -1,5 +1,6 @@
 import 'package:ache_um_lar/app/features/home/presenter/pages/help_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../submodules/details/widgets/bottom_buttons.dart';
@@ -124,7 +125,9 @@ class _VisitHomePageState extends State<VisitHomePage> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pushNamed('/chat');
+                  },
                   child: Text("Pedir encaixe de outra data ou horário"),
                   //style: ButtonStyle(shadowColor: theme.colorScheme.primary),
                 ),
