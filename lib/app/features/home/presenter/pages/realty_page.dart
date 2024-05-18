@@ -1,6 +1,4 @@
-//import 'dart:ffi';
-
-import 'package:ache_um_lar/app/core/widgets/home_app_bar_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:ache_um_lar/app/features/home/presenter/widgets/datails_page.dart';
 import 'package:flutter/material.dart';
@@ -18,26 +16,51 @@ class CardPage extends StatefulWidget {
 }
 
 class _CardPageState extends State<CardPage> {
-  final listCard = popular
-      .map((data) => CardHomeModel(
-            name: data.name,
-            urlImage: data.image,
-            city: data.location,
-            address: data.address,
-            numberAddress: data.numberAddress,
-            neighborhood: data.neighborhood,
-            price: data.price,
-            isFav: data.isFavorite,
-            description: data.description,
-            bedRooms: data.bedRooms,
-            bathRooms: data.bathRooms,
-            garages: data.garages,
-            sqFeet: data.sqFeet,
-            iptu: data.iptu,
-            condominiumTax: data.condominiumTax,
-            moreImagesUrl: data.moreImagesUrl ?? [],
-          ))
-      .toList();
+  late List<CardHomeModel> listCard = [];
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    prefs = await SharedPreferences.getInstance();
+    final favoriteIds = prefs.getStringList('favoriteIds') ?? [];
+    listCard = popular
+        .map((data) => CardHomeModel(
+              id: data.id,
+              name: data.name,
+              urlImage: data.image,
+              city: data.location,
+              address: data.address,
+              numberAddress: data.numberAddress,
+              neighborhood: data.neighborhood,
+              price: data.price,
+              isFav: favoriteIds.contains(data.id),
+              description: data.description,
+              bedRooms: data.bedRooms,
+              bathRooms: data.bathRooms,
+              garages: data.garages,
+              sqFeet: data.sqFeet,
+              iptu: data.iptu,
+              condominiumTax: data.condominiumTax,
+              moreImagesUrl: data.moreImagesUrl ?? [],
+            ))
+        .toList();
+    setState(() {});
+  }
+
+  Future<void> _toggleFavorite(CardHomeModel item) async {
+    item.toggleFavorite();
+    setState(() {});
+
+    final favoriteIds =
+        listCard.where((item) => item.isFav).map((item) => item.id).toList();
+    await prefs.setStringList('favoriteIds', favoriteIds);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -63,14 +86,12 @@ class _CardPageState extends State<CardPage> {
                   );
                 },
                 child: SizedBox(
-                    height: size.height * 0.4,
-                    // width: double.infinity,
-                    child: cardHousesMethod(item, textTheme, iconSize, theme)),
+                  height: size.height * 0.4,
+                  child: cardHousesMethod(item, textTheme, iconSize, theme),
+                ),
               );
             },
-            separatorBuilder: ((context, index) => const SizedBox(
-                  height: 8,
-                )),
+            separatorBuilder: ((context, index) => const SizedBox(height: 8)),
             itemCount: listCard.length,
           ),
         ),
@@ -103,22 +124,17 @@ class _CardPageState extends State<CardPage> {
                   top: appPadding / 2,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(19)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(19),
+                    ),
                     child: IconButton(
-                      icon: item.isFav == true
-                          ? const Icon(
-                              Icons.favorite_rounded,
-                              color: Colors.red,
-                            )
-                          : const Icon(
-                              Icons.favorite_border_rounded,
-                              color: Colors.black,
-                            ),
+                      icon: item.isFav
+                          ? const Icon(Icons.favorite_rounded,
+                              color: Colors.red)
+                          : const Icon(Icons.favorite_border_rounded,
+                              color: Colors.black),
                       onPressed: () {
-                        setState(() {
-                          item.isFav;
-                        });
+                        _toggleFavorite(item);
                       },
                     ),
                   ),
@@ -221,9 +237,8 @@ class _CardPageState extends State<CardPage> {
                             ),
                             Text(
                               item.price,
-                              style: textTheme.displaySmall?.copyWith(
-                                color: theme.colorScheme.primary,
-                              ),
+                              style: textTheme.displaySmall
+                                  ?.copyWith(color: theme.colorScheme.primary),
                             ),
                           ],
                         ),

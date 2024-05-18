@@ -1,10 +1,9 @@
-import 'package:ache_um_lar/app/core/widgets/home_app_bar_widget.dart';
+import 'package:ache_um_lar/app/utils/data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:ache_um_lar/app/features/home/presenter/widgets/datails_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../../../utils/data.dart';
 import '../../../presenter/widgets/builld_search_bar_widget.dart';
 
 class FavoritesPage extends StatefulWidget {
@@ -15,27 +14,43 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-  final listCard = popular
-      .map((data) => CardHomeModel(
-            name: data.name,
-            urlImage: data.image,
-            city: data.location,
-            address: data.address,
-            numberAddress: data.numberAddress,
-            neighborhood: data.neighborhood,
-            price: data.price,
-            isFav: data.isFavorite,
-            description: data.description,
-            bedRooms: data.bedRooms,
-            bathRooms: data.bathRooms,
-            garages: data.garages,
-            sqFeet: data.sqFeet,
-            iptu: data.iptu,
-            condominiumTax: data.condominiumTax,
-            moreImagesUrl: data.moreImagesUrl ?? [],
-          ))
-      .where((element) => element.isFav)
-      .toList();
+  late List<CardHomeModel> listCard = [];
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    prefs = await SharedPreferences.getInstance();
+    final favoriteIds = prefs.getStringList('favoriteIds') ?? [];
+    listCard = popular
+        .map((data) => CardHomeModel(
+              id: data.id,
+              name: data.name,
+              urlImage: data.image,
+              city: data.location,
+              address: data.address,
+              numberAddress: data.numberAddress,
+              neighborhood: data.neighborhood,
+              price: data.price,
+              isFav: favoriteIds.contains(data.id),
+              description: data.description,
+              bedRooms: data.bedRooms,
+              bathRooms: data.bathRooms,
+              garages: data.garages,
+              sqFeet: data.sqFeet,
+              iptu: data.iptu,
+              condominiumTax: data.condominiumTax,
+              moreImagesUrl: data.moreImagesUrl ?? [],
+            ))
+        .where((element) => element.isFav)
+        .toList();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -60,14 +75,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   );
                 },
                 child: SizedBox(
-                    height: size.height * 0.4,
-                    // width: double.infinity,
-                    child: cardHousesMethod(item, textTheme, iconSize, theme)),
+                  height: size.height * 0.4,
+                  child: cardHousesMethod(item, textTheme, iconSize, theme),
+                ),
               );
             },
-            separatorBuilder: ((context, index) => const SizedBox(
-                  height: 8,
-                )),
+            separatorBuilder: ((context, index) => const SizedBox(height: 8)),
             itemCount: listCard.length,
           ),
         ),
@@ -100,22 +113,17 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   top: appPadding / 2,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(19)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(19),
+                    ),
                     child: IconButton(
-                      icon: item.isFav == true
-                          ? const Icon(
-                              Icons.favorite_rounded,
-                              color: Colors.red,
-                            )
-                          : const Icon(
-                              Icons.favorite_border_rounded,
-                              color: Colors.black,
-                            ),
+                      icon: item.isFav
+                          ? const Icon(Icons.favorite_rounded,
+                              color: Colors.red)
+                          : const Icon(Icons.favorite_border_rounded,
+                              color: Colors.black),
                       onPressed: () {
-                        setState(() {
-                          item.isFav;
-                        });
+                        // No need to toggle favorite in FavoritesPage
                       },
                     ),
                   ),
@@ -138,41 +146,24 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 0.0, vertical: 8.0),
-                        child: Text(
-                          item.name,
-                          style: textTheme.headlineSmall,
-                        ),
+                        child: Text(item.name, style: textTheme.headlineSmall),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.location_on,
-                            size: iconSize,
-                          ),
-                          const SizedBox(
-                            width: 2,
-                          ),
-                          Text(
-                            item.city,
-                            style: textTheme.titleMedium,
-                          ),
+                          Icon(Icons.location_on, size: iconSize),
+                          const SizedBox(width: 2),
+                          Text(item.city, style: textTheme.titleMedium),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.home,
-                            size: iconSize,
-                          ),
-                          const SizedBox(
-                            width: 2,
-                          ),
+                          Icon(Icons.home, size: iconSize),
+                          const SizedBox(width: 2),
                           Text(
-                            '${item.address} ${item.numberAddress} ${item.neighborhood}',
-                            style: textTheme.titleMedium,
-                          ),
+                              '${item.address} ${item.numberAddress} ${item.neighborhood}',
+                              style: textTheme.titleMedium),
                         ],
                       ),
                     ],
@@ -208,20 +199,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
-                            Icon(
-                              FontAwesomeIcons.brazilianRealSign,
-                              size: iconSize * 0.8,
-                              color: theme.colorScheme.primary,
-                            ),
-                            const SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              item.price,
-                              style: textTheme.displaySmall?.copyWith(
-                                color: theme.colorScheme.primary,
-                              ),
-                            ),
+                            Icon(FontAwesomeIcons.brazilianRealSign,
+                                size: iconSize * 0.8,
+                                color: theme.colorScheme.primary),
+                            const SizedBox(width: 2),
+                            Text(item.price,
+                                style: textTheme.displaySmall?.copyWith(
+                                    color: theme.colorScheme.primary)),
                           ],
                         ),
                       ],
