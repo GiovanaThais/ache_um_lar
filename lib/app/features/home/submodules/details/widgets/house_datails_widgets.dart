@@ -174,6 +174,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                         Center(
                           child: Text(
                             '${widget.house.sqFeet} Metros²',
+                            textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,

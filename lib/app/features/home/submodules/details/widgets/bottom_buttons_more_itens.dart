@@ -65,7 +65,7 @@ class BottomButtonsChat extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 36),
-          _buildBigButton(Icons.star_border, 'Destacar Anuncio', () {
+          _buildBigButton(Icons.star_border, 'Destacar Anúncio', () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -75,6 +75,10 @@ class BottomButtonsChat extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          const SizedBox(height: 30),
+          _buildEditButton(context),
+          const SizedBox(height: 10),
+          _buildRemoveButton(context),
         ],
       ),
     );
@@ -171,6 +175,54 @@ class BottomButtonsChat extends StatelessWidget {
           shadowColor: theme.colorScheme.tertiary,
           // primary: theme.colorScheme.primary,
           // onPrimary:theme.colorScheme.onSecondary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEditButton(BuildContext context) {
+    final theme = Theme.of(context);
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AdvertisementPage()),
+          );
+        },
+        icon: const Icon(Icons.edit, color: Colors.white),
+        label:
+            const Text('Editar Anúncio', style: TextStyle(color: Colors.white)),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: theme.colorScheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRemoveButton(BuildContext context) {
+    final theme = Theme.of(context);
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AdvertisementPage()),
+          );
+        },
+        icon: const Icon(Icons.delete, color: Colors.white),
+        label: const Text('Remover Anúncio',
+            style: TextStyle(color: Colors.white)),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: theme.colorScheme.error,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

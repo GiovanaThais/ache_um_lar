@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'register_user_controller.dart';
 import 'widgets/formatters_widget.dart';
 import 'widgets/text_label_widget.dart';
+import 'package:intl/intl.dart';
 
 class RegisterUsersPage extends StatefulWidget {
   const RegisterUsersPage({Key? key}) : super(key: key);
@@ -122,7 +123,8 @@ class _RegisterUsersPageState extends State<RegisterUsersPage> {
                     lastDate: DateTime.now(),
                   );
                   if (date != null) {
-                    controller.birthDateController.text = date.toString();
+                    controller.birthDateController.text =
+                        DateFormat('dd/MM/yyyy').format(date);
                     controller.birthDate = date;
                   }
                 },
