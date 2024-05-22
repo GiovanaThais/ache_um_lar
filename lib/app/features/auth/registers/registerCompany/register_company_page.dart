@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:ache_um_lar/app/core/components/snackbar_componets.dart';
 import 'package:ache_um_lar/app/core/services/shared_preferences/app_storage_company_service.dart';
 import 'package:ache_um_lar/app/features/auth/service/auth_service_firebase.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import '../widgets/formatters_widget.dart';
 import '../widgets/text_label_widget.dart';
@@ -30,23 +33,24 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
 
   // AuthServiceFirebase _authService = AuthServiceFirebase();
   FirebaseFirestore company = FirebaseFirestore.instance;
+  bool _isPasswordVisible = false;
 
   var types = [];
   var typeSelected = "";
 
-  // AppStorageCompanyService storage = AppStorageCompanyService();
-  // final String NAME_COMPANY_REGISTRATER_DATA_KEY =
-  //     "NAME_COMPANY_REGISTRATER_DATA_KEY";
-  // final String NUMBERID_REGISTRATER_DATA_KEY =
-  //     "NUMBERID_COMPANY_REGISTRATER_DATA_KEY";
-  // final String CELLPHONE_COMPANY_REGISTRATER_DATA_KEY =
-  //     "CELLPHONE_COMPANY_REGISTRATER_DATA_KEY";
-  // final String CNPJ_COMPANY_REGISTRATER_DATA_KEY = "CNPJ_REGISTRATER_DATA_KEY";
-  // final String CRECI_REGISTRATER_DATA_KEY = "CRECI_REGISTRATER_DATA_KEY";
-  // final String EMAIL_COMPANY_REGISTRATER_DATA_KEY =
-  //     "EMAIL_COMPANY_REGISTRATER_DATA_KEY";
-  // final String PASSWORD_COMPANY_REGISTRATER_DATA_KEY =
-  //     "PASSWORD_COMPANY_REGISTRATER_DATA_KEY";
+  AppStorageCompanyService storage = AppStorageCompanyService();
+  final String NAME_COMPANY_REGISTRATER_DATA_KEY =
+      "NAME_COMPANY_REGISTRATER_DATA_KEY";
+  final String NUMBERID_REGISTRATER_DATA_KEY =
+      "NUMBERID_COMPANY_REGISTRATER_DATA_KEY";
+  final String CELLPHONE_COMPANY_REGISTRATER_DATA_KEY =
+      "CELLPHONE_COMPANY_REGISTRATER_DATA_KEY";
+  final String CNPJ_COMPANY_REGISTRATER_DATA_KEY = "CNPJ_REGISTRATER_DATA_KEY";
+  final String CRECI_REGISTRATER_DATA_KEY = "CRECI_REGISTRATER_DATA_KEY";
+  final String EMAIL_COMPANY_REGISTRATER_DATA_KEY =
+      "EMAIL_COMPANY_REGISTRATER_DATA_KEY";
+  final String PASSWORD_COMPANY_REGISTRATER_DATA_KEY =
+      "PASSWORD_COMPANY_REGISTRATER_DATA_KEY";
 
   bool safing = false;
   final _formKey = GlobalKey<FormState>();
@@ -55,20 +59,44 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
   void initState() {
     super.initState();
 
-    //loadData();
+    loadData();
   }
 
-  //loadData() async {
-  // nameController.text = await storage.getRegisterCompanyDataName();
-  // emailController.text = await storage.getRegisterCompanyEmail();
-  // passwordController.text = await storage.getRegisterCompanyPassword();
-  // creciController.text = await storage.getRegisterCreci();
-  // cnpjController.text = await storage.getRegisterCnpj();
+  loadData() async {
+    nameCompanyController.text = await storage.getRegisterCompanyDataName();
+    emailCompanyController.text = await storage.getRegisterCompanyEmail();
+    passwordCompanyController.text = await storage.getRegisterCompanyPassword();
+    creciController.text = await storage.getRegisterCreci();
+    cnpjController.text = await storage.getRegisterCnpj();
 
-  // cellController.text = await storage.getRegisterCompanyCellphone();
+    cellCompanyController.text = await storage.getRegisterCompanyCellphone();
 
-  //  setState(() {});
-  // }
+    setState(() {});
+  }
+
+  final _imagePicker = ImagePicker();
+  File? _imageFile;
+
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<void> _takePhoto() async {
+    final pickedFile = await _imagePicker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +109,22 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
         child: ListView(
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    _pickImage();
+                  },
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage:
+                        _imageFile != null ? FileImage(_imageFile!) : null,
+                    child: _imageFile == null
+                        ? const Icon(Icons.person, size: 50)
+                        : null,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
                 child: TextLabel(
@@ -230,15 +274,27 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
                   controller: passwordCompanyController,
                   textlabel: "Senha",
                   validator: (String? value) {
-                    if (value == null) {
+                    if (value == null || value.isEmpty) {
                       return "A senha deve ser preenchida";
                     }
                     if (value.length < 8) {
-                      return "O senha deve conter no mínimo 8 caracteres!";
+                      return "A senha deve conter no mínimo 8 caracteres!";
                     }
-
                     return null;
                   },
+                  obscureText: !_isPasswordVisible,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                    child: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                  ),
                 ),
               ),
               Padding(
@@ -247,15 +303,27 @@ class _RegisterCompanyPageState extends State<RegisterCompanyPage> {
                   controller: passwordCompanyController,
                   textlabel: "Confirmar Senha",
                   validator: (String? value) {
-                    if (value == null) {
-                      return "O e-mail deve ser preenchido";
+                    if (value == null || value.isEmpty) {
+                      return "A senha deve ser preenchida";
                     }
                     if (value.length < 8) {
-                      return "O senha deve conter no mínimo 8 caracteres!";
+                      return "A senha deve conter no mínimo 8 caracteres!";
                     }
-
                     return null;
                   },
+                  obscureText: !_isPasswordVisible,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                    child: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                  ),
                 ),
               ),
               Padding(

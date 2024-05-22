@@ -170,7 +170,7 @@ class _RegisterUsersPageState extends State<RegisterUsersPage> {
                         },
                       ),
                       const Text("Empresa"),
-                      const SizedBox(width: 20),
+                      //const SizedBox(width: 5),
                       Radio(
                         value: "Corretor",
                         groupValue: _selectedOption,
@@ -183,7 +183,7 @@ class _RegisterUsersPageState extends State<RegisterUsersPage> {
                         },
                       ),
                       const Text("Corretor"),
-                      const SizedBox(width: 20),
+                      //const SizedBox(width: 5),
                       Radio(
                         value: "Cliente",
                         groupValue: _selectedOption,
