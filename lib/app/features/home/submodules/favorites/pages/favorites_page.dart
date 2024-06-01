@@ -1,9 +1,10 @@
 import 'package:ache_um_lar/app/utils/data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
-import 'package:ache_um_lar/app/features/home/presenter/widgets/datails_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../presenter/pages/datails_page.dart';
 import '../../../presenter/widgets/builld_search_bar_widget.dart';
 
 class FavoritesPage extends StatefulWidget {
@@ -60,7 +61,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
     return Column(
       children: [
-        buildSearchBar(context),
+        //buildSearchBar(context),
         Expanded(
           child: ListView.separated(
             itemBuilder: (context, index) {

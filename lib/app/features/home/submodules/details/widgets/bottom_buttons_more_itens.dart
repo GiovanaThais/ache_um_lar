@@ -1,11 +1,12 @@
 import 'package:ache_um_lar/app/features/home/submodules/chat/chat_page.dart';
-import 'package:ache_um_lar/app/features/home/submodules/details/page/advertisement_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../presenter/pages/visit_home_page.dart';
+import '../page/advertisement_page.dart';
 
 class BottomButtonsChat extends StatelessWidget {
   const BottomButtonsChat({super.key});

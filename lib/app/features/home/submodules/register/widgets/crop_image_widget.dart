@@ -1,7 +1,10 @@
-// import 'package:flutter/material.dart';
-// import 'package:image_cropper/image_cropper.dart';
-// import 'package:image_picker/image_picker.dart';
-// import 'package:gallery_saver/gallery_saver.dart';
+import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+import 'package:image_cropper/image_cropper.dart';
+//import 'package:gallery_saver/gallery_saver.dart';
 
 // class cropImagesWidget extends StatefulWidget {
 //   const cropImagesWidget({super.key});
@@ -47,3 +50,45 @@
 //     return const Placeholder();
 //   }
 // }
+
+class CropImages {
+  static Future<String?> cropImage(String imagePath) async {
+    CroppedFile? croppedImage = await ImageCropper().cropImage(
+      sourcePath: imagePath,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+            toolbarTitle: 'Editar Imagem',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false),
+        IOSUiSettings(
+          title: 'Cropper',
+          minimumAspectRatio: 1.0,
+        ),
+      ],
+      // androidUiSettings: AndroidUiSettings(
+      //     toolbarTitle: 'Editar Imagem',
+      //     toolbarColor: Colors.deepOrange,
+      //     toolbarWidgetColor: Colors.white,
+      //     initAspectRatio: CropAspectRatioPreset.original,
+      //     lockAspectRatio: false),
+      // iosUiSettings: IOSUiSettings(
+      //   minimumAspectRatio: 1.0,
+      // ),
+    );
+
+    if (croppedImage != null) {
+      return croppedImage.path;
+    } else {
+      return null;
+    }
+  }
+}

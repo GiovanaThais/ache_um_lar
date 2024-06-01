@@ -297,16 +297,19 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                       RowFormatters(
                         label: 'Preço (R\$)',
                         formatter: formController.priceFormatter,
+                        controller: formController.priceController,
                       ),
                       SizedBox(height: 20),
                       RowFormatters(
                         label: 'Taxa de condomínio (R\$)',
                         formatter: formController.condominiumTaxFormatter,
+                        controller: formController.condominiumTaxController,
                       ),
                       SizedBox(height: 20),
                       RowFormatters(
                         label: 'IPTU (R\$)',
                         formatter: formController.iptuFormatter,
+                        controller: formController.iptuController,
                       ),
                       SizedBox(height: 20),
                     ],
@@ -372,10 +375,34 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
-                      RowFormatters(
+                      const SizedBox(height: 20),
+                      // Container(
+                      //   child: Expanded(
+                      //     child: TextFieldWidget(
+                      //       controller: formController.bathroomsController,
+                      //       label: 'Garagem',
+                      //       prefixIcon: Icons.garage,
+                      //       validator: (value) =>
+                      //           defaultValidator(value, 'Campo Obrigatório'),
+                      //     ),
+                      //   ),
+                      // ),
+                      TextFieldWidget(
+                        controller: formController.propertyCodeController,
+                        label: 'Garagem',
+                        // maxLines: 3,
+                        //keyboardType: TextInputType.multiline,
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                      const SizedBox(height: 20),
+                      TextFieldWidget(
+                        controller: formController.propertyCodeController,
                         label: 'Código do Imóvel(Opcional)',
-                        formatter: formController.condominiumTaxFormatter,
+                        // maxLines: 3,
+                        //keyboardType: TextInputType.multiline,
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
                       ),
                       SizedBox(height: 20),
                       TextFieldWidget(
@@ -385,6 +412,21 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                         keyboardType: TextInputType.multiline,
                         validator: (value) =>
                             defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                      DropdownButtonFormField<String>(
+                        value: formController.selectedCategory,
+                        items: ['Casa', 'Apartamento']
+                            .map((label) => DropdownMenuItem(
+                                  child: Text(label),
+                                  value: label,
+                                ))
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            formController.selectedCategory = value ?? 'Casa';
+                          });
+                        },
+                        decoration: InputDecoration(labelText: 'Categoria'),
                       ),
                     ],
                   ),
@@ -413,7 +455,7 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
           const SizedBox(height: 20),
           Center(
             child: ElevatedButton(
-              onPressed: () => formController.addProperties(),
+              onPressed: () => formController.addProperties(context),
               child: const Text('Cadastrar'),
             ),
           ),
