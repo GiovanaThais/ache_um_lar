@@ -1,15 +1,12 @@
-import 'package:ache_um_lar/app/features/home/submodules/chat/chat_page.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../presenter/pages/visit_home_page.dart';
 import '../page/advertisement_page.dart';
 
 class BottomButtonsChat extends StatelessWidget {
-  const BottomButtonsChat({super.key});
+  const BottomButtonsChat({super.key, this.onPressedRemove});
+  final void Function()? onPressedRemove;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +43,7 @@ class BottomButtonsChat extends StatelessWidget {
           const Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Informações gerais",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+              Text("Informações gerais", style: TextStyle(fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 6,
               ),
@@ -69,8 +65,7 @@ class BottomButtonsChat extends StatelessWidget {
           _buildBigButton(Icons.star_border, 'Destacar Anúncio', () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const AdvertisementPage()),
+              MaterialPageRoute(builder: (context) => const AdvertisementPage()),
             );
           }, context),
           const SizedBox(
@@ -79,7 +74,7 @@ class BottomButtonsChat extends StatelessWidget {
           const SizedBox(height: 30),
           _buildEditButton(context),
           const SizedBox(height: 10),
-          _buildRemoveButton(context),
+          _buildRemoveButton(context, onPressedRemove),
         ],
       ),
     );
@@ -91,8 +86,8 @@ class BottomButtonsChat extends StatelessWidget {
       onPressed: () {
         Modular.to.pushNamed('/visit');
       },
-      icon: Icon(Icons.calendar_today),
-      label: Text('Agendar Visita'),
+      icon: const Icon(Icons.calendar_today),
+      label: const Text('Agendar Visita'),
       style: ElevatedButton.styleFrom(
         //primary: theme.colorScheme.primary,
         //onPrimary: Colors.white,
@@ -151,8 +146,8 @@ class BottomButtonsChat extends StatelessWidget {
         // Implemente a lógica para simular financiamento
         print('Simular Financiamento clicado');
       },
-      icon: Icon(Icons.monetization_on),
-      label: Text('Simular Financiamento'),
+      icon: const Icon(Icons.monetization_on),
+      label: const Text('Simular Financiamento'),
       style: ElevatedButton.styleFrom(
         //   primary: theme.colorScheme.primary,
         //   onPrimary: Colors.white,
@@ -163,8 +158,7 @@ class BottomButtonsChat extends StatelessWidget {
     );
   }
 
-  Widget _buildBigButton(
-      IconData icon, String label, VoidCallback onPressed, context) {
+  Widget _buildBigButton(IconData icon, String label, VoidCallback onPressed, context) {
     final theme = Theme.of(context);
     return SizedBox(
       width: double.infinity,
@@ -196,8 +190,7 @@ class BottomButtonsChat extends StatelessWidget {
           );
         },
         icon: const Icon(Icons.edit, color: Colors.white),
-        label:
-            const Text('Editar Anúncio', style: TextStyle(color: Colors.white)),
+        label: const Text('Editar Anúncio', style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
           backgroundColor: theme.colorScheme.primary,
           shape: RoundedRectangleBorder(
@@ -208,20 +201,20 @@ class BottomButtonsChat extends StatelessWidget {
     );
   }
 
-  Widget _buildRemoveButton(BuildContext context) {
+  Widget _buildRemoveButton(BuildContext context, void Function()? onPressed) {
     final theme = Theme.of(context);
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AdvertisementPage()),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const AdvertisementPage()),
+          // );
+          onPressed?.call();
         },
         icon: const Icon(Icons.delete, color: Colors.white),
-        label: const Text('Remover Anúncio',
-            style: TextStyle(color: Colors.white)),
+        label: const Text('Remover Anúncio', style: TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
           backgroundColor: theme.colorScheme.error,
           shape: RoundedRectangleBorder(

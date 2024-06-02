@@ -61,7 +61,7 @@ class AddHomesFormController {
         print('Erro na conversão dos valores de preço, iptu ou condominiumTax.');
         return;
       }
-      List<String> imageUrls = await _uploadImages(imageFiles);
+      final (imageUrls, imageRefs) = await _uploadImages(imageFiles);
       // Dados do imóvel
       final propertiesData = {
         'city': cityController.text,
@@ -79,6 +79,8 @@ class AddHomesFormController {
         'iptu': iptu,
         'category': selectedCategory,
         'images': imageUrls, // Adicionar URLs das imagens
+        'imagesRef': imageRefs,
+        'createdAt': FieldValue.serverTimestamp(),
       };
 
       // Salvar no Firestore
@@ -90,8 +92,9 @@ class AddHomesFormController {
     }
   }
 
-  Future<List<String>> _uploadImages(List<File> imageFiles) async {
+  Future<(List<String>, List<String>)> _uploadImages(List<File> imageFiles) async {
     List<String> imageUrls = [];
+    List<String> imageRefs = [];
     for (File imageFile in imageFiles) {
       String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
       Reference ref = FirebaseStorage.instance.ref().child('properties/').child(fileName);
@@ -99,11 +102,12 @@ class AddHomesFormController {
         contentType: 'image/jpeg',
         customMetadata: {'picked-file-path': imageFile.path},
       );
-      
+
       await ref.putFile(imageFile, metadata);
       String downloadUrl = await ref.getDownloadURL();
       imageUrls.add(downloadUrl);
+      imageRefs.add(ref.fullPath);
     }
-    return imageUrls;
+    return (imageUrls, imageRefs);
   }
 }

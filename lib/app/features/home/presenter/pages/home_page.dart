@@ -1,11 +1,11 @@
 import 'package:ache_um_lar/app/app_controller.dart';
+import 'package:ache_um_lar/app/features/home/presenter/pages/card_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/widgets/custom_drawer_widget.dart';
-import '../../submodules/favorites/pages/favorites_page.dart';
-import 'realty_page.dart';
 import '../../submodules/chat/chat_page.dart';
+import '../../submodules/favorites/pages/favorites_page.dart';
 import '../../submodules/register/add_homes_form_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,8 +61,7 @@ class _HomePageState extends State<HomePage> {
                           }),
                       Transform.rotate(
                         angle: 3.0, // Ângulo de rotação
-                        child: const Icon(Icons.brightness_3_outlined,
-                            size: 16), // Ícone para modo escuro
+                        child: const Icon(Icons.brightness_3_outlined, size: 16), // Ícone para modo escuro
                       ),
                     ],
                   );

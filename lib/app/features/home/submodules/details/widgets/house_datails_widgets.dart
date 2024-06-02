@@ -2,6 +2,7 @@ import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/constants_widget.dart';
+import '../../../../auth/service/prop_service.dart';
 import '../../../presenter/widgets/check_more_info_details_widget.dart';
 import 'bottom_buttons_more_itens.dart';
 
@@ -14,6 +15,8 @@ class HouseDetailsWidget extends StatefulWidget {
 }
 
 class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
+  final service = PropertyService();
+
   final List<String> moreImovelDetails = [
     'Área de serviço',
     'Armários no quarto',
@@ -69,11 +72,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
                       height: 5,
                     ),
                     Text(
-                      widget.house.address +
-                          '' +
-                          (widget.house.numberAddress ?? '') +
-                          ' ' +
-                          (widget.house.neighborhood ?? ''),
+                      '${widget.house.address}${widget.house.numberAddress ?? ''} ${widget.house.neighborhood ?? ''}',
                       style: TextStyle(
                         fontSize: 15,
                         color: theme.colorScheme.secondary,
@@ -142,7 +141,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: 130,
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -328,7 +327,11 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
             imovelDetails: moreImovelDetails,
             condominiumDetails: moreCondominiumDetails,
           ),
-          const BottomButtonsChat(),
+          BottomButtonsChat(
+            onPressedRemove: () {
+              service.deleteProperty(widget.house).then((value) => Navigator.pop(context));
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(
               left: appPadding,
