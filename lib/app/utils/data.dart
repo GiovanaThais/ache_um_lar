@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class HouseData {
   final String id;
   final String image;
@@ -197,8 +195,9 @@ List<HouseData> popular = [
 ];
 
 List<String> categoryList = [
-  '<\$220.00',
-  'Casas',
-  '3-4 quartos',
-  'Apartamentos',
+  'Todas',
+  // '<\$220.00',
+  'Casa',
+  // '3-4 quartos',
+  'Apartamento',
 ];

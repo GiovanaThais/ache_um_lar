@@ -19,8 +19,10 @@ class _CardPageState extends State<CardPage> {
   final PropertyService _propertyService = PropertyService();
   late Future<List<CardHomeModel>> _propertiesFuture;
   late List<CardHomeModel> listCard = [];
+  late List<CardHomeModel> listCardFiltered = [];
   late SharedPreferences prefs;
   String selectedCategory = 'All';
+  List<String> listFavId = [];
 
   @override
   void initState() {
@@ -28,47 +30,48 @@ class _CardPageState extends State<CardPage> {
     _propertiesFuture = _loadData();
   }
 
-  Future<void> _loadFavorites() async {
+  Future<List<String>> _loadFavorites() async {
     prefs = await SharedPreferences.getInstance();
     final favoriteIds = prefs.getStringList('favoriteIds') ?? [];
-    setState(() {
-      listCard = favoriteIds
-          .map((id) => CardHomeModel(
-                id: id,
-                name: '',
-                urlImage: '',
-                city: '',
-                address: '',
-                numberAddress: '',
-                neighborhood: '',
-                price: '',
-                isFav: true,
-                description: '',
-                bedRooms: '',
-                bathRooms: '',
-                garages: 0,
-                sqFeet: 0,
-                iptu: 0,
-                condominiumTax: 0,
-                moreImagesUrl: [],
-              ))
-          .toList();
-    });
+    return favoriteIds;
+    // setState(() {
+    //   listCard = favoriteIds
+    //       .map((id) => CardHomeModel(
+    //             id: id,
+    //             name: '',
+    //             urlImage: '',
+    //             city: '',
+    //             address: '',
+    //             numberAddress: '',
+    //             neighborhood: '',
+    //             price: '',
+    //             isFav: true,
+    //             description: '',
+    //             bedRooms: '',
+    //             bathRooms: '',
+    //             garages: 0,
+    //             sqFeet: 0,
+    //             iptu: 0,
+    //             condominiumTax: 0,
+    //             moreImagesUrl: [],
+    //           ))
+    //       .toList();
+    // });
   }
 
   Future<List<CardHomeModel>> _loadData() async {
-    await _loadFavorites();
-    return _propertyService.getProperties();
+    listFavId = await _loadFavorites();
+    return _propertyService.getProperties(listFavId);
   }
 
   void _filterList() {
-    if (selectedCategory == 'All') {
+    if (selectedCategory == 'All' || selectedCategory == 'Todas') {
       setState(() {
-        listCard = listCard; // Aqui você pode filtrar de acordo com os dados carregados
+        _propertiesFuture = _loadData();
       });
     } else {
       setState(() {
-        // listCard = listCard.where((data) => data.category == selectedCategory).toList();
+        _propertiesFuture = _propertyService.getPropertiesFilter(listFavId, selectedCategory);
       });
     }
   }
@@ -76,8 +79,8 @@ class _CardPageState extends State<CardPage> {
   void _onCategorySelected(String category) {
     setState(() {
       selectedCategory = category;
-      _filterList();
     });
+    _filterList();
   }
 
   Future<void> _toggleFavorite(CardHomeModel item) async {
@@ -95,23 +98,23 @@ class _CardPageState extends State<CardPage> {
     const iconSize = 20.0;
     final size = MediaQuery.of(context).size;
 
-    return FutureBuilder<List<CardHomeModel>>(
-      future: _propertiesFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return const Center(child: Text('Erro ao carregar imóveis'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('Nenhum imóvel encontrado'));
-        } else {
-          final properties = snapshot.data!;
-          return Column(
-            children: [
-              buildSearchBar(context),
-              Categories(onCategorySelected: _onCategorySelected),
-              Expanded(
-                child: ListView.separated(
+    return Column(
+      children: [
+        buildSearchBar(context),
+        Categories(onCategorySelected: _onCategorySelected),
+        Expanded(
+          child: FutureBuilder<List<CardHomeModel>>(
+            future: _propertiesFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return const Center(child: Text('Erro ao carregar imóveis'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('Nenhum imóvel encontrado'));
+              } else {
+                final properties = snapshot.data!;
+                return ListView.separated(
                   itemBuilder: (context, index) {
                     final item = properties[index];
                     return GestureDetector(
@@ -133,12 +136,12 @@ class _CardPageState extends State<CardPage> {
                   },
                   separatorBuilder: (context, index) => const SizedBox(height: 8),
                   itemCount: properties.length,
-                ),
-              ),
-            ],
-          );
-        }
-      },
+                );
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 
 class CardHomeModel {
   final String id; // Adiciona um identificador único para cada item
@@ -22,6 +21,7 @@ class CardHomeModel {
   List<String> moreImagesUrl;
   List<String> imagesRef;
   final double iptu;
+  final String category; // Nova propriedade para categoria
   final double condominiumTax;
 
   CardHomeModel({
@@ -43,6 +43,7 @@ class CardHomeModel {
     this.moreImagesUrl = const [],
     this.imagesRef = const [],
     required this.iptu,
+    this.category = '',
     required this.condominiumTax,
   });
 
@@ -69,6 +70,7 @@ class CardHomeModel {
     List<String>? moreImagesUrl,
     List<String>? imagesRef,
     double? iptu,
+    String? category,
     double? condominiumTax,
   }) {
     return CardHomeModel(
@@ -90,6 +92,7 @@ class CardHomeModel {
       moreImagesUrl: moreImagesUrl ?? this.moreImagesUrl,
       imagesRef: imagesRef ?? this.imagesRef,
       iptu: iptu ?? this.iptu,
+      category: category ?? this.category,
       condominiumTax: condominiumTax ?? this.condominiumTax,
     );
   }
@@ -114,6 +117,7 @@ class CardHomeModel {
       'moreImagesUrl': moreImagesUrl,
       'imagesRef': imagesRef,
       'iptu': iptu,
+      'category': category,
       'condominiumTax': condominiumTax,
     };
   }
@@ -138,6 +142,7 @@ class CardHomeModel {
       moreImagesUrl: List<String>.from(map['moreImagesUrl']),
       imagesRef: List<String>.from(map['imagesRef']),
       iptu: map['iptu']?.toDouble() ?? 0.0,
+      category: map['category'] ?? '',
       condominiumTax: map['condominiumTax']?.toDouble() ?? 0.0,
     );
   }
@@ -148,7 +153,7 @@ class CardHomeModel {
 
   @override
   String toString() {
-    return 'CardHomeModel(id: $id, name: $name, urlImage: $urlImage, city: $city, address: $address, numberAddress: $numberAddress, neighborhood: $neighborhood, cep: $cep, price: $price, isFav: $isFav, description: $description, bedRooms: $bedRooms, bathRooms: $bathRooms, garages: $garages, sqFeet: $sqFeet, moreImagesUrl: $moreImagesUrl, imagesRef: $imagesRef, iptu: $iptu, condominiumTax: $condominiumTax)';
+    return 'CardHomeModel(id: $id, name: $name, urlImage: $urlImage, city: $city, address: $address, numberAddress: $numberAddress, neighborhood: $neighborhood, cep: $cep, price: $price, isFav: $isFav, description: $description, bedRooms: $bedRooms, bathRooms: $bathRooms, garages: $garages, sqFeet: $sqFeet, moreImagesUrl: $moreImagesUrl, imagesRef: $imagesRef, iptu: $iptu, category: $category, condominiumTax: $condominiumTax)';
   }
 
   @override
@@ -174,6 +179,7 @@ class CardHomeModel {
       listEquals(other.moreImagesUrl, moreImagesUrl) &&
       listEquals(other.imagesRef, imagesRef) &&
       other.iptu == iptu &&
+      other.category == category &&
       other.condominiumTax == condominiumTax;
   }
 
@@ -197,6 +203,7 @@ class CardHomeModel {
       moreImagesUrl.hashCode ^
       imagesRef.hashCode ^
       iptu.hashCode ^
+      category.hashCode ^
       condominiumTax.hashCode;
   }
 }
