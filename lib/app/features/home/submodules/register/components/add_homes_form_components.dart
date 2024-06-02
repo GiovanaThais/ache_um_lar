@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import '../../../models/card_home_model.dart';
 import '../controllers/add_homes_form_controller.dart';
 import '../widgets/check_more_info_widget.dart';
 import '../widgets/row_formatters_widget.dart';
@@ -11,8 +12,10 @@ class AddHomesFormComponent extends StatefulWidget {
   const AddHomesFormComponent({
     Key? key,
     required this.formController,
+    this.model,
   }) : super(key: key);
   final AddHomesFormController formController;
+  final CardHomeModel? model;
 
   @override
   State<AddHomesFormComponent> createState() => _AddHomesFormComponentState();
@@ -46,6 +49,31 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
     'Piscina (cond.)',
     'Salão de festas',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.model != null) {
+      formController.addressController.text = widget.model?.address ?? '';
+      formController.bathroomsController.text = widget.model?.bathRooms ?? '';
+      formController.bedroomsController.text = widget.model?.bedRooms ?? '';
+      formController.cepController.text = widget.model?.cep ?? '';
+      formController.cityController.text = widget.model?.city ?? '';
+      formController.condominiumTaxController.text = widget.model?.condominiumTax.toString() ?? '';
+      formController.descriptionController.text = widget.model?.description.toString() ?? '';
+      formController.imageUrl = widget.model?.moreImagesUrl ?? [];
+      formController.imageRef = widget.model?.imagesRef ?? [];
+      formController.houseId = widget.model?.id;
+      formController.iptuController.text = widget.model?.iptu.toString() ?? '';
+      formController.neighborhoodController.text = widget.model?.neighborhood.toString() ?? '';
+      formController.numberAddressController.text = widget.model?.numberAddress.toString() ?? '';
+      formController.priceController.text = widget.model?.price.toString() ?? '';
+      formController.selectedCategory = widget.model?.category.toString() ?? '';
+      // formController.stateController.text = widget.model?.state.toString() ?? '';
+      // formController.countryController.text = widget.model?.country.toString() ?? '';
+      imagePaths.addAll(formController.imageUrl);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +146,9 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                     ),
                   );
                 }
+                final imageItem = imagePaths[index];
+                final image = (imageItem.startsWith('http') ? NetworkImage(imageItem) : FileImage(File(imageItem)))
+                    as ImageProvider;
                 return Stack(
                   alignment: Alignment.center,
                   children: [
@@ -128,7 +159,7 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: FileImage(File(imagePaths[index])),
+                          image: image,
                           fit: BoxFit.cover,
                         ),
                       ),

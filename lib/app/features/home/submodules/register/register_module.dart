@@ -4,6 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 class RegisterModule extends Module {
   @override
   void binds(i) {
-    i.addSingleton(() => AddHomesFormController(i()));
+    i.add(() => AddHomesFormController(i()));
   }
 }

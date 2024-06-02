@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../models/card_home_model.dart';
 import '../page/advertisement_page.dart';
 
 class BottomButtonsChat extends StatelessWidget {
-  const BottomButtonsChat({super.key, this.onPressedRemove});
+  const BottomButtonsChat({super.key, this.onPressedRemove, this.model});
   final void Function()? onPressedRemove;
+  final CardHomeModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -184,10 +186,11 @@ class BottomButtonsChat extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AdvertisementPage()),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const AdvertisementPage()),
+          // );
+          Modular.to.pushNamed('/editHome', arguments: model);
         },
         icon: const Icon(Icons.edit, color: Colors.white),
         label: const Text('Editar Anúncio', style: TextStyle(color: Colors.white)),

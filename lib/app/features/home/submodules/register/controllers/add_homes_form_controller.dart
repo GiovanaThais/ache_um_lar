@@ -28,7 +28,11 @@ class AddHomesFormController {
 
   final ImagePickerService imagePickerService;
   String selectedCategory = 'Casa';
+  String? houseId;
   List<File> imageFiles = [];
+  List<String> imageUrl = [];
+  List<String> imageRef = [];
+
   AddHomesFormController(this.imagePickerService);
 
   Future<String> pickerImage(String source) async {
@@ -78,15 +82,20 @@ class AddHomesFormController {
         'condominiumTax': condominiumTax,
         'iptu': iptu,
         'category': selectedCategory,
-        'images': imageUrls, // Adicionar URLs das imagens
-        'imagesRef': imageRefs,
+        'images': [...imageUrl, ...imageUrls], // Adicionar URLs das imagens
+        'imagesRef': [...imageRef, ...imageRefs],
         'createdAt': FieldValue.serverTimestamp(),
       };
 
-      // Salvar no Firestore
-      await FirebaseFirestore.instance.collection('properties').add(propertiesData);
+      if (houseId != null && houseId!.isNotEmpty) {
+        // Salvar no Firestore
+        await FirebaseFirestore.instance.collection('properties').doc(houseId).update(propertiesData);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Imóvel atualizado com sucesso!')));
+      } else {
+        await FirebaseFirestore.instance.collection('properties').add(propertiesData);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Imóvel adicionado com sucesso!')));
+      }
       print('Dados da casa salvos com sucesso');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Imóvel adicionado com sucesso!')));
     } on FirebaseException catch (e) {
       print('Erro ao adicionar imóvel: $e');
     }

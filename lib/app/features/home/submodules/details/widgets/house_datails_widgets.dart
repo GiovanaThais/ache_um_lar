@@ -328,6 +328,7 @@ class _HouseDetailsWidgetState extends State<HouseDetailsWidget> {
             condominiumDetails: moreCondominiumDetails,
           ),
           BottomButtonsChat(
+            model: widget.house,
             onPressedRemove: () {
               service.deleteProperty(widget.house).then((value) => Navigator.pop(context));
             },
