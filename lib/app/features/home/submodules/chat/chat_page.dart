@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'individual_chat_page.dart';
+
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key});
 
@@ -39,70 +41,67 @@ class ChatPage extends StatelessWidget {
     BuildContext context,
     String avatarImagePath,
   ) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(avatarImagePath),
-            ),
-            const SizedBox(width: 16.0),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    username,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    message,
-                    style: TextStyle(
-                      fontSize: 14.0,
-                    ),
-                  ),
-                  // Positioned(
-                  //   bottom: 8,
-                  //   right: 8,
-                  //   child: GestureDetector(
-                  //     onTap: () {
-                  //       // Handle delete icon click
-                  //     },
-                  //     child: Icon(
-                  //       Icons.delete,
-                  //       color: Colors.red,
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => IndividualChatPage(username: username),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage(avatarImagePath),
               ),
-            ),
-            if (menuIcon != null)
-              PopupMenuButton<String>(
-                icon: Icon(menuIcon),
-                onSelected: (menu) {
-                  // Handle menu selection
-                },
-                itemBuilder: (BuildContext bc) {
-                  return <PopupMenuEntry<String>>[
-                    const PopupMenuItem(
-                      value: "opção 1",
-                      child: Text("Option 1"),
+              const SizedBox(width: 16.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      username,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
                     ),
-                  ];
-                },
+                    const SizedBox(height: 8.0),
+                    Text(
+                      message,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-          ],
+              if (menuIcon != null)
+                PopupMenuButton<String>(
+                  icon: Icon(menuIcon),
+                  onSelected: (menu) {
+                    // Handle menu selection
+                  },
+                  itemBuilder: (BuildContext bc) {
+                    return <PopupMenuEntry<String>>[
+                      const PopupMenuItem(
+                        value: "opção 1",
+                        child: Text("Option 1"),
+                      ),
+                    ];
+                  },
+                ),
+            ],
+          ),
         ),
       ),
     );
