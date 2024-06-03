@@ -105,15 +105,20 @@ class PropertyService {
     }
   }
 
-  Future<List<CardHomeModel>> getFavorites(String userId) async {
+  Future<List<CardHomeModel>> getFavorites({String userId = '', List<String> listFavs = const []}) async {
     try {
-      final querySnapshotFavorites = await _firestore
-          .collection('favorites')
-          .doc(userId)
-          .collection('favoritesId')
-          .orderBy('createdAt', descending: true)
-          .get();
-      final listId = querySnapshotFavorites.docs.map((e) => e.data()['id'] ?? '');
+      List<String> listId = [];
+      if (listFavs.isNotEmpty) {
+        listId = listFavs;
+      } else if (userId.isNotEmpty) {
+        final querySnapshotFavorites = await _firestore
+            .collection('favorites')
+            .doc(userId)
+            .collection('favoritesId')
+            .orderBy('createdAt', descending: true)
+            .get();
+        listId = List<String>.from(querySnapshotFavorites.docs.map((e) => e.data()['id'] ?? ''));
+      }
       final querySnapshot = await _firestore
           .collection('properties')
           .where(FieldPath.documentId, whereIn: listId)
@@ -131,7 +136,7 @@ class PropertyService {
           numberAddress: data['numberAddress'] ?? '',
           neighborhood: data['neighborhood'] ?? '',
           price: data['price']?.toString() ?? '',
-          isFav: false, // Esse valor será atualizado mais tarde
+          isFav: listId.contains(doc.id), // Esse valor será atualizado mais tarde
           description: data['description'] ?? '',
           bedRooms: data['bedrooms']?.toString() ?? '',
           bathRooms: data['bathrooms']?.toString() ?? '',

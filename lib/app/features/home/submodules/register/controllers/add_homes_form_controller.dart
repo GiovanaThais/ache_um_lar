@@ -31,9 +31,28 @@ class AddHomesFormController {
   String? houseId;
   List<File> imageFiles = [];
   List<String> imageUrl = [];
-  List<String> imageRef = [];
+  List<String> imageUrlToRemove = [];
+  Map<String, String> imageRef = {};
 
   AddHomesFormController(this.imagePickerService);
+
+  Future<void> removeImage(String url) async {
+    if (url.startsWith('http')) {
+      imageUrlToRemove.add(url);
+    }
+  }
+
+  Future<void> removeImageFromFirebase() async {
+    for (var element in imageUrlToRemove) {
+      if (element.startsWith('http')) {
+        Reference ref = FirebaseStorage.instance.ref(imageRef[element]);
+        await ref.delete().then((value) {
+          imageRef.remove(element);
+          imageUrl.remove(element);
+        });
+      }
+    }
+  }
 
   Future<String> pickerImage(String source) async {
     File? file;
@@ -65,6 +84,7 @@ class AddHomesFormController {
         print('Erro na conversão dos valores de preço, iptu ou condominiumTax.');
         return;
       }
+      await removeImageFromFirebase();
       final (imageUrls, imageRefs) = await _uploadImages(imageFiles);
       // Dados do imóvel
       final propertiesData = {
@@ -83,7 +103,7 @@ class AddHomesFormController {
         'iptu': iptu,
         'category': selectedCategory,
         'images': [...imageUrl, ...imageUrls], // Adicionar URLs das imagens
-        'imagesRef': [...imageRef, ...imageRefs],
+        'imagesRef': [...imageRef.values, ...imageRefs],
         'createdAt': FieldValue.serverTimestamp(),
       };
 

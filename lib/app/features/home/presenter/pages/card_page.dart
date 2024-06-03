@@ -1,6 +1,7 @@
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
 import 'package:ache_um_lar/app/features/home/presenter/pages/datails_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +17,7 @@ class CardPage extends StatefulWidget {
 }
 
 class _CardPageState extends State<CardPage> {
-  final PropertyService _propertyService = PropertyService();
+  late final PropertyService _propertyService;
   late Future<List<CardHomeModel>> _propertiesFuture;
   late List<CardHomeModel> listCard = [];
   late List<CardHomeModel> listCardFiltered = [];
@@ -27,6 +28,7 @@ class _CardPageState extends State<CardPage> {
   @override
   void initState() {
     super.initState();
+    _propertyService = context.read<PropertyService>();
     _propertiesFuture = _loadData();
   }
 
@@ -87,8 +89,11 @@ class _CardPageState extends State<CardPage> {
     item.toggleFavorite();
     setState(() {});
 
-    final favoriteIds = listCard.where((item) => item.isFav).map((item) => item.id).toList();
-    await prefs.setStringList('favoriteIds', favoriteIds);
+    final listFav = await _loadFavorites();
+    listFavId = listFav;
+
+    // final favoriteIds = listCard.where((item) => item.isFav).map((item) => item.id).toList();
+    await prefs.setStringList('favoriteIds', [...listFav, item.id]);
   }
 
   @override

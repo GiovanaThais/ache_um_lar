@@ -62,7 +62,11 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
       formController.condominiumTaxController.text = widget.model?.condominiumTax.toString() ?? '';
       formController.descriptionController.text = widget.model?.description.toString() ?? '';
       formController.imageUrl = widget.model?.moreImagesUrl ?? [];
-      formController.imageRef = widget.model?.imagesRef ?? [];
+      formController.imageRef = {
+        for (int i = 0; i < widget.model!.moreImagesUrl.length; i++)
+          widget.model!.moreImagesUrl[i]: widget.model!.imagesRef[i]
+      };
+      // (widget.model?.moreImagesUrl.indexed.map((index, e) => {e: widget.model?.imagesRef[index]})).;
       formController.houseId = widget.model?.id;
       formController.iptuController.text = widget.model?.iptu.toString() ?? '';
       formController.neighborhoodController.text = widget.model?.neighborhood.toString() ?? '';
@@ -172,6 +176,7 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                           setState(() {
                             imagePaths.removeAt(index);
                           });
+                          formController.removeImage(imageItem);
                         },
                         child: Container(
                           padding: const EdgeInsets.all(4),
@@ -448,20 +453,16 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
           ),
           const SizedBox(width: 30),
           Center(
-            child: Expanded(
-              child: CheckMoreInfoWidget(
-                title: 'Detalhes do imóvel',
-                detailsList: imovelDetails,
-              ),
+            child: CheckMoreInfoWidget(
+              title: 'Detalhes do imóvel',
+              detailsList: imovelDetails,
             ),
           ),
           const SizedBox(width: 16),
           Center(
-            child: Expanded(
-              child: CheckMoreInfoWidget(
-                title: 'Detalhes do condomínio',
-                detailsList: condominiumDetails,
-              ),
+            child: CheckMoreInfoWidget(
+              title: 'Detalhes do condomínio',
+              detailsList: condominiumDetails,
             ),
           ),
           const SizedBox(height: 20),

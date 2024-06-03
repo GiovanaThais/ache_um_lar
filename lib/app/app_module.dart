@@ -9,6 +9,7 @@ import 'package:ache_um_lar/app/features/home/submodules/chat/chat_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'features/auth/service/prop_service.dart';
 import 'features/home/submodules/register/add_homes_form_page.dart';
 import 'features/home/submodules/register/controllers/add_homes_form_controller.dart';
 
@@ -17,6 +18,7 @@ class AppModule extends Module {
   void binds(i) {
     i.addSingleton(() => AppController());
     i.add(() => ImagePicker());
+    i.add(() => PropertyService());
     i.add<ImagePickerService>(() => ImagePickerServiceImpl(imagePicker: i()));
     i.add(() => AddHomesFormController(i()));
   }

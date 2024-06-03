@@ -1,11 +1,11 @@
-import 'package:ache_um_lar/app/utils/data.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ache_um_lar/app/features/home/models/card_home_model.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../auth/service/prop_service.dart';
 import '../../../presenter/pages/datails_page.dart';
-import '../../../presenter/widgets/builld_search_bar_widget.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -17,39 +17,26 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPageState extends State<FavoritesPage> {
   late List<CardHomeModel> listCard = [];
   late SharedPreferences prefs;
+  List<String> listFavId = [];
+  late final PropertyService _propertyService;
+  late Future<List<CardHomeModel>> _propertiesFuture;
 
   @override
   void initState() {
     super.initState();
-    _loadFavorites();
+    _propertyService = context.read<PropertyService>();
+    _propertiesFuture = _loadData();
   }
 
-  Future<void> _loadFavorites() async {
+  Future<List<CardHomeModel>> _loadData() async {
+    listFavId = await _loadFavorites();
+    return _propertyService.getFavorites(listFavs: listFavId);
+  }
+
+  Future<List<String>> _loadFavorites() async {
     prefs = await SharedPreferences.getInstance();
     final favoriteIds = prefs.getStringList('favoriteIds') ?? [];
-    listCard = popular
-        .map((data) => CardHomeModel(
-              id: data.id,
-              name: data.name,
-              urlImage: data.image,
-              city: data.location,
-              address: data.address,
-              numberAddress: data.numberAddress,
-              neighborhood: data.neighborhood,
-              price: data.price,
-              isFav: favoriteIds.contains(data.id),
-              description: data.description,
-              bedRooms: data.bedRooms,
-              bathRooms: data.bathRooms,
-              garages: data.garages,
-              sqFeet: data.sqFeet,
-              iptu: data.iptu,
-              condominiumTax: data.condominiumTax,
-              moreImagesUrl: data.moreImagesUrl ?? [],
-            ))
-        .where((element) => element.isFav)
-        .toList();
-    setState(() {});
+    return favoriteIds;
   }
 
   @override
@@ -63,34 +50,46 @@ class _FavoritesPageState extends State<FavoritesPage> {
       children: [
         //buildSearchBar(context),
         Expanded(
-          child: ListView.separated(
-            itemBuilder: (context, index) {
-              final item = listCard[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => DetailsHouses(house: item),
-                    ),
+          child: FutureBuilder<List<CardHomeModel>>(
+              future: _propertiesFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return const Center(child: Text('Erro ao carregar imóveis'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(child: Text('Nenhum favorito encontrado'));
+                } else {
+                  final properties = snapshot.data!;
+                  return ListView.separated(
+                    itemBuilder: (context, index) {
+                      final item = properties[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => DetailsHouses(house: item),
+                            ),
+                          );
+                        },
+                        child: SizedBox(
+                          height: size.height * 0.4,
+                          child: cardHousesMethod(item, textTheme, iconSize, theme),
+                        ),
+                      );
+                    },
+                    separatorBuilder: ((context, index) => const SizedBox(height: 8)),
+                    itemCount: properties.length,
                   );
-                },
-                child: SizedBox(
-                  height: size.height * 0.4,
-                  child: cardHousesMethod(item, textTheme, iconSize, theme),
-                ),
-              );
-            },
-            separatorBuilder: ((context, index) => const SizedBox(height: 8)),
-            itemCount: listCard.length,
-          ),
+                }
+              }),
         ),
       ],
     );
   }
 
-  Card cardHousesMethod(CardHomeModel item, TextTheme textTheme,
-      double iconSize, ThemeData theme) {
+  Card cardHousesMethod(CardHomeModel item, TextTheme textTheme, double iconSize, ThemeData theme) {
     double appPadding = 30.0;
 
     return Card(
@@ -104,7 +103,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   child: Image.network(
-                    item.urlImage,
+                    item.moreImagesUrl.first,
                     fit: BoxFit.fitWidth,
                     width: double.maxFinite,
                   ),
@@ -119,10 +118,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     ),
                     child: IconButton(
                       icon: item.isFav
-                          ? const Icon(Icons.favorite_rounded,
-                              color: Colors.red)
-                          : const Icon(Icons.favorite_border_rounded,
-                              color: Colors.black),
+                          ? const Icon(Icons.favorite_rounded, color: Colors.red)
+                          : const Icon(Icons.favorite_border_rounded, color: Colors.black),
                       onPressed: () {
                         // No need to toggle favorite in FavoritesPage
                       },
@@ -135,8 +132,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
           Expanded(
             flex: 40,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,8 +141,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 0.0, vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
                         child: Text(item.name, style: textTheme.headlineSmall),
                       ),
                       Row(
@@ -162,8 +157,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         children: [
                           Icon(Icons.home, size: iconSize),
                           const SizedBox(width: 2),
-                          Text(
-                              '${item.address} ${item.numberAddress} ${item.neighborhood}',
+                          Text('${item.address} ${item.numberAddress} ${item.neighborhood}',
                               style: textTheme.titleMedium),
                         ],
                       ),
@@ -201,12 +195,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Icon(FontAwesomeIcons.brazilianRealSign,
-                                size: iconSize * 0.8,
-                                color: theme.colorScheme.primary),
+                                size: iconSize * 0.8, color: theme.colorScheme.primary),
                             const SizedBox(width: 2),
-                            Text(item.price,
-                                style: textTheme.displaySmall?.copyWith(
-                                    color: theme.colorScheme.primary)),
+                            Text(item.price, style: textTheme.displaySmall?.copyWith(color: theme.colorScheme.primary)),
                           ],
                         ),
                       ],
