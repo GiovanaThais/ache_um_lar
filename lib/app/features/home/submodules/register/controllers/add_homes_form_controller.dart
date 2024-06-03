@@ -8,23 +8,30 @@ import 'package:flutter/material.dart';
 //import 'package:multi_image_picker/multi_image_picker.dart';
 
 class AddHomesFormController {
-  final TextEditingController addressController = TextEditingController(); //logradouro
+  final TextEditingController addressController =
+      TextEditingController(); //logradouro
   final TextEditingController cityController = TextEditingController();
-  final TextEditingController stateController = TextEditingController(); //Estado
+  final TextEditingController stateController =
+      TextEditingController(); //Estado
   final TextEditingController numberAddressController = TextEditingController();
   final TextEditingController neighborhoodController = TextEditingController();
   final TextEditingController cepController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController iptuController = TextEditingController();
-  final TextEditingController condominiumTaxController = TextEditingController();
+  final TextEditingController condominiumTaxController =
+      TextEditingController();
   final TextEditingController bedroomsController = TextEditingController();
   final TextEditingController bathroomsController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final RealInputFormatter priceFormatter = RealInputFormatter(moeda: true);
-  final RealInputFormatter condominiumTaxFormatter = RealInputFormatter(moeda: true);
+  final RealInputFormatter condominiumTaxFormatter =
+      RealInputFormatter(moeda: true);
   final RealInputFormatter iptuFormatter = RealInputFormatter(moeda: true);
   final TextEditingController propertyCodeController = TextEditingController();
+  final TextEditingController sqfeetController = TextEditingController();
+  final TextEditingController garageController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
   final ImagePickerService imagePickerService;
   String selectedCategory = 'Casa';
@@ -69,19 +76,24 @@ class AddHomesFormController {
 
   Future<void> addProperties(BuildContext context) async {
     try {
-      final price = double.tryParse(priceController.text.replaceAll(RegExp(r'[^\d.]'), ''));
-      final iptu = double.tryParse(iptuController.text.replaceAll(RegExp(r'[^\d.]'), ''));
-      final condominiumTax = double.tryParse(condominiumTaxController.text.replaceAll(RegExp(r'[^\d.]'), ''));
+      final price = double.tryParse(
+          priceController.text.replaceAll(RegExp(r'[^\d.]'), ''));
+      final iptu = double.tryParse(
+          iptuController.text.replaceAll(RegExp(r'[^\d.]'), ''));
+      final condominiumTax = double.tryParse(
+          condominiumTaxController.text.replaceAll(RegExp(r'[^\d.]'), ''));
 
       // Verificando se a conversão foi bem-sucedida
       if (price == null || iptu == null || condominiumTax == null) {
-        print('Erro na conversão dos valores de preço, iptu ou condominiumTax.');
+        print(
+            'Erro na conversão dos valores de preço, iptu ou condominiumTax.');
         return;
       }
 
       // Verificando se a conversão foi bem-sucedida
       if (price == null || iptu == null || condominiumTax == null) {
-        print('Erro na conversão dos valores de preço, iptu ou condominiumTax.');
+        print(
+            'Erro na conversão dos valores de preço, iptu ou condominiumTax.');
         return;
       }
       await removeImageFromFirebase();
@@ -102,6 +114,9 @@ class AddHomesFormController {
         'condominiumTax': condominiumTax,
         'iptu': iptu,
         'category': selectedCategory,
+        'sqfeet': sqfeetController,
+        'garage': garageController,
+        'name': nameController,
         'images': [...imageUrl, ...imageUrls], // Adicionar URLs das imagens
         'imagesRef': [...imageRef.values, ...imageRefs],
         'createdAt': FieldValue.serverTimestamp(),
@@ -109,11 +124,18 @@ class AddHomesFormController {
 
       if (houseId != null && houseId!.isNotEmpty) {
         // Salvar no Firestore
-        await FirebaseFirestore.instance.collection('properties').doc(houseId).update(propertiesData);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Imóvel atualizado com sucesso!')));
+        await FirebaseFirestore.instance
+            .collection('properties')
+            .doc(houseId)
+            .update(propertiesData);
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Imóvel atualizado com sucesso!')));
       } else {
-        await FirebaseFirestore.instance.collection('properties').add(propertiesData);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Imóvel adicionado com sucesso!')));
+        await FirebaseFirestore.instance
+            .collection('properties')
+            .add(propertiesData);
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Imóvel adicionado com sucesso!')));
       }
       print('Dados da casa salvos com sucesso');
     } on FirebaseException catch (e) {
@@ -121,12 +143,14 @@ class AddHomesFormController {
     }
   }
 
-  Future<(List<String>, List<String>)> _uploadImages(List<File> imageFiles) async {
+  Future<(List<String>, List<String>)> _uploadImages(
+      List<File> imageFiles) async {
     List<String> imageUrls = [];
     List<String> imageRefs = [];
     for (File imageFile in imageFiles) {
       String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
-      Reference ref = FirebaseStorage.instance.ref().child('properties/').child(fileName);
+      Reference ref =
+          FirebaseStorage.instance.ref().child('properties/').child(fileName);
       final metadata = SettableMetadata(
         contentType: 'image/jpeg',
         customMetadata: {'picked-file-path': imageFile.path},

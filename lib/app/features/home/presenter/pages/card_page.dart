@@ -73,7 +73,8 @@ class _CardPageState extends State<CardPage> {
       });
     } else {
       setState(() {
-        _propertiesFuture = _propertyService.getPropertiesFilter(listFavId, selectedCategory);
+        _propertiesFuture =
+            _propertyService.getPropertiesFilter(listFavId, selectedCategory);
       });
     }
   }
@@ -135,11 +136,13 @@ class _CardPageState extends State<CardPage> {
                       },
                       child: SizedBox(
                         height: size.height * 0.4,
-                        child: cardHousesMethod(item, textTheme, iconSize, theme),
+                        child:
+                            cardHousesMethod(item, textTheme, iconSize, theme),
                       ),
                     );
                   },
-                  separatorBuilder: (context, index) => const SizedBox(height: 8),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 8),
                   itemCount: properties.length,
                 );
               }
@@ -150,7 +153,8 @@ class _CardPageState extends State<CardPage> {
     );
   }
 
-  Card cardHousesMethod(CardHomeModel item, TextTheme textTheme, double iconSize, ThemeData theme) {
+  Card cardHousesMethod(CardHomeModel item, TextTheme textTheme,
+      double iconSize, ThemeData theme) {
     double appPadding = 30.0;
 
     return Card(
@@ -185,8 +189,10 @@ class _CardPageState extends State<CardPage> {
                     ),
                     child: IconButton(
                       icon: item.isFav
-                          ? const Icon(Icons.favorite_rounded, color: Colors.red)
-                          : const Icon(Icons.favorite_border_rounded, color: Colors.black),
+                          ? const Icon(Icons.favorite_rounded,
+                              color: Colors.red)
+                          : const Icon(Icons.favorite_border_rounded,
+                              color: Colors.black),
                       onPressed: () {
                         _toggleFavorite(item);
                       },
@@ -199,7 +205,8 @@ class _CardPageState extends State<CardPage> {
           Expanded(
             flex: 40,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +215,8 @@ class _CardPageState extends State<CardPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 0.0, vertical: 8.0),
                         child: Text(item.name, style: textTheme.headlineSmall),
                       ),
                       Row(
@@ -224,7 +232,8 @@ class _CardPageState extends State<CardPage> {
                         children: [
                           Icon(Icons.home, size: iconSize),
                           const SizedBox(width: 2),
-                          Text('${item.address} ${item.numberAddress} ${item.neighborhood}',
+                          Text(
+                              '${item.address} ${item.numberAddress} ${item.neighborhood}',
                               style: textTheme.titleMedium),
                         ],
                       ),
@@ -241,13 +250,15 @@ class _CardPageState extends State<CardPage> {
                             Icon(FontAwesomeIcons.bath, size: iconSize),
                             Text(item.bathRooms, style: textTheme.bodyLarge),
                             Icon(FontAwesomeIcons.car, size: iconSize),
-                            Text(item.garages.toString(), style: textTheme.bodyLarge),
+                            Text(item.garages.toString(),
+                                style: textTheme.bodyLarge),
                           ],
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('R\$${item.price}',
-                              style: textTheme.headlineSmall!.copyWith(color: theme.colorScheme.primary)),
+                          child: Text('R\$${item.price} mil',
+                              style: textTheme.headlineSmall!
+                                  .copyWith(color: theme.colorScheme.primary)),
                         ),
                       ],
                     ),

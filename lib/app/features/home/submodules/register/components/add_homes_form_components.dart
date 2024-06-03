@@ -59,8 +59,10 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
       formController.bedroomsController.text = widget.model?.bedRooms ?? '';
       formController.cepController.text = widget.model?.cep ?? '';
       formController.cityController.text = widget.model?.city ?? '';
-      formController.condominiumTaxController.text = widget.model?.condominiumTax.toString() ?? '';
-      formController.descriptionController.text = widget.model?.description.toString() ?? '';
+      formController.condominiumTaxController.text =
+          widget.model?.condominiumTax.toString() ?? '';
+      formController.descriptionController.text =
+          widget.model?.description.toString() ?? '';
       formController.imageUrl = widget.model?.moreImagesUrl ?? [];
       formController.imageRef = {
         for (int i = 0; i < widget.model!.moreImagesUrl.length; i++)
@@ -69,10 +71,18 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
       // (widget.model?.moreImagesUrl.indexed.map((index, e) => {e: widget.model?.imagesRef[index]})).;
       formController.houseId = widget.model?.id;
       formController.iptuController.text = widget.model?.iptu.toString() ?? '';
-      formController.neighborhoodController.text = widget.model?.neighborhood.toString() ?? '';
-      formController.numberAddressController.text = widget.model?.numberAddress.toString() ?? '';
-      formController.priceController.text = widget.model?.price.toString() ?? '';
+      formController.neighborhoodController.text =
+          widget.model?.neighborhood.toString() ?? '';
+      formController.numberAddressController.text =
+          widget.model?.numberAddress.toString() ?? '';
+      formController.priceController.text =
+          widget.model?.price.toString() ?? '';
       formController.selectedCategory = widget.model?.category.toString() ?? '';
+      formController.sqfeetController.text =
+          widget.model?.sqFeet.toString() ?? '';
+      formController.garageController.text =
+          widget.model?.garages.toString() ?? '';
+      formController.nameController.text = widget.model?.name.toString() ?? '';
       // formController.stateController.text = widget.model?.state.toString() ?? '';
       // formController.countryController.text = widget.model?.country.toString() ?? '';
       imagePaths.addAll(formController.imageUrl);
@@ -107,7 +117,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                                 title: const Text("Câmera"),
                                 leading: const Icon(Icons.photo_camera),
                                 onTap: () async {
-                                  final imagePath = await formController.pickerImage("cam");
+                                  final imagePath =
+                                      await formController.pickerImage("cam");
                                   setState(() {
                                     imagePaths.add(imagePath);
                                   });
@@ -118,7 +129,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                                 title: const Text("Galeria"),
                                 leading: const Icon(Icons.photo_library),
                                 onTap: () async {
-                                  final imagePath = await formController.pickerImage("gallery");
+                                  final imagePath = await formController
+                                      .pickerImage("gallery");
                                   setState(() {
                                     imagePaths.add(imagePath);
                                   });
@@ -133,10 +145,12 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                     child: Container(
                       margin: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 226, 226, 226).withOpacity(0.7),
+                        color: const Color.fromARGB(255, 226, 226, 226)
+                            .withOpacity(0.7),
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: const Color.fromARGB(255, 226, 226, 226).withOpacity(0.7),
+                          color: const Color.fromARGB(255, 226, 226, 226)
+                              .withOpacity(0.7),
                           width: 1.5,
                         ),
                       ),
@@ -151,8 +165,9 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                   );
                 }
                 final imageItem = imagePaths[index];
-                final image = (imageItem.startsWith('http') ? NetworkImage(imageItem) : FileImage(File(imageItem)))
-                    as ImageProvider;
+                final image = (imageItem.startsWith('http')
+                    ? NetworkImage(imageItem)
+                    : FileImage(File(imageItem))) as ImageProvider;
                 return Stack(
                   alignment: Alignment.center,
                   children: [
@@ -204,8 +219,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             ),
             color: theme.colorScheme.onPrimary,
             child: ExpansionTile(
-              iconColor:
-                  const Color.fromARGB(255, 220, 167, 255), // Cor da setinha quando o ExpansionTile está expandido
+              iconColor: const Color.fromARGB(255, 220, 167,
+                  255), // Cor da setinha quando o ExpansionTile está expandido
               collapsedIconColor: const Color.fromARGB(255, 238, 161, 248),
               title: const Padding(
                 padding: EdgeInsets.all(10),
@@ -227,7 +242,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                       TextFieldWidget(
                         controller: formController.cityController,
                         label: 'Cidade',
-                        validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
                       ),
                       const SizedBox(height: 20),
                       Row(
@@ -236,7 +252,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                             child: TextFieldWidget(
                               controller: formController.stateController,
                               label: 'Estado',
-                              validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
                             ),
                           ),
                           const SizedBox(width: 20),
@@ -244,7 +261,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                             child: TextFieldWidget(
                               controller: formController.countryController,
                               label: 'País',
-                              validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
                             ),
                           ),
                         ],
@@ -253,13 +271,15 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                       TextFieldWidget(
                         controller: formController.addressController,
                         label: 'Logradouro',
-                        validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
                       ),
                       const SizedBox(height: 20),
                       TextFieldWidget(
                         controller: formController.cepController,
                         label: 'CEP',
-                        validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
                       ),
                       const SizedBox(height: 20),
                       Row(
@@ -268,15 +288,18 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                             child: TextFieldWidget(
                               controller: formController.neighborhoodController,
                               label: 'Bairro',
-                              validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
                             ),
                           ),
                           const SizedBox(width: 20),
                           Expanded(
                             child: TextFieldWidget(
-                              controller: formController.numberAddressController,
+                              controller:
+                                  formController.numberAddressController,
                               label: 'Número',
-                              validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                              validator: (value) =>
+                                  defaultValidator(value, 'Campo Obrigatório'),
                             ),
                           ),
                         ],
@@ -296,8 +319,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             ),
             color: theme.colorScheme.onPrimary,
             child: ExpansionTile(
-              iconColor:
-                  const Color.fromARGB(255, 220, 167, 255), // Cor da setinha quando o ExpansionTile está expandido
+              iconColor: const Color.fromARGB(255, 220, 167,
+                  255), // Cor da setinha quando o ExpansionTile está expandido
               collapsedIconColor: const Color.fromARGB(255, 238, 161, 248),
               title: const Padding(
                 padding: EdgeInsets.all(10),
@@ -349,10 +372,10 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
             ),
             color: theme.colorScheme.onPrimary,
             child: ExpansionTile(
-              iconColor:
-                  const Color.fromARGB(255, 220, 167, 255), // Cor da setinha quando o ExpansionTile está expandido
-              collapsedIconColor:
-                  const Color.fromARGB(255, 238, 161, 248), // Cor da setinha quando o ExpansionTile está colapsado
+              iconColor: const Color.fromARGB(255, 220, 167,
+                  255), // Cor da setinha quando o ExpansionTile está expandido
+              collapsedIconColor: const Color.fromARGB(255, 238, 161,
+                  248), // Cor da setinha quando o ExpansionTile está colapsado
               title: const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
@@ -378,7 +401,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                                 controller: formController.bedroomsController,
                                 label: 'Quartos',
                                 prefixIcon: Icons.bed,
-                                validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                                validator: (value) => defaultValidator(
+                                    value, 'Campo Obrigatório'),
                               ),
                             ),
                           ),
@@ -389,7 +413,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                                 controller: formController.bathroomsController,
                                 label: 'Banheiros',
                                 prefixIcon: Icons.bathtub,
-                                validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                                validator: (value) => defaultValidator(
+                                    value, 'Campo Obrigatório'),
                               ),
                             ),
                           ),
@@ -408,11 +433,30 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                       //   ),
                       // ),
                       TextFieldWidget(
-                        controller: formController.propertyCodeController,
+                        controller: formController.garageController,
                         label: 'Garagem',
                         // maxLines: 3,
                         //keyboardType: TextInputType.multiline,
-                        validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                      const SizedBox(height: 10),
+                      TextFieldWidget(
+                        controller: formController.sqfeetController,
+                        label: 'Metragem(m2)',
+                        // maxLines: 3,
+                        //keyboardType: TextInputType.multiline,
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
+                      ),
+                      const SizedBox(height: 10),
+                      TextFieldWidget(
+                        controller: formController.nameController,
+                        label: 'Nome',
+                        // maxLines: 3,
+                        //keyboardType: TextInputType.multiline,
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
                       ),
                       const SizedBox(height: 20),
                       TextFieldWidget(
@@ -420,7 +464,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                         label: 'Código do Imóvel(Opcional)',
                         // maxLines: 3,
                         //keyboardType: TextInputType.multiline,
-                        validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
                       ),
                       const SizedBox(height: 20),
                       TextFieldWidget(
@@ -428,7 +473,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                         label: 'Descrição',
                         maxLines: 3,
                         keyboardType: TextInputType.multiline,
-                        validator: (value) => defaultValidator(value, 'Campo Obrigatório'),
+                        validator: (value) =>
+                            defaultValidator(value, 'Campo Obrigatório'),
                       ),
                       DropdownButtonFormField<String>(
                         value: formController.selectedCategory,
@@ -443,7 +489,8 @@ class _AddHomesFormComponentState extends State<AddHomesFormComponent> {
                             formController.selectedCategory = value ?? 'Casa';
                           });
                         },
-                        decoration: const InputDecoration(labelText: 'Categoria'),
+                        decoration:
+                            const InputDecoration(labelText: 'Categoria'),
                       ),
                     ],
                   ),
