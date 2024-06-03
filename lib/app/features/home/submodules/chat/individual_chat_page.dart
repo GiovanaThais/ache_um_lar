@@ -28,8 +28,11 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat with ${widget.username}'),
-        backgroundColor: theme.colorScheme.primaryContainer,
+        title: Text(
+          'Chat with ${widget.username}',
+          selectionColor: theme.colorScheme.onPrimary,
+        ),
+        backgroundColor: theme.colorScheme.primary,
       ),
       body: Column(
         children: [
@@ -44,7 +47,7 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
                     margin: const EdgeInsets.symmetric(vertical: 4.0),
                     padding: const EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.onPrimary,
+                      color: theme.colorScheme.primaryFixed,
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: Text(
@@ -79,14 +82,14 @@ class _IndividualChatPageState extends State<IndividualChatPage> {
                 FloatingActionButton(
                   onPressed: _sendMessage,
                   child: Icon(Icons.send),
-                  backgroundColor: theme.colorScheme.primaryContainer,
+                  backgroundColor: theme.colorScheme.primary,
                 ),
               ],
             ),
           ),
         ],
       ),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: theme.colorScheme.onPrimary,
     );
   }
 }
