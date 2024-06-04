@@ -114,9 +114,9 @@ class AddHomesFormController {
         'condominiumTax': condominiumTax,
         'iptu': iptu,
         'category': selectedCategory,
-        'sqfeet': sqfeetController,
-        'garage': garageController,
-        'name': nameController,
+        'sqfeet': sqfeetController.text,
+        'garage': garageController.text,
+        'name': nameController.text,
         'images': [...imageUrl, ...imageUrls], // Adicionar URLs das imagens
         'imagesRef': [...imageRef.values, ...imageRefs],
         'createdAt': FieldValue.serverTimestamp(),
